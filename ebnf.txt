@@ -7,12 +7,15 @@ import ::= 'import' '"' path '"' '\n' (import)*
 
 attributes ::= (optional_attributes)* (mandatory_attributes)
 optional_attributes ::= network_name
+					| cuda_available
                     | ε
+
 mandatory_attributes ::= input_tensors (optional_attributes)*
                       | output_tensors (optional_attributes)*
                       | backend (optional_attributes)*
                       | target (optional_attributes)*
-network_name ::= STR
+network_name ::= 'network_name' '=' STR '\n'
+cuda_available ::= 'cuda_available' '=' BOOL '\n'
 
 input_tensors ::= 'input_tensors' '=' '[' (STR ',')* STR ']' '\n'
 output_tensors ::= 'output_tensors' '=' '[' (STR ',')* STR ']' '\n'

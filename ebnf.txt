@@ -14,13 +14,7 @@ mandatory_attributes ::= input_tensors (optional_attributes)*
                       | output_tensors (optional_attributes)*
                       | backend (optional_attributes)*
                       | target (optional_attributes)*
-network_name ::= 'network_name' '=' STR '\n'
-cuda_available ::= 'cuda_available' '=' BOOL '\n'
 
-input_tensors ::= 'input_tensors' '=' '[' (STR ',')* STR ']' '\n'
-output_tensors ::= 'output_tensors' '=' '[' (STR ',')* STR ']' '\n'
-backend ::= 'backend' '=' STR '\n'
-target ::= 'target' '=' STR '\n'
 
 layer ::= LSTM_block
         | MLP_block
@@ -56,6 +50,12 @@ output_timestep ::= 'output_timestep' '=' INT '\n'
 hidden_size ::= 'hidden_size' '=' INT '\n'
 num_layers ::= 'num_layers' '=' INT '\n'
 in_features ::= 'in_features' '=' (INT | lengthof) '\n'
-out_features ::= 'out_features '=' '[' (INT ',')* INT ']' '\n'
+out_features ::= 'out_features' '=' '[' (INT  ',')* INT ']' '\n'
+network_name ::= 'network_name' '=' STR '\n'
+cuda_available ::= 'cuda_available' '=' BOOL '\n'
+input_tensors ::= 'input_tensors' '=' '[' (STR ',')* STR ']' '\n'
+output_tensors ::= 'output_tensors' '=' '[' (STR ',')* STR ']' '\n'
+backend ::= 'backend' '=' STR '\n'
+target ::= 'target' '=' STR '\n'
 
 lengthof = 'len' '(' STR ')' '\n'

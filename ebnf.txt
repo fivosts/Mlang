@@ -2,7 +2,7 @@ MLog grammar:
 
 model ::= (import)* attributes (layer)+
 
-import ::= 'import' '"' path '"' '\n' (import)*
+import ::= 'import' '"' path '"' '\n'
         | ε
 
 attributes ::= (optional_attributes)* (mandatory_attributes)
@@ -44,6 +44,7 @@ mlp_hparams ::= in_features '\n' (mlp_hparams)*
 
 lengthof = 'len' '(' STR ')' '\n'
 
+path ::= STR
 input_size ::= 'input_size' '=' INT '\n'
 output_timestep ::= 'output_timestep' '=' INT '\n'
 hidden_size ::= 'hidden_size' '=' INT '\n'

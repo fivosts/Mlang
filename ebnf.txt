@@ -1,0 +1,58 @@
+MLog grammar:
+
+model ::= (import)* attributes (layer)+
+
+import ::= 'import' '"' path '"' '\n' (import)*
+        | ε
+
+attributes ::= (optional_attributes)* (mandatory_attributes)
+optional_attributes ::= network_name
+                    | ε
+mandatory_attributes ::= input_tensors (optional_attributes)*
+                      | output_tensors (optional_attributes)*
+                      | backend (optional_attributes)*
+                      | target (optional_attributes)*
+network_name ::= STR
+
+input_tensors ::= 'input_tensors' '=' '[' (STR ',')* STR ']' '\n'
+output_tensors ::= 'output_tensors' '=' '[' (STR ',')* STR ']' '\n'
+backend ::= 'backend' '=' STR '\n'
+target ::= 'target' '=' STR '\n'
+
+layer ::= LSTM_block
+        | MLP_block
+        | SIGMOID_block
+
+LSTM_block ::= 'LSTM' '{' params lstm_hparam_block '}'
+MLP_block ::= 'MLP' '{' params mlp_hparam_block '}'
+SIGMOID_block ::= 'SIGMOID' '{' params '}'
+
+params ::= (optional_params)* input output (optional_params)*
+optional_params ::= layer_name
+input ::= 'input' '=' expression '\n'
+output ::= 'output' '=' STR '\n'
+layer_name ::= 'name' '=' STR '\n'
+expression ::= STR  
+            | STR '+' expression
+
+lstm_hparam_block ::= 'params' '{' lstm_hparams '}'
+mlp_hparam_block ::= 'params' '{' mlp_hparams '}'
+
+lstm_hparams ::= input_size '\n' (lstm_hparams)*
+              | output_timestep '\n' (lstm_hparams)*
+              | hidden_size '\n' (lstm_hparams)*
+              | num_layers '\n' (lstm_hparams)*
+              | ε
+
+mlp_hparams ::= in_features '\n' (mlp_hparams)*
+              | out_features '\n' (mlp_hparams)*
+              | ε
+
+input_size ::= 'input_size' '=' INT '\n'
+output_timestep ::= 'output_timestep' '=' INT '\n'
+hidden_size ::= 'hidden_size' '=' INT '\n'
+num_layers ::= 'num_layers' '=' INT '\n'
+in_features ::= 'in_features' '=' (INT | lengthof) '\n'
+out_features ::= 'out_features '=' '[' (INT ',')* INT ']' '\n'
+
+lengthof = 'len' '(' STR ')' '\n'

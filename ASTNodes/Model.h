@@ -3,6 +3,7 @@
 
 #include "ASTNode.h"
 #include "Import.h"
+#include "Attribute.h"
 
 #include <vector>
 
@@ -16,7 +17,7 @@ public:
 
 private:
 	vector<Import> imp;
-	// Attributes attr;
+	vector<Attribute> attr;
 	// vector<Layer> lr;
 };
 

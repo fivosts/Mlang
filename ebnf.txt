@@ -1,11 +1,12 @@
 MLog grammar:
 
-model ::= (import)* attributes (layer)+
+model ::= (import)* (attribute)* (layer)+
 
 import ::= 'import' '"' path '"' '\n'
         | ε
 
-attributes ::= (optional_attributes)* (mandatory_attributes)
+attribute ::= optional_attributes
+			| mandatory_attributes
 
 layer ::= LSTM
         | MLP
@@ -13,11 +14,11 @@ layer ::= LSTM
 
 optional_attributes ::= network_name
 					| cuda_available
-                    | ε
-mandatory_attributes ::= input_tensors (optional_attributes)*
-                      | output_tensors (optional_attributes)*
-                      | backend (optional_attributes)*
-                      | target (optional_attributes)*
+
+mandatory_attributes ::= input_tensors
+                      | output_tensors
+                      | backend
+                      | target
 
 LSTM ::= 'LSTM' '{' params lstm_hparams '}'
 MLP ::= 'MLP' '{' params mlp_hparam_block '}'

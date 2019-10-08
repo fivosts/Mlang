@@ -6,6 +6,7 @@
 #include "Attribute.h"
 
 #include <vector>
+#include <unordered_set>
 
 class Model : ASTNode
 {
@@ -14,9 +15,9 @@ public:
 	~Model() override = default;
 
 private:
-	std::vector<Import> imp;
-	std::vector<Attribute> attr;
-	// vector<Layer> lr;
+	std::unordered_set<Import> imp;
+	std::unordered_set<Attribute> attr;
+	// std::vector<Layer> lr;
 };
 
 #endif

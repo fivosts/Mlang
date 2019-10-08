@@ -7,8 +7,6 @@
 
 #include <vector>
 
-using namespace std;
-
 class Model : ASTNode
 {
 public:
@@ -16,8 +14,8 @@ public:
 	~Model() override = default;
 
 private:
-	vector<Import> imp;
-	vector<Attribute> attr;
+	std::vector<Import> imp;
+	std::vector<Attribute> attr;
 	// vector<Layer> lr;
 };
 

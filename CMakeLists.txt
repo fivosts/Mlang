@@ -5,5 +5,6 @@ project(MLOG,
         DESCRIPTION "Source to source compiler for machine learning models"
         LANGUAGES C CXX)
 
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_subdirectory(Source)
-# add_subdirectory(Source) # TODO
+# add_subdirectory(Test) # TODO

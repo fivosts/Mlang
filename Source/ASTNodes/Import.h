@@ -5,8 +5,7 @@
 
 #include <string>
 
-using namespace std;
-typedef string importPath;
+typedef std::string importPath;
 
 class Import : ASTNode
 {

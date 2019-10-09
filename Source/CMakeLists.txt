@@ -1,4 +1,4 @@
-add_subdirectory(Source/)
-add_subdirectory(Source/ASTNodes/)
-add_executable(compiler main.cpp)
 
+# add_subdirectory(ASTNodes/)
+include_directories(ASTNodes)
+add_executable(main main.cpp)

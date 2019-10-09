@@ -25,4 +25,5 @@ script:
   - export CXX=/usr/bin/g++-7
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version && clang --version && clang++ --version
-  # Run your build commands next
+  # Build the system
+  - ./configure

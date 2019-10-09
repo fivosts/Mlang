@@ -5,6 +5,16 @@ project(MLOG,
         DESCRIPTION "Source to source compiler for machine learning models"
         LANGUAGES C CXX)
 
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    # TODO on clang
+    message("Using Clang")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    # TODO on GCC
+    message("Using GCC")
+else()
+    message(FATAL_ERROR "Unknown compiler " ${CMAKE_CXX_COMPILER_ID} ". Aborting.")
+endif()
+
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(Source)
 # add_subdirectory(Test) # TODO

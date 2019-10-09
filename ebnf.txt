@@ -41,17 +41,17 @@ expression ::= STR
 
 lengthof = 'len' '(' STR ')' '\n'
 
+## Model Attributes
 network_name ::= 'network_name' '=' STR '\n'
 backend ::= 'backend' '=' STR '\n'
 target ::= 'target' '=' STR '\n'
 cuda_available ::= 'cuda_available' '=' BOOL '\n'
 
+## Model Inputs and Outputs
 input_tensors ::= 'input_tensors' '=' '[' (STR ',')* STR ']' '\n'
 output_tensors ::= 'output_tensors' '=' '[' (STR ',')* STR ']' '\n'
 
-input ::= 'input' '=' expression '\n'
-output ::= 'output' '=' STR '\n'
-
+## Layer Attributes
 layer_name ::= 'name' '=' STR '\n'
 input_size ::= 'input_size' '=' INT '\n'
 output_timestep ::= 'output_timestep' '=' INT '\n'
@@ -59,3 +59,7 @@ hidden_size ::= 'hidden_size' '=' INT '\n'
 num_layers ::= 'num_layers' '=' INT '\n'
 in_features ::= 'in_features' '=' (INT | lengthof) '\n'
 out_features ::= 'out_features' '=' '[' (INT  ',')* INT ']' '\n'
+
+## Layer Inputs and Outputs
+input ::= 'input' '=' expression '\n'
+output ::= 'output' '=' STR '\n'

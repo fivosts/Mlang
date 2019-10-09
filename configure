@@ -1,0 +1,10 @@
+echo "Configuring MLog"
+
+if [ ! -d "bin" ]; then 
+    mkdir build
+fi
+
+cd build && cmake .. && make
+
+echo $@
+

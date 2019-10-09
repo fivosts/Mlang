@@ -1,6 +1,6 @@
 echo "Configuring MLog"
 
-if [ ! -d "bin" ]; then 
+if [ ! -d "build" ]; then 
     mkdir build
 fi
 

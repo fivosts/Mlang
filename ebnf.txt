@@ -2,62 +2,60 @@ MLog grammar:
 
 model ::= (import)* (attribute)* (layer)+
 
-import ::= 'import' '"' path '"' '\n'
+import ::= 'import' '"' STR '"' '\n'
         | ε
 
-attribute ::= optional_attributes
-			| mandatory_attributes
+attribute ::= network_name      # Optional - defaulted
+            | cuda_available    # Optional - defaulted 
+            | input_tensors     # Mandatory
+            | output_tensors    # Mandatory
+            | backend           # Optional - defaulted
+            | target            # Optional - defaulted
 
 layer ::= LSTM
         | MLP
-        | SIGMOID
+        | SIGMOID   # Extend this property for new layers
 
-optional_attributes ::= network_name
-					| cuda_available
+LSTM ::= 'LSTM' '{' param_block hyperparam_block '}'
+MLP ::= 'MLP' '{' params hyperparam_block '}'
+SIGMOID ::= 'SIGMOID' '{' param_block '}'
 
-mandatory_attributes ::= input_tensors
-                      | output_tensors
-                      | backend
-                      | target
+param_block ::= (params)* # Extend layer_n
 
-LSTM ::= 'LSTM' '{' params lstm_hparams '}'
-MLP ::= 'MLP' '{' params mlp_hparam_block '}'
-SIGMOID ::= 'SIGMOID' '{' params '}'
+params ::= input        # Mandatory
+         | output       # Mandatory
+         | layer_name   # Optional
 
-params ::= (optional_params)* input output (optional_params)*
-optional_params ::= layer_name
-input ::= 'input' '=' expression '\n'
+hyperparam_block ::= 'hyperparam_block' '{' ( (lstm_hparams)* | (mlp_hparams)* ) '}'
+
+lstm_hparams ::= input_size '\n'        # Mandatory
+              | output_timestep '\n'    # Mandatory
+              | hidden_size '\n'        # Mandatory
+              | num_layers '\n'         # Mandatory
+
+mlp_hparams ::= in_features '\n'        # Mandatory
+              | out_features '\n'       # Mandatory
+
 expression ::= STR  
-            | STR '+' expression
-
-lstm_hparams ::= 'params' '{' lstm_hparams '}'
-mlp_hparam_block ::= 'params' '{' mlp_hparams '}'
-
-lstm_hparams ::= input_size '\n' (lstm_hparams)*
-              | output_timestep '\n' (lstm_hparams)*
-              | hidden_size '\n' (lstm_hparams)*
-              | num_layers '\n' (lstm_hparams)*
-              | ε
-
-mlp_hparams ::= in_features '\n' (mlp_hparams)*
-              | out_features '\n' (mlp_hparams)*
-              | ε
+            | expression '+' STR
 
 lengthof = 'len' '(' STR ')' '\n'
 
-path ::= STR
+network_name ::= 'network_name' '=' STR '\n'
+backend ::= 'backend' '=' STR '\n'
+target ::= 'target' '=' STR '\n'
+cuda_available ::= 'cuda_available' '=' BOOL '\n'
+
+input_tensors ::= 'input_tensors' '=' '[' (STR ',')* STR ']' '\n'
+output_tensors ::= 'output_tensors' '=' '[' (STR ',')* STR ']' '\n'
+
+input ::= 'input' '=' expression '\n'
+output ::= 'output' '=' STR '\n'
+
+layer_name ::= 'name' '=' STR '\n'
 input_size ::= 'input_size' '=' INT '\n'
 output_timestep ::= 'output_timestep' '=' INT '\n'
 hidden_size ::= 'hidden_size' '=' INT '\n'
 num_layers ::= 'num_layers' '=' INT '\n'
 in_features ::= 'in_features' '=' (INT | lengthof) '\n'
 out_features ::= 'out_features' '=' '[' (INT  ',')* INT ']' '\n'
-network_name ::= 'network_name' '=' STR '\n'
-cuda_available ::= 'cuda_available' '=' BOOL '\n'
-input_tensors ::= 'input_tensors' '=' '[' (STR ',')* STR ']' '\n'
-output_tensors ::= 'output_tensors' '=' '[' (STR ',')* STR ']' '\n'
-backend ::= 'backend' '=' STR '\n'
-target ::= 'target' '=' STR '\n'
-output ::= 'output' '=' STR '\n'
-layer_name ::= 'name' '=' STR '\n'
-

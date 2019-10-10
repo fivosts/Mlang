@@ -2,15 +2,15 @@ MLog grammar:
 
 model ::= (import)* (attribute)* (layer)+
 
-import ::= 'import' '"' STR '"' '\n'
-        | ε
+import ::= '#import' '"' STR '"' '\n'
 
-attribute ::= network_name      # Optional - defaulted
-            | cuda_available    # Optional - defaulted 
-            | input_tensors     # Mandatory
-            | output_tensors    # Mandatory
-            | backend           # Optional - defaulted
-            | target            # Optional - defaulted
+attribute ::= '#define' ( network_name      # Optional - defaulted
+                        | cuda_available    # Optional - defaulted 
+                        | input_tensors     # Mandatory
+                        | output_tensors    # Mandatory
+                        | backend           # Optional - defaulted
+                        | target )          # Optional - defaulted
+                        
 
 layer ::= LSTM
         | MLP
@@ -42,14 +42,14 @@ expression ::= STR
 lengthof = 'len' '(' STR ')' '\n'
 
 ## Model Attributes
-network_name ::= 'network_name' '=' STR '\n'
-backend ::= 'backend' '=' STR '\n'
-target ::= 'target' '=' STR '\n'
-cuda_available ::= 'cuda_available' '=' BOOL '\n'
+network_name ::= 'network_name' STR '\n'
+backend ::= 'backend' STR '\n'
+target ::= 'target' STR '\n'
+cuda_available ::= 'cuda_available' BOOL '\n'
 
 ## Model Inputs and Outputs
-input_tensors ::= 'input_tensors' '=' '[' (STR ',')* STR ']' '\n'
-output_tensors ::= 'output_tensors' '=' '[' (STR ',')* STR ']' '\n'
+input_tensors ::= 'input_tensors' (STR | '[' (STR ',')* STR ']') '\n'
+output_tensors ::= 'output_tensors' (STR | '[' (STR ',')* STR ']') '\n'
 
 ## Layer Attributes
 layer_name ::= 'name' '=' STR '\n'

@@ -11,5 +11,8 @@
 #include "Params.h"
 
 int main(){
+
+	MLParams *test = new InFeatures<int>();
+
 	return 0;
 }

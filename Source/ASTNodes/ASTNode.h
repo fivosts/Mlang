@@ -4,7 +4,7 @@
 class ASTNode
 {
 public:
-	ASTNode() = delete;
+	ASTNode() = default;
 	virtual ~ASTNode() = 0;
 };
 

@@ -4,28 +4,28 @@
 class LayerParams : public ASTNode
 {
 public:
-	LayerParams() = delete;
+	LayerParams() = default;
 	virtual ~LayerParams() = 0;
 };
 
 class HyperParams : public ASTNode
 {
 public:
-	HyperParams() = delete;
+	HyperParams() = default;
 	virtual ~HyperParams() = 0;
 };
 
 class LSTMParams : public HyperParams
 {
 public:
-	LSTMParams() = delete;
+	LSTMParams() = default;
 	~LSTMParams() override = default;
 };
 
 class MLParams : public HyperParams
 {
 public:
-	MLParams() = delete;
+	MLParams() = default;
 	~MLParams() override = default;
 };
 

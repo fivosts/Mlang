@@ -4,7 +4,7 @@
 class Attribute : ASTNode
 {
 public:
-	Attribute() = delete;
+	Attribute() = default;
 	virtual ~Attribute() override = 0;
 
 };

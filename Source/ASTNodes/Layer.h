@@ -7,7 +7,7 @@
 class Layer : public ASTNode
 {
 public:
-	Layer() = delete;
+	Layer() = default;
 	virtual ~Layer() = 0;
 };
 

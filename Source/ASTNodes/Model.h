@@ -17,7 +17,7 @@ public:
 private:
 	std::unordered_set<Import*> imp;
 	std::unordered_set<Attribute*> attr;
-	// std::vector<Layer*> lr;
+	std::unordered_set<Layer*> lr;
 };
 
 #endif

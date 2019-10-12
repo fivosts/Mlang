@@ -9,11 +9,4 @@ public:
 
 };
 
-class MandatoryAttribute : Attribute
-{
-public:
-	MandatoryAttribute() = default;
-	~MandatoryAttribute() override = default;
-};
-
 #endif

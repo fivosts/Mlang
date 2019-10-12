@@ -12,6 +12,8 @@ addons:
     packages:
       - gcc-7
       - g++-7
+      - clang-8
+      - clang++-8
       - cmake
 script:
   # Link gcc-7 and g++-7 to their standard commands

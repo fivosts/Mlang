@@ -36,8 +36,8 @@ lstm_hparams ::= input_size '\n'        # Mandatory
 mlp_hparams ::= in_features '\n'        # Mandatory
               | out_features '\n'       # Mandatory
 
-expression ::= STR  
-            | expression '+' STR
+BinExpr ::= STR  
+            | BinExpr '+' STR
 
 lengthof = 'len' '(' STR ')' '\n'
 
@@ -61,5 +61,5 @@ in_features ::= 'in_features' '=' (INT | lengthof) '\n'
 out_features ::= 'out_features' '=' '[' (INT  ',')* INT ']' '\n'
 
 ## Layer Inputs and Outputs
-input ::= 'input' '=' expression '\n'
+input ::= 'input' '=' BinExpr '\n'
 output ::= 'output' '=' STR '\n'

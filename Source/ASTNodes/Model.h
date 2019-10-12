@@ -4,6 +4,7 @@
 #include "ASTNode.h"
 #include "Import.h"
 #include "Attribute.h"
+#include "Layer.h"
 
 #include <vector>
 #include <unordered_set>

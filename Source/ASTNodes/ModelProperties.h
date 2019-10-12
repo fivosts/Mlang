@@ -1,12 +1,12 @@
 #ifndef MODELPROPERTIES_H
 #define MODELPROPERTIES_H
 
-#include "Attributes.h"
+#include "Attribute.h"
 
 #include <string>
 #include <unordered_set>
 
-class NetworkName : public Attributes
+class NetworkName : public Attribute
 {
 public:
 	NetworkName() = default;
@@ -16,7 +16,7 @@ private:
 	std::string name;
 };
 
-class Backend : public Attributes
+class Backend : public Attribute
 {
 public:
 	Backend() = default;
@@ -26,7 +26,7 @@ private:
 	std::string bend;
 };
 
-class Target : public Attributes
+class Target : public Attribute
 {
 public:
 	Target() = default;
@@ -36,7 +36,7 @@ private:
 	std::string target;
 };
 
-class CUDA : public Attributes
+class CUDA : public Attribute
 {
 public:
 	CUDA() = default;
@@ -46,7 +46,7 @@ private:
 	bool cuda;
 };
 
-class InpTensors : public Attributes
+class InpTensors : public Attribute
 {
 public:
 	InpTensors() = default;
@@ -56,7 +56,7 @@ private:
 	std::unordered_set<std::string> inTens;
 };
 
-class OutTensors : public Attributes
+class OutTensors : public Attribute
 {
 public:
 	OutTensors() = default;

@@ -1,16 +1,17 @@
 #ifndef LAYER_H
 #define LAYER_H
 
+#include "ASTNode.h"
 #include "Block.h"
 
-class Layers : public ASTNode
+class Layer : public ASTNode
 {
 public:
-	Layers() = delete;
-	virtual ~Layers() = 0;
+	Layer() = delete;
+	virtual ~Layer() = 0;
 };
 
-class LSTM : public Layers
+class LSTM : public Layer
 {
 public:
 	LSTM() = default;
@@ -21,7 +22,7 @@ private:
 	HyperparamBlock* hblock{NULL};
 };
 
-class MLP : public Layers
+class MLP : public Layer
 {
 public:
 	MLP() = default;
@@ -32,7 +33,7 @@ private:
 	HyperparamBlock* hblock{NULL};
 };
 
-class Sigmoid : public Layers
+class Sigmoid : public Layer
 {
 public:
 	Sigmoid() = default;

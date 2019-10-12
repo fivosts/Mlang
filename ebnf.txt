@@ -1,6 +1,6 @@
 MLog grammar:
 
-model ::= (import)* (attribute)* (layer)+
+model ::= (import)* (attribute)* (layer)*
 
 import ::= '#import' '"' STR '"' '\n'
 

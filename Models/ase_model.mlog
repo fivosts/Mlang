@@ -1,0 +1,56 @@
+#import "dummy.mlog"
+#import "dummy2.mlog"
+
+#define network_name "ase_model"
+#define cuda_available false
+#define backend "pytorch"
+#define target "python"
+#define input_tensors ["trace_func", "trace_arg", "trace_ret"]
+#define output_tensors "Sigmoid"
+
+LSTM{
+	output = "ret_encoder"
+	input = "trace_ret"
+	hyperparam_block{
+		input_size = 64
+		output_timestep = -1
+		hidden_size = 64
+		num_layers = 1
+	}
+
+}
+LSTM 
+{
+	output = "arg_encoder"
+	input = "trace_arg"
+	hyperparam_block{
+		input_size = 64
+		output_timestep = -1
+		hidden_size = 64
+		num_layers = 1
+	}
+
+}
+
+LSTM {
+	output = "line_encoder"
+	input = "trace_func" + "ret_encoder" + "arg_encoder"
+	hyperparam_block{
+		input_size = len(input)
+		output_timestep = -1
+		hidden_size = 128
+		num_layers = 1
+	}
+}
+MLP {
+	output = "MLP"
+	input = "line_encoder"
+	hyperparam_block{
+		in_features = len(input)
+		out_features = [128, 64, 32, 1]
+	}
+}
+SIGMOID {
+	output = "Sigmoid"
+	input = "MLP"
+}

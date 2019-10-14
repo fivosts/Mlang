@@ -2,7 +2,7 @@ MLog grammar:
 
 model ::= (import)* (attribute)* (layer)*
 
-import ::= '#import' '"' STR '"' '\n'
+import ::= '#import' STR '\n'
 
 attribute ::= '#define' ( network_name      # Optional - defaulted
                         | cuda_available    # Optional - defaulted 
@@ -63,3 +63,8 @@ out_features ::= 'out_features' '=' '[' (INT  ',')* INT ']' '\n'
 ## Layer Inputs and Outputs
 input ::= 'input' '=' BinExpr '\n'
 output ::= 'output' '=' STR '\n'
+
+## Generic Types
+STR ::= '"' ([a-z] | [A-Z] | [0-9] | '_')* '"'
+BOOL ::= True | true | False | false | 0 | 1
+INT ::= ([0-9])*

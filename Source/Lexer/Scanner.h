@@ -33,7 +33,6 @@ public:
     }
 
     virtual char getChar(){
-        peekBuffer = -1;
         try                                     {   return updatePosition(this->get()); }
         catch(const std::ifstream::failure &e)  {   return EOF;                         }
     }

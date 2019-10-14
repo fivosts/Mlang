@@ -33,6 +33,7 @@ public:
     }
 
     virtual char getChar(){
+        peekBuffer = -1;
         try                                     {   return updatePosition(this->get()); }
         catch(const std::ifstream::failure &e)  {   return EOF;                         }
     }
@@ -40,6 +41,10 @@ public:
     virtual char peekChar(){
         try                                     {       return this->peek();    }
         catch(const std::ifstream::failure &e)  {       return EOF;             }
+    }
+
+    virtual const Position &getCurrentPosition(){
+        return pos;
     }
 
 private:
@@ -52,10 +57,6 @@ private:
         else
             ++pos.column;
         return c;
-    }
-
-    virtual const Position &getCurrentPosition(){
-        return pos;
     }
 
 private:

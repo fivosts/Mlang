@@ -65,6 +65,13 @@ input ::= 'input' '=' BinExpr '\n'
 output ::= 'output' '=' STR '\n'
 
 ## Generic Types
+IDENTIFIER ::= 'network_name' | 'backend' | 'target' | 'cuda_available'
+             | 'input_tensors' | 'output_tensors'
+             | 'name' | 'input_size' | 'output_timestep' | 'hidden_size' | 'num_layers' | 'in_features' | 'out_features'
+             | 'input' | 'output'
+             | 'hyperparam_block'
+             | 'LSTM' | 'MLP' | 'LSTM'
+
 STR ::= '"' ([a-z] | [A-Z] | [0-9] | '_')* '"'
 BOOL ::= True | true | False | false | 0 | 1
 INT ::= ([0-9])*

@@ -6,33 +6,33 @@
 class Token
 {
 public:
-	enum class TokenType : std::string
+	enum class TokenType
 	{
 
-		IMPORT				:		"IMPORT",			// #import module
-		DEFINE				:		"DEFINE",			// #define target Pytorch
+		IMPORT,			// #import module
+		DEFINE,			// #define target Pytorch
 		
-		IDENTIFIER			:		"IDENTIFIER", 		// identifier = | {
+		IDENTIFIER, 	// identifier = | {
 
-		LENOF				:		"LENOF",			// len(layer1)
-		NEWLINE				:		"NEWLINE",				// '\n'
-		QUOTE				:		"QUOTE",			// '\"'
-		PLUS				:		"PLUS",				// '+'
-		ASSIGN				:		"ASSIGN",			// '='
+		LENOF,			// len(layer1)
+		NEWLINE,		// '\n'
+		QUOTE,			// '\"'
+		PLUS,			// '+'
+		ASSIGN,			// '='
 
-		STR_LITERAL			:		"STR_LITERAL",		// names
-		INT_LITERAL			:		"INT_LITERAL",		// integer values
-		BOOL_LITERAL		:		"BOOL_LITERAL",		// True/False 1/0
+		STR_LITERAL,	// "([a-z] | [A-Z] | [0-9] | '_')*"
+		INT_LITERAL,	// ([0-9])*
+		BOOL_LITERAL,	// True/False true/false 1/0
 
-		LBRA				:		"LBRA",				// '{'
-		RBRA				:		"RBRA",				// '}'
-		LPAR				:		"LPAR",				// '('
-		RPAR				:		"RPAR",				// ')'
-		LSBR				:		"LSBR",				// '['
-		RSBR				:		"RSBR",				// ']'
+		LBRA,			// '{'
+		RBRA,			// '}'
+		LPAR,			// '('
+		RPAR,			// ')'
+		LSBR,			// '['
+		RSBR,			// ']'
 
-		END					:		"END",				// EOF
-		INVALID				:		"INVALID"			// Unk token
+		END,			// EOF
+		INVALID			// Unk token
 	};
 
 	Token() = delete;

@@ -47,7 +47,7 @@ public:
     }
 
 private:
-    virtual char updatePosition(char c){
+    virtual const char updatePosition(char c){
 
         if (c == '\n')
         {

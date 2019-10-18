@@ -88,7 +88,7 @@ const Token Lexer::nextToken()
 	{
 
 	}
-	// LBRA, RBRA, LPAR, RPAR, LSBR, RSBR
+	// LBRA, RBRA, LPAR, RPAR, LSBR, RSBR Tokens
 	else if (current == '{')
 	{
 

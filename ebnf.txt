@@ -70,7 +70,8 @@ IDENTIFIER ::= 'network_name' | 'backend' | 'target' | 'cuda_available'
              | 'name' | 'input_size' | 'output_timestep' | 'hidden_size' | 'num_layers' | 'in_features' | 'out_features'
              | 'input' | 'output'
              | 'hyperparam_block'
-             | 'LSTM' | 'MLP' | 'LSTM'
+             | 'len'
+             | 'LSTM' | 'MLP' | 'SIGMOID'
 
 STR ::= '"' ([a-z] | [A-Z] | [0-9] | '_')* '"'
 BOOL ::= True | true | False | false | 0 | 1

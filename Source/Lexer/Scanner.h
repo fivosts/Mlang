@@ -32,7 +32,7 @@ public:
         this->close();
     }
 
-    virtual char nextChar()
+    virtual const char nextChar()
     {
         try                                     {   return updatePosition(this->get()); }
         catch(const std::ifstream::failure &e)  {   return EOF;                         }

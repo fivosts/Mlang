@@ -12,9 +12,8 @@ public:
 		IMPORT,			// #import module
 		DEFINE,			// #define target Pytorch
 		
-		IDENTIFIER, 	// identifier = | {
+		IDENTIFIER, 	// identifier (see grammar)
 
-		LENOF,			// len(layer1)
 		NEWLINE,		// '\n'
 		QUOTE,			// '\"'
 		PLUS,			// '+'

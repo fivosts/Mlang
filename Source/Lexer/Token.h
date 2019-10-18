@@ -35,7 +35,7 @@ public:
 	};
 
 	Token() = delete;
-	Token(TokenType t) : token(t) {}
+	Token(TokenType t, std::string d = "") : token(t), data(d) {}
 	~Token() = default;
 
 	const TokenType &getToken() const{
@@ -44,6 +44,7 @@ public:
 
 private:
 	TokenType token;
+	std::string data;
 };
 
 #endif

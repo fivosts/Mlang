@@ -32,12 +32,14 @@ public:
         this->close();
     }
 
-    virtual char getChar(){
+    virtual char nextChar()
+    {
         try                                     {   return updatePosition(this->get()); }
         catch(const std::ifstream::failure &e)  {   return EOF;                         }
     }
 
-    virtual char peekChar(){
+    virtual char peekChar()
+    {
         try                                     {       return this->peek();    }
         catch(const std::ifstream::failure &e)  {       return EOF;             }
     }
@@ -47,7 +49,8 @@ public:
     }
 
 private:
-    virtual const char updatePosition(char c){
+    virtual const char updatePosition(char c)
+    {
 
         if (c == '\n')
         {

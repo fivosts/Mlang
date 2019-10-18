@@ -11,6 +11,7 @@
 // #include "Params.h"
 #include "Scanner.h"
 #include "Token.h"
+#include "Lexer.h"
 #include <iostream>
 
 typedef Token::TokenType type;
@@ -30,6 +31,9 @@ int main(){
 	if (t.getToken() == type::IMPORT){
 		std::cout << "Yay!\n";
 	}
+
+	Lexer test(a);
+	test.nextToken();
 
 	// while(b != EOF){
 	// 	std::cout << (char)b;

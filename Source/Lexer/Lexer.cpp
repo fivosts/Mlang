@@ -47,10 +47,15 @@ const Token Lexer::nextToken()
 			return Token(Token::TokenType::IDENTIFIER, id);
 		}
 	}
-	// NEWLINE, QUOTE, Special characters \\ \t \b \r etc.
-	else if (current == '\\')
+	// NEWLINE, Special characters \\ \t \b \r etc.
+	else if (current == '\n')
 	{
-
+		return Token(Token::TokenType::NEWLINE);
+	}
+	// QUOTE
+	else if (current == '\"')
+	{
+		return Token(Token::TokenType::QUOTE);
 	}
 	// PLUS
 	else if (current == '+')

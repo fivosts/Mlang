@@ -4,8 +4,10 @@ const Token Lexer::nextToken()
 {
 
 	using Token::TokenType = TType;
+	using std::pair<int, int> = Position;
 
 	char current = sc->nextChar();
+	Position cpos = sc->getCurrentPosition();
 
 	if (current == ' '){
 		return Lexer::nextToken();
@@ -31,7 +33,7 @@ const Token Lexer::nextToken()
 		current = sc->nextChar();
 		if (current == 't')
 		{
-			return Token(Token::TokenType::IMPORT);
+			return Token(Token::TokenType::IMPORT, cpos);
 		}}}}}}
 		
 		else if (current == 'd')
@@ -51,7 +53,7 @@ const Token Lexer::nextToken()
 		current = sc->nextChar();
 		if (current == 'e')
 		{
-			return Token(Token::TokenType::DEFINE);
+			return Token(Token::TokenType::DEFINE, cpos);
 		}}}}}}
 	}
 	// Identifiers and BOOL literals
@@ -69,31 +71,31 @@ const Token Lexer::nextToken()
 		}
 		if (id == "True" || id == "true")
 		{
-			return Token(Token::TokenType::BOOL_LITERAL, "True");
+			return Token(Token::TokenType::BOOL_LITERAL, cpos, "True");
 		}
 		else if (id == "False" || id == "false")
 		{
-			return Token(Token::TokenType::BOOL_LITERAL, "False");
+			return Token(Token::TokenType::BOOL_LITERAL, cpos, "False");
 		}
 		else
 		{
-			return Token(Token::TokenType::IDENTIFIER, id);
+			return Token(Token::TokenType::IDENTIFIER, cpos, id);
 		}
 	}
 	// NEWLINE, Special characters \\ \t \b \r etc.
 	else if (current == '\n')
 	{
-		return Token(Token::TokenType::NEWLINE);
+		return Token(Token::TokenType::NEWLINE, cpos);
 	}
 	// PLUS
 	else if (current == '+')
 	{
-		return Token(Token::TokenType::::PLUS);
+		return Token(Token::TokenType::::PLUS, cpos);
 	}
 	// ASSIGN
 	else if (current == '=')
 	{
-		return Token(Token::TokenType::ASSIGN);
+		return Token(Token::TokenType::ASSIGN, cpos);
 	}
 	// STRING Literals
 	else if (current == '\"')
@@ -109,7 +111,7 @@ const Token Lexer::nextToken()
 			 || next == '\0' || next == '\n')
 			{
 				current = sc->nextChar();
-				return Token(Token::TokenType::INVALID, current);
+				return Token(Token::TokenType::INVALID, cpos, current);
 			}
 			else
 			{
@@ -118,7 +120,7 @@ const Token Lexer::nextToken()
 				strID += current;
 			}
 		}
-		return Token(Token::TokenType::STR_LITERAL, strID);
+		return Token(Token::TokenType::STR_LITERAL, cpos, strID);
 	}
 	// INT Literals
 	else if (isDigit(current))
@@ -129,42 +131,42 @@ const Token Lexer::nextToken()
 			current = sc->nextChar();
 			intId += current;
 		}
-		return Token(Token::TokenType::INT_LITERAL);
+		return Token(Token::TokenType::INT_LITERAL, cpos);
 	}
 	// LBRA, RBRA, LPAR, RPAR, LSBR, RSBR Tokens
 	else if (current == '{')
 	{
-		return Token(Token::TokenType::LBRA);
+		return Token(Token::TokenType::LBRA, cpos);
 	}
 	else if (current == '}')
 	{
-		return Token(Token::TokenType::RBRA);
+		return Token(Token::TokenType::RBRA, cpos);
 	}
 	else if (current == '(')
 	{
-		return Token(Token::TokenType::LPAR);
+		return Token(Token::TokenType::LPAR, cpos);
 	}
 	else if (current == ')')
 	{
-		return Token(Token::TokenType::RPAR);
+		return Token(Token::TokenType::RPAR, cpos);
 	}
 	else if (current == '[')
 	{
-		return Token(Token::TokenType::LSBR);
+		return Token(Token::TokenType::LSBR, cpos);
 	}
 	else if (current == ']')
 	{
-		return Token(Token::TokenType::RSBR);
+		return Token(Token::TokenType::RSBR, cpos);
 	}
 	// End-Of-File token
 	else if (current == EOF)
 	{
-		return Token(Token::TokenType::END);
+		return Token(Token::TokenType::END, cpos);
 	}
 	// INVALID Token if not recognized.
 	else{
 		// Throw an error here
-		return Token(Token::TokenType::INVALID);
+		return Token(Token::TokenType::INVALID, cpos, current);
 	}
 
 }

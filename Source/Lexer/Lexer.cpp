@@ -141,6 +141,7 @@ const Token Lexer::nextToken()
 	{
 		return Token(Token::TokenType::RSBR);
 	}
+	// End-Of-File token
 	else if (current == EOF)
 	{
 		return Token(Token::TokenType::END);

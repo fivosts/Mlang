@@ -15,7 +15,6 @@ public:
 		IDENTIFIER, 	// identifier (see grammar)
 
 		NEWLINE,		// '\n'
-		QUOTE,			// '\"'
 		PLUS,			// '+'
 		ASSIGN,			// '='
 

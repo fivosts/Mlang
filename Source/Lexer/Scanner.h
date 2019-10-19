@@ -9,10 +9,12 @@ class Scanner : public std::ifstream
 {
 public:
 
-    struct Position{
-        int line;
-        int column;
-    };
+    // struct Position{
+    //     int line;
+    //     int column;
+    // };
+
+    using std::pair<int, int> = Position;
 
     Scanner() = delete;
     Scanner(std::string filePath)
@@ -44,24 +46,25 @@ public:
         catch(const std::ifstream::failure &e)  {       return EOF;             }
     }
 
-    virtual const Position &getCurrentPosition(){
+    virtual const Position &getCurrentPosition() const
+    {
         return pos;
     }
 
 private:
-    virtual const char updatePosition(char c)
+    virtual char updatePosition(char c)
     {
-
         if (c == '\n')
         {
-            ++pos.line;     pos.column = 1;
+            ++pos.first;     pos.second = 1;
         }
         else
-            ++pos.column;
+            ++pos.second;
         return c;
     }
 
-private:
+// private:
+public:
     Position pos{0, 0};
 
 };

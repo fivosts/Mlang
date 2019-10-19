@@ -5,7 +5,7 @@ const Token Lexer::nextToken()
 
 	using Token::TokenType = TType;
 
-	const char current = sc->nextChar();
+	char current = sc->nextChar();
 
 	if (current == ' '){
 		return Lexer::nextToken();
@@ -23,36 +23,29 @@ const Token Lexer::nextToken()
 		}
 	}
 	// Identifiers
-	else if (current == 'b') 
+	else if (isLetter(current))
 	{
-
-	}else if (current == 'c')
-	{
-
-	}else if (current == 'h')
-	{
-
-	}else if (current == 'i')
-	{
-
-	}else if (current == 'L')
-	{
-
-	}else if (current == 'l')
-	{
-
-	}else if (current == 'M')
-	{
-
-	}else if (current == 'n')
-	{
-
-	}else if (current == 'o')
-	{
-
-	}else if (current == 'S')
-	{
-
+		std::string id = current;
+		char next = sc->peekChar();
+		while(isLetter(next) 
+			|| isDigit(next) 
+			|| next == '_')
+		{
+			current = sc->nextChar();
+			id += current;
+		}
+		if (id == "True" || id == "true")
+		{
+			return Token(Token::TokenType::BOOL_LITERAL, "True");
+		}
+		else if (id == "False" || id == "false")
+		{
+			return Token(Token::TokenType::BOOL_LITERAL, "False");
+		}
+		else
+		{
+			return Token(Token::TokenType::IDENTIFIER, id);
+		}
 	}
 	// NEWLINE, QUOTE, Special characters \\ \t \b \r etc.
 	else if (current == '\\')
@@ -75,7 +68,7 @@ const Token Lexer::nextToken()
 
 	}
 	// INT Literals
-	else if (current <= (char)('9') && current >= (char)('0'))
+	else if (isDigit(current))
 	{
 
 	}
@@ -91,6 +84,7 @@ const Token Lexer::nextToken()
 				current = sc->nextChar();
 				if (current == 'e')
 				{
+					// Trues as identifier causes an issue here
 					return Token(Token::TokenType::BOOL_LITERAL, "True");
 				}
 			}

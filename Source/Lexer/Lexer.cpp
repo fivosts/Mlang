@@ -16,13 +16,45 @@ const Token Lexer::nextToken()
 		current = sc->nextChar();
 		if (current == 'i')
 		{
-
-		}else if (current == 'd')
+		current = sc->nextChar();
+		if (current == 'm')
 		{
-
-		}
+		current = sc->nextChar();
+		if (current == 'p')
+		{
+		current = sc->nextChar();
+		if (current == 'o')
+		{
+		current = sc->nextChar();
+		if (current == 'r')
+		{
+		current = sc->nextChar();
+		if (current == 't')
+		{
+			return Token(Token::TokenType::IMPORT);
+		}}}}}}
+		
+		else if (current == 'd')
+		{
+		current = sc->nextChar();
+		if (current == 'e')
+		{
+		current = sc->nextChar();
+		if (current == 'f')
+		{
+		current = sc->nextChar();
+		if (current == 'i')
+		{
+		current = sc->nextChar();
+		if (current == 'n')
+		{
+		current = sc->nextChar();
+		if (current == 'e')
+		{
+			return Token(Token::TokenType::DEFINE);
+		}}}}}}
 	}
-	// Identifiers
+	// Identifiers and BOOL literals
 	else if (isLetter(current))
 	{
 		std::string id = current;
@@ -32,6 +64,7 @@ const Token Lexer::nextToken()
 			|| next == '_')
 		{
 			current = sc->nextChar();
+			next = sc->peekChar();
 			id += current;
 		}
 		if (id == "True" || id == "true")
@@ -52,11 +85,6 @@ const Token Lexer::nextToken()
 	{
 		return Token(Token::TokenType::NEWLINE);
 	}
-	// QUOTE
-	else if (current == '\"')
-	{
-		return Token(Token::TokenType::QUOTE);
-	}
 	// PLUS
 	else if (current == '+')
 	{
@@ -70,51 +98,38 @@ const Token Lexer::nextToken()
 	// STRING Literals
 	else if (current == '\"')
 	{
-
+		std::string strID = "";
+		char next = sc->peekChar();
+		while (next != "\"")
+		{
+			// Special characters and whitespaces
+			// in STR are not allowed.
+			if (next == '\'' || next == '\\' || next == ' '
+			 || next == '\t' || next == '\b'
+			 || next == '\0' || next == '\n')
+			{
+				current = sc->nextChar();
+				return Token(Token::TokenType::INVALID, current);
+			}
+			else
+			{
+				current = sc->nextChar();
+				next = sc->peekChar();
+				strID += current;
+			}
+		}
+		return Token(Token::TokenType::STR_LITERAL, strID);
 	}
 	// INT Literals
 	else if (isDigit(current))
 	{
-
-	}
-	// BOOL Literals
-	else if (current == 'T' || current == 't')
-	{
-		current = sc->nextChar();
-		if (current == 'r')
+		std::string intID = current;
+		while (isDigit(sc->peekChar()))
 		{
 			current = sc->nextChar();
-			if (current == 'u')
-			{
-				current = sc->nextChar();
-				if (current == 'e')
-				{
-					// Trues as identifier causes an issue here
-					return Token(Token::TokenType::BOOL_LITERAL, "True");
-				}
-			}
+			intId += current;
 		}
-	}
-	else if (current == 'F' || current == 'f')
-	{
-		current = sc->nextChar();
-		if (current == 'a')
-		{
-			current = sc->nextChar();
-			if(current == 'l')
-			{
-				current = sc->nextChar();
-				if (current == 's')
-				{
-					current = sc->nextChar();
-					if (current == 'e')
-					{
-						return Token(Token::TokenType::BOOL_LITERAL, "False");
-					}
-				}
-			}
-		}
-
+		return Token(Token::TokenType::INT_LITERAL);
 	}
 	// LBRA, RBRA, LPAR, RPAR, LSBR, RSBR Tokens
 	else if (current == '{')
@@ -148,6 +163,7 @@ const Token Lexer::nextToken()
 	}
 	// INVALID Token if not recognized.
 	else{
+		// Throw an error here
 		return Token(Token::TokenType::INVALID);
 	}
 

@@ -33,8 +33,10 @@ public:
 		INVALID			// Unk token
 	};
 
+	using std::pair<int, int> = Position;
+
 	Token() = delete;
-	Token(TokenType t, std::string d = "") : token(t), data(d) {}
+	Token(TokenType t, Position p, std::string d = "") : token(t), pos(p), data(d) {}
 	~Token() = default;
 
 	const TokenType &getToken() const{
@@ -44,6 +46,7 @@ public:
 private:
 	TokenType token;
 	std::string data;
+	Position pos;
 };
 
 #endif

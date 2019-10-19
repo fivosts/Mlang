@@ -32,8 +32,8 @@ int main(){
 		std::cout << "Yay!\n";
 	}
 
-	Lexer test(a);
-	test.nextToken();
+	// Lexer test(a);
+	// test.nextToken();
 
 	// while(b != EOF){
 	// 	std::cout << (char)b;

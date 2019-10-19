@@ -14,7 +14,7 @@ public:
     //     int column;
     // };
 
-    using std::pair<int, int> = Position;
+    using Position = std::pair<int, int>;
 
     Scanner() = delete;
     Scanner(std::string filePath)

@@ -4,7 +4,7 @@ const Token Lexer::nextToken()
 {
 
 	using Token::TokenType = TokenType;
-	using std::pair<int, int> = Position;
+    using Position = std::pair<int, int>;
 
 	char current = sc->nextChar();
 	Position cpos = sc->getCurrentPosition();

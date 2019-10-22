@@ -6,6 +6,7 @@ namespace MLogTest
     {
 
         ASSERT_FALSE(1==0);
+        ASSERT_TRUE(1==0);
     }
 }
 

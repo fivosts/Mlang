@@ -165,9 +165,9 @@ const Token Lexer::nextToken()
 		return Token(Token::TokenType::END, cpos);
 	}
 	// INVALID Token if not recognized.
-	else{
-		// Throw an error here
-		return Token(Token::TokenType::INVALID, cpos, current);
-	}
-
+	// else{
+	// 	// Throw an error here
+	// 	return Token(Token::TokenType::INVALID, cpos, current);
+	// }
+	return Token(Token::TokenType::INVALID, cpos, current);
 }

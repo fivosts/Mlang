@@ -17,7 +17,7 @@ endif()
 
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(Source)
-# add_subdirectory(Test) # TODO
+add_subdirectory(Test)
 
 # TODO compiler flags
 # TODO if/else branch on compiler type -> LLVM bytecode and flags

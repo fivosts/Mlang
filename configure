@@ -4,7 +4,8 @@ if [ ! -d "build" ]; then
     mkdir build
 fi
 
-cd build && cmake .. && make
+cd build && cmake .. || (echo "Cmake config failed $$?"; exit 1)
+make || (echo "Compilation failed $$?"; exit 1)
 
 echo $@
 

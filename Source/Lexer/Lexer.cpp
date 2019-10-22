@@ -1,9 +1,10 @@
 #include "Lexer.h"
+#include "Util.h"
 
 const Token Lexer::nextToken()
 {
 
-	using Token::TokenType = TokenType;
+	// using Token::TokenType = TokenType;
     using Position = std::pair<int, int>;
 
 	char current = sc->nextChar();
@@ -33,7 +34,7 @@ const Token Lexer::nextToken()
 		current = sc->nextChar();
 		if (current == 't')
 		{
-			return Token(TokenType::IMPORT, cpos);
+			return Token(Token::TokenType::IMPORT, cpos);
 		}}}}}}
 		
 		else if (current == 'd')
@@ -53,16 +54,16 @@ const Token Lexer::nextToken()
 		current = sc->nextChar();
 		if (current == 'e')
 		{
-			return Token(TokenType::DEFINE, cpos);
+			return Token(Token::TokenType::DEFINE, cpos);
 		}}}}}}
 	}
 	// Identifiers and BOOL literals
-	else if (isLetter(current))
+	else if (isLetter(std::move(current)))
 	{
-		std::string id = current;
+		std::string id = (const char*)&current;
 		char next = sc->peekChar();
-		while(isLetter(next) 
-			|| isDigit(next) 
+		while(isLetter(std::move(next)) 
+			|| isDigit(std::move(next)) 
 			|| next == '_')
 		{
 			current = sc->nextChar();
@@ -71,38 +72,38 @@ const Token Lexer::nextToken()
 		}
 		if (id == "True" || id == "true")
 		{
-			return Token(TokenType::BOOL_LITERAL, cpos, "True");
+			return Token(Token::TokenType::BOOL_LITERAL, cpos, "True");
 		}
 		else if (id == "False" || id == "false")
 		{
-			return Token(TokenType::BOOL_LITERAL, cpos, "False");
+			return Token(Token::TokenType::BOOL_LITERAL, cpos, "False");
 		}
 		else
 		{
-			return Token(TokenType::IDENTIFIER, cpos, id);
+			return Token(Token::TokenType::IDENTIFIER, cpos, id);
 		}
 	}
 	// NEWLINE, Special characters \\ \t \b \r etc.
 	else if (current == '\n')
 	{
-		return Token(TokenType::NEWLINE, cpos);
+		return Token(Token::TokenType::NEWLINE, cpos);
 	}
 	// PLUS
 	else if (current == '+')
 	{
-		return Token(TokenType::::PLUS, cpos);
+		return Token(Token::TokenType::PLUS, cpos);
 	}
 	// ASSIGN
 	else if (current == '=')
 	{
-		return Token(TokenType::ASSIGN, cpos);
+		return Token(Token::TokenType::ASSIGN, cpos);
 	}
 	// STRING Literals
 	else if (current == '\"')
 	{
 		std::string strID = "";
 		char next = sc->peekChar();
-		while (next != "\"")
+		while (next != '\"')
 		{
 			// Special characters and whitespaces
 			// in STR are not allowed.
@@ -111,7 +112,7 @@ const Token Lexer::nextToken()
 			 || next == '\0' || next == '\n')
 			{
 				current = sc->nextChar();
-				return Token(TokenType::INVALID, cpos, current);
+				return Token(Token::TokenType::INVALID, cpos, current);
 			}
 			else
 			{
@@ -120,53 +121,53 @@ const Token Lexer::nextToken()
 				strID += current;
 			}
 		}
-		return Token(TokenType::STR_LITERAL, cpos, strID);
+		return Token(Token::TokenType::STR_LITERAL, cpos, strID);
 	}
 	// INT Literals
-	else if (isDigit(current))
+	else if (isDigit(std::move(current)))
 	{
-		std::string intID = current;
+		std::string intID = (const char*)&current;
 		while (isDigit(sc->peekChar()))
 		{
 			current = sc->nextChar();
-			intId += current;
+			intID += current;
 		}
-		return Token(TokenType::INT_LITERAL, cpos);
+		return Token(Token::TokenType::INT_LITERAL, cpos);
 	}
 	// LBRA, RBRA, LPAR, RPAR, LSBR, RSBR Tokens
 	else if (current == '{')
 	{
-		return Token(TokenType::LBRA, cpos);
+		return Token(Token::TokenType::LBRA, cpos);
 	}
 	else if (current == '}')
 	{
-		return Token(TokenType::RBRA, cpos);
+		return Token(Token::TokenType::RBRA, cpos);
 	}
 	else if (current == '(')
 	{
-		return Token(TokenType::LPAR, cpos);
+		return Token(Token::TokenType::LPAR, cpos);
 	}
 	else if (current == ')')
 	{
-		return Token(TokenType::RPAR, cpos);
+		return Token(Token::TokenType::RPAR, cpos);
 	}
 	else if (current == '[')
 	{
-		return Token(TokenType::LSBR, cpos);
+		return Token(Token::TokenType::LSBR, cpos);
 	}
 	else if (current == ']')
 	{
-		return Token(TokenType::RSBR, cpos);
+		return Token(Token::TokenType::RSBR, cpos);
 	}
 	// End-Of-File token
 	else if (current == EOF)
 	{
-		return Token(TokenType::END, cpos);
+		return Token(Token::TokenType::END, cpos);
 	}
 	// INVALID Token if not recognized.
 	else{
 		// Throw an error here
-		return Token(TokenType::INVALID, cpos, current);
+		return Token(Token::TokenType::INVALID, cpos, current);
 	}
 
 }

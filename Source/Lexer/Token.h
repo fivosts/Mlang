@@ -36,7 +36,9 @@ public:
     using Position = std::pair<int, int>;
 
 	Token() = delete;
+	//maybe add template instead of overload ?
 	Token(TokenType t, Position p, std::string d = "") : token(t), pos(p), data(d) {}
+	Token(TokenType t, Position p, char d) : token(t), pos(p), data((const char*)&d) {}
 	~Token() = default;
 
 	const TokenType &getToken() const{

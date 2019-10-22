@@ -26,11 +26,11 @@ int main(){
 
 	// std::cout << b <<std::endl;
 
-	Token t(Token::TokenType::IMPORT);
+	// Token t(Token::TokenType::IMPORT, );
 
-	if (t.getToken() == type::IMPORT){
-		std::cout << "Yay!\n";
-	}
+	// if (t.getToken() == type::IMPORT){
+	// 	std::cout << "Yay!\n";
+	// }
 
 	// Lexer test(a);
 	// test.nextToken();

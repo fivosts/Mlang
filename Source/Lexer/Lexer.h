@@ -2,6 +2,7 @@
 #define LEXER_H
 
 #include "Scanner.h"
+#include "Token.h"
 
 class Lexer
 {

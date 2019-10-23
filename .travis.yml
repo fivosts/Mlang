@@ -30,4 +30,4 @@ script:
   - gcc -v && g++ -v && cmake --version && clang --version && clang++ --version
   # Build the system
   - ./configure
-  - ./bin/MLogTest
+  - ./build/bin/MLogTest

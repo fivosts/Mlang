@@ -46,7 +46,7 @@ public:
         catch(const std::ifstream::failure &e)  {       return EOF;             }
     }
 
-    virtual const Position &getCurrentPosition() const
+    const Position &getCurrentPosition() const
     {
         return pos;
     }

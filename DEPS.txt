@@ -1,1 +1,1 @@
-libgtest-dev
+cmake

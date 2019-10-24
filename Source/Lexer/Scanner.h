@@ -25,7 +25,7 @@ public:
         {this->open(filePath);}
 
         catch (const std::ifstream::failure &e)
-        {/*TODO Send Error report*/}
+        {throw "Could not open file!";/*TODO Send Error report*/}
 
         return;
     }

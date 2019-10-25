@@ -25,7 +25,7 @@ namespace MLogTest
             sc = new Scanner(FULL_PATH("ase_model.mlog"));
         });
         ASSERT_ANY_THROW({
-            while(t->nextChar() != EOF){}
+            while(sc->nextChar() != EOF){}
         });
     }
 
@@ -35,7 +35,7 @@ namespace MLogTest
             sc = new Scanner(FULL_PATH("binary.mlog"));
         });
         ASSERT_ANY_THROW({
-            while(t->nextChar() != EOF){}
+            while(sc->nextChar() != EOF){}
         });
     }
 }

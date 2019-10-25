@@ -1,3 +1,4 @@
+
 add_executable(MLogTest 
 				TestRunner.cpp
 				Scanner.cpp
@@ -5,8 +6,12 @@ add_executable(MLogTest
 				${PROJECT_SOURCE_DIR}/Source/Lexer/Lexer.cpp)
 
 target_compile_definitions(MLogTest
-							PRIVATE MODEL_PATH="${PROJECT_SOURCE_DIR}/Models/"
-							PRIVATE TEST)
+				PRIVATE MODEL_PATH="${PROJECT_SOURCE_DIR}/Models/")
+
+if (LEXDBG)
+	target_compile_definitions(MLogTest PRIVATE LEXDBG)
+ENDIF(LEXDBG)
+
 target_link_libraries(MLogTest ${PROJECT_SOURCE_DIR}/Tools/GoogleTest/libgtest.a pthread)
 
 include_directories(${PROJECT_SOURCE_DIR}/Source/ASTNodes)

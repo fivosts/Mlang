@@ -15,6 +15,14 @@ else()
     message(FATAL_ERROR "Unknown compiler " ${CMAKE_CXX_COMPILER_ID} ". Aborting.")
 endif()
 
+OPTION(LEXDBG "Select ON to print lexing result" OFF)
+
+# if (LEXDBG)
+#     set(LEXDBG ON CACHE BOOL "Select ON to print lexing result")
+# else()
+#     set(LEXDBG OFF CACHE BOOL "Select ON to print lexing result")
+# ENDIF(LEXDBG)
+
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(Source)
 add_subdirectory(Test)

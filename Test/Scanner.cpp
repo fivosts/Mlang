@@ -5,30 +5,37 @@
 #define FULL_PATH(M) MODEL_PATH M
 #endif
 
+static Scanner *sc;
+
 namespace MLogTest
 {
     TEST(ScannerTest, Empty)
     {
         ASSERT_NO_THROW({
-            Scanner *t = new Scanner(FULL_PATH("empty.mlog"));
-            while(t->nextChar() != EOF){}
+            sc = new Scanner(FULL_PATH("empty.mlog"));
+        });
+        ASSERT_NO_THROW({
+            while(sc->nextChar() != EOF){}
         });
     }
 
     TEST(ScannerTest, Normal)
     {
         ASSERT_NO_THROW({
-            Scanner *t = new Scanner(FULL_PATH("ase_model.mlog"));
+            sc = new Scanner(FULL_PATH("ase_model.mlog"));
+        });
+        ASSERT_ANY_THROW({
             while(t->nextChar() != EOF){}
         });
     }
 
-    TEST(ScannerTest, Binary){
+    TEST(ScannerTest, Binary)
+    {
         ASSERT_NO_THROW({
-            Scanner *t = new Scanner(FULL_PATH("binary.mlog"));
+            sc = new Scanner(FULL_PATH("binary.mlog"));
+        });
+        ASSERT_ANY_THROW({
             while(t->nextChar() != EOF){}
         });
     }
-
 }
-

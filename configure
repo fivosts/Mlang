@@ -1,25 +1,48 @@
-echo "Scanning for apt package dependencies"
+#!/bin/bash
+function help()
+{
+    echo "TODO: Help message"
+    exit
+}
 
-while IFS="" read -r DEP_PACK || [ -n "$DEP_PACK" ]
-do
-    PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $DEP_PACK|grep "install ok installed")
-    # echo Checking for somelib: $PKG_OK
-    if [ "" == "$PKG_OK" ]; then
-    echo "Installing $DEP_PACK"
-    sudo apt --yes install $DEP_PACK
-    else
-        echo "$DEP_PACK is installed"
+function parse_arguments()
+{
+    if [[ "$*" == '--help' || "$*" == '-h' ]]
+    then
+        help
     fi
-done < DEPS.txt
+}
 
-echo "Configuring MLog"
+function setup_deps()
+{
+    echo "Scanning for apt package dependencies"
 
-if [ ! -d "build" ]; then 
-    mkdir build
-fi
+    while IFS="" read -r DEP_PACK || [ -n "$DEP_PACK" ]
+    do
+        PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $DEP_PACK|grep "install ok installed")
+        # echo Checking for somelib: $PKG_OK
+        if [ "" == "$PKG_OK" ]; then
+        echo "Installing $DEP_PACK"
+        sudo apt --yes install $DEP_PACK
+        else
+            echo "$DEP_PACK is installed"
+        fi
+    done < DEPS.txt
+}
 
-cd build && cmake .. || (echo "Cmake config failed: Error $$"; exit 1)
-make || (echo "Compilation failed: Error $$"; exit 1)
+function build_and_compile()
+{
+    echo "Configuring MLog"
+    if [ ! -d "build" ]; then 
+        mkdir build
+    fi
 
+    cd build && cmake .. $@ || (echo "Cmake config failed: Error $$"; exit 1)
+    make || (echo "Compilation failed: Error $$"; exit 1)
+}
+
+parse_arguments
+setup_deps
+build_and_compile
 echo $@
-
+exit

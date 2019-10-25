@@ -119,24 +119,27 @@ const Token Lexer::nextToken()
 	else if (current == '\"')
 	{
 		std::string strID = "";
-		current = sc->nextChar();
-		while (current != '\"')
+		char next = sc->peekChar();
+		while (next != '\"')
 		{
 			// Special characters and whitespaces
 			// in STR are not allowed.
-			if (current == '\'' || current == '\\' || current == ' '
-			 || current == '\t' || current == '\b'
-			 || current == '\0' || current == '\n')
+			if (next == '\'' || next == '\\' || next == ' '
+			 || next == '\t' || next == '\b' || next == EOF
+			 || next == '\0' || next == '\n')
 			{
+				// current = sc->nextChar();
 				strID += current;
 				return Token(Token::TokenType::INVALID, cpos, strID);
 			}
 			else
 			{
-				strID += current;
 				current = sc->nextChar();
+				next = sc->peekChar();
+				strID += current;
 			}
 		}
+		current = sc->nextChar();
 		return Token(Token::TokenType::STR_LITERAL, cpos, strID);
 	}
 	// INT Literals

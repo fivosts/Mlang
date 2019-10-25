@@ -36,8 +36,9 @@ public:
 
     virtual char nextChar()
     {
+        if (fEnd)                               {   throw "Illegal access past EOF!";   }
         try                                     {   return updatePosition(this->get()); }
-        catch(const std::ifstream::failure &e)  {   return EOF;                         }
+        catch(const std::ifstream::failure &e)  {   fEnd = true;    return EOF;                         }
     }
 
     virtual char peekChar()
@@ -63,7 +64,8 @@ private:
         return c;
     }
 
-// private:
+private:
+    bool fEnd = false;
 public:
     Position pos{0, 0};
 

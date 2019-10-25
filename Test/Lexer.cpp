@@ -143,5 +143,81 @@ namespace MLogTest
 
         delete sc;
     }
+
+    TEST(LexerTest, BadID1)
+    {
+        sc = new Scanner(FULL_PATH("bad_id1.mlog"));
+        Lexer lex(sc);
+        std::unordered_set<Token::TokenType> TokenBag;
+        
+        Token curr = lex.nextToken();
+        TokenBag.insert(curr.getToken());
+        while(curr.getToken() != Token::TokenType::END)
+        {
+            curr = lex.nextToken();
+            TokenBag.insert(curr.getToken());
+        }
+        ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
+        ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
+
+        delete sc;
+    }
+
+    TEST(LexerTest, Bool1)
+    {
+        sc = new Scanner(FULL_PATH("bool1.mlog"));
+        Lexer lex(sc);
+        std::unordered_set<Token::TokenType> TokenBag;
+        
+        Token curr = lex.nextToken();
+        TokenBag.insert(curr.getToken());
+        while(curr.getToken() != Token::TokenType::END)
+        {
+            curr = lex.nextToken();
+            TokenBag.insert(curr.getToken());
+        }
+        ASSERT_TRUE(TokenBag.find(Token::TokenType::BOOL_LITERAL) != TokenBag.end());
+        ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
+
+        delete sc;
+    }
+
+    TEST(LexerTest, Bool2)
+    {
+        sc = new Scanner(FULL_PATH("bool2.mlog"));
+        Lexer lex(sc);
+        std::unordered_set<Token::TokenType> TokenBag;
+        
+        Token curr = lex.nextToken();
+        TokenBag.insert(curr.getToken());
+        while(curr.getToken() != Token::TokenType::END)
+        {
+            curr = lex.nextToken();
+            TokenBag.insert(curr.getToken());
+        }
+        ASSERT_TRUE(TokenBag.find(Token::TokenType::BOOL_LITERAL) != TokenBag.end());
+        ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
+
+        delete sc;
+    }
+
+    TEST(LexerTest, BadInt1)
+    {
+        sc = new Scanner(FULL_PATH("bad_int1.mlog"));
+        Lexer lex(sc);
+        std::unordered_set<Token::TokenType> TokenBag;
+        
+        Token curr = lex.nextToken();
+        TokenBag.insert(curr.getToken());
+        while(curr.getToken() != Token::TokenType::END)
+        {
+            curr = lex.nextToken();
+            TokenBag.insert(curr.getToken());
+        }
+        ASSERT_TRUE(TokenBag.find(Token::TokenType::INT_LITERAL) != TokenBag.end());
+        ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
+
+        delete sc;
+    }
 }
 

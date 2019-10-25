@@ -66,9 +66,10 @@ const Token Lexer::nextToken()
 	// Identifiers and BOOL literals
 	else if (isLetter(std::move(current)))
 	{
-		std::string id = (const char*)&current;
+		std::string id = "";
+		id += current;
 		char next = sc->peekChar();
-		// current = sc->nextChar();
+
 		while(isLetter(std::move(next)) 
 			|| isDigit(std::move(next)) 
 			|| next == '_')
@@ -144,7 +145,8 @@ const Token Lexer::nextToken()
 	// INT Literals
 	else if (isDigit(std::move(current)))
 	{
-		std::string intID = (const char*)&current;
+		std::string intID = "";
+		intID += current;
 		while (isDigit(sc->peekChar()))
 		{
 			current = sc->nextChar();

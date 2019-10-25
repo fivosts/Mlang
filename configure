@@ -83,5 +83,4 @@ declare -a CMAKE_ARGS=()
 parse_arguments
 setup_deps
 build_and_compile
-echo $@
 exit 0

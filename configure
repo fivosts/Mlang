@@ -1,16 +1,52 @@
 #!/bin/bash
 function help()
 {
-    echo "TODO: Help message"
-    exit
+    echo "Usage: ./configure [OPTIONS]"
+    echo ""
+    echo "  -h, --help"
+    echo "              Print help message"
+    echo "  -L, --LEXDBG"
+    echo "              Enable lexer debugging output"
+    echo "  -P, --PARDBG"
+    echo "              Enable parser debugging output"
+    echo "  -S, --SEMDBG"
+    echo "              Enable semantic analyzer debugging output"
+    echo "  -C, --CODEDBG"
+    echo "              Enable code generator debugging output"
+    echo ""
+    echo "If no argument is provided, cmake is invoked with"
+    echo "all preprocessor flags set to off by default."
+    echo ""
+    echo "@author: Foivos Tsimpourlas"
+    echo "@webpage: <https://github.com/fivosts/MLog>"
+    exit $1
 }
 
 function parse_arguments()
 {
-    if [[ "$*" == '--help' || "$*" == '-h' ]]
-    then
-        help
-    fi
+    for arg in "${ARGS[@]}"; do
+    case "$arg" in
+        -h|--help)
+            help 0
+            ;;
+        -L|--LEXDBG)
+            CMAKE_ARGS+="-DLEXDBG=ON"
+            ;;
+        -P|--PARDBG)
+            CMAKE_ARGS+="-DPARDBG=ON"
+            ;;
+        -S|--SEMDBG)
+            CMAKE_ARGS+="-DSEMDBG=ON"
+            ;;
+        -C|--CODEDBG)
+            CMAKE_ARGS+="-DCODEDBG=ON"
+            ;;
+        *)
+            echo "configure: Unrecognized option " $arg
+            help 1
+            ;;
+    esac
+    done
 }
 
 function setup_deps()
@@ -37,12 +73,15 @@ function build_and_compile()
         mkdir build
     fi
 
-    cd build && cmake .. $@ || (echo "Cmake config failed: Error $$"; exit 1)
+    cd build && cmake .. $CMAKE_ARGS || (echo "Cmake config failed: Error $$"; exit 1)
     make || (echo "Compilation failed: Error $$"; exit 1)
 }
+
+declare -a ARGS=("$@")
+declare -a CMAKE_ARGS=()
 
 parse_arguments
 setup_deps
 build_and_compile
 echo $@
-exit
+exit 0

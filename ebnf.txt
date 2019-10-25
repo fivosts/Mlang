@@ -75,4 +75,4 @@ IDENTIFIER ::= 'network_name' | 'backend' | 'target' | 'cuda_available'
 
 STR ::= '"' ([a-z] | [A-Z] | [0-9] | '_')* '"'
 BOOL ::= True | true | False | false | 0 | 1
-INT ::= ([0-9])*
+INT ::= (ε | '-') ([0-9])*

@@ -9,10 +9,11 @@ bool isDigit(char&& c)
 
 bool isLetter(char&& c)
 {
-	return (c >= (char)'A' 
-			&& c <= (char)'Z' 
-			&& c >= (char)'a' 
-			&& c <= (char)'z');
+	return ((c >= (char)'A' 
+			&& c <= (char)'Z')
+			|| 
+			(c >= (char)'a' 
+			&& c <= (char)'z'));
 }
 
 #endif

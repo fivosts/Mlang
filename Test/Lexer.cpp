@@ -24,8 +24,8 @@ namespace MLogTest
             curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
-        ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) == TokenBag.end() );
-        ASSERT_TRUE(TokenBag.find(Token::TokenType::END) == TokenBag.end() );
+        ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) == TokenBag.end());
+        ASSERT_TRUE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
 
         delete sc;
     }
@@ -44,7 +44,7 @@ namespace MLogTest
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) == TokenBag.end());
-        ASSERT_TRUE(TokenBag.find(Token::TokenType::END) == TokenBag.end() );
+        ASSERT_TRUE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
 
         delete sc;
     }
@@ -63,7 +63,7 @@ namespace MLogTest
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
-        ASSERT_TRUE(TokenBag.find(Token::TokenType::END) == TokenBag.end() );
+        ASSERT_TRUE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
 
         delete sc;
     }

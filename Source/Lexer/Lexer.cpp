@@ -128,7 +128,6 @@ const Token Lexer::nextToken()
 			 || next == '\t' || next == '\b' || next == EOF
 			 || next == '\0' || next == '\n')
 			{
-				// current = sc->nextChar();
 				strID += current;
 				return Token(Token::TokenType::INVALID, cpos, strID);
 			}

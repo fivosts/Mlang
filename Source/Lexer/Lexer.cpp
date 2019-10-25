@@ -1,6 +1,12 @@
 #include "Lexer.h"
 #include "Util.h"
 
+#ifdef TEST
+std::unordered_map<Token::TokenType, std::string> Token::tokenMap = {
+	FOR_TOKENTYPES(TOKEN_MAP)
+};
+#endif
+
 const Token Lexer::nextToken()
 {
 

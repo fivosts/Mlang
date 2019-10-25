@@ -13,7 +13,6 @@ public:
 
 private:
 	Scanner *sc;
-
 };
 
 #endif

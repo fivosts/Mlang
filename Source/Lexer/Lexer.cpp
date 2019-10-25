@@ -16,7 +16,7 @@ const Token Lexer::nextToken()
 	char current = sc->nextChar();
 	Position cpos = sc->getCurrentPosition();
 
-	if (current == ' '){
+	if (current == ' ' || current == '\t'){
 		return Lexer::nextToken();
 	}
 	// #import and #define 
@@ -68,6 +68,7 @@ const Token Lexer::nextToken()
 	{
 		std::string id = (const char*)&current;
 		char next = sc->peekChar();
+		// current = sc->nextChar();
 		while(isLetter(std::move(next)) 
 			|| isDigit(std::move(next)) 
 			|| next == '_')
@@ -99,32 +100,41 @@ const Token Lexer::nextToken()
 	{
 		return Token(Token::TokenType::PLUS, cpos);
 	}
+	// MINUS
+	else if (current == '-')
+	{
+		return Token(Token::TokenType::MINUS, cpos);
+	}
 	// ASSIGN
 	else if (current == '=')
 	{
 		return Token(Token::TokenType::ASSIGN, cpos);
 	}
+	// COMMA
+	else if (current == ',')
+	{
+		return Token(Token::TokenType::COMMA, cpos);
+	}
 	// STRING Literals
 	else if (current == '\"')
 	{
 		std::string strID = "";
-		char next = sc->peekChar();
-		while (next != '\"')
+		current = sc->nextChar();
+		while (current != '\"')
 		{
 			// Special characters and whitespaces
 			// in STR are not allowed.
-			if (next == '\'' || next == '\\' || next == ' '
-			 || next == '\t' || next == '\b'
-			 || next == '\0' || next == '\n')
+			if (current == '\'' || current == '\\' || current == ' '
+			 || current == '\t' || current == '\b'
+			 || current == '\0' || current == '\n')
 			{
-				current = sc->nextChar();
-				return Token(Token::TokenType::INVALID, cpos, current);
+				strID += current;
+				return Token(Token::TokenType::INVALID, cpos, strID);
 			}
 			else
 			{
-				current = sc->nextChar();
-				next = sc->peekChar();
 				strID += current;
+				current = sc->nextChar();
 			}
 		}
 		return Token(Token::TokenType::STR_LITERAL, cpos, strID);

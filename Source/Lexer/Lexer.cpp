@@ -1,7 +1,7 @@
 #include "Lexer.h"
 #include "Util.h"
 
-#ifdef TEST
+#ifdef LEXDBG
 std::unordered_map<Token::TokenType, std::string> Token::tokenMap = {
 	FOR_TOKENTYPES(TOKEN_MAP)
 };

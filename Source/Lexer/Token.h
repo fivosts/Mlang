@@ -2,7 +2,7 @@
 #define TOKEN_H
 
 #include <string>
-#ifdef TEST
+#ifdef LEXDBG
 	#include <unordered_map>
 #endif
 
@@ -60,12 +60,12 @@ public:
 	Token() = delete;
 	//maybe add template instead of overload ?
 	Token(TokenType t, Position p, std::string d = "") : token(t), pos(p), data(d) {
- 		#ifdef TEST
+ 		#ifdef LEXDBG
 			PRINT_TOKEN(tokenMap[t], d);
 		#endif
 	}
 	Token(TokenType t, Position p, char d) : token(t), pos(p), data((const char*)&d) {
-		#ifdef TEST
+		#ifdef LEXDBG
 			PRINT_TOKEN(tokenMap[t], d);
 		#endif
 	}
@@ -80,7 +80,7 @@ private:
 	std::string data;
 	Position pos;
 	public:
-	#ifdef TEST
+	#ifdef LEXDBG
 		static std::unordered_map<TokenType, std::string> tokenMap;
 	#endif
 };

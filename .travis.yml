@@ -8,7 +8,7 @@ matrix:
       addons:
         apt:
           sourceline: "ppa:ubuntu-toolchain-r/test"
-          packages: ['g++-7', 'cmake', 'libgtest-dev']
+          packages: ['g++-7', 'cmake']
       env:
         - CC=gcc-7
         - CXX=g++-7
@@ -17,7 +17,7 @@ matrix:
       addons:
         apt:
           sourceline: "ppa:ubuntu-toolchain-r/test"
-          packages: ['g++-8', 'cmake', 'libgtest-dev']
+          packages: ['g++-8', 'cmake']
       env:
         - CC=gcc-8
         - CXX=g++-8
@@ -27,7 +27,7 @@ matrix:
         apt:
           sources: ['llvm-toolchain-xenial-6']
           sourceline: "ppa:ubuntu-toolchain-r/test"
-          packages: ['clang-6.0', 'g++-7', 'cmake', 'libgtest-dev']
+          packages: ['clang-6.0', 'g++-7', 'cmake']
       env:
         - CC=clang-6.0
         - CXX=clang++-6.0
@@ -37,7 +37,7 @@ matrix:
         apt:
           sources: ['llvm-toolchain-xenial-7']
           sourceline: "ppa:ubuntu-toolchain-r/test"
-          packages: ['clang-7', 'g++-7', 'cmake', 'libgtest-dev']
+          packages: ['clang-7', 'g++-7', 'cmake']
       env:
         - CC=clang-7
         - CXX=clang++-7
@@ -47,7 +47,7 @@ matrix:
         apt:
           sources: ['llvm-toolchain-xenial-8']
           sourceline: "ppa:ubuntu-toolchain-r/test"
-          packages: ['clang-8', 'g++-8', 'cmake', 'libgtest-dev']
+          packages: ['clang-8', 'g++-8', 'cmake']
       env:
         - CC=clang-8
         - CXX=clang++-8

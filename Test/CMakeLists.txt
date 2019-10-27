@@ -12,7 +12,7 @@ if (LEXDBG)
 	target_compile_definitions(MLogTest PRIVATE LEXDBG)
 ENDIF(LEXDBG)
 
-target_link_libraries(MLogTest ${PROJECT_SOURCE_DIR}/Tools/GoogleTest/libgtest.a pthread)
+target_link_libraries(MLogTest gtest pthread)
 
 include_directories(${PROJECT_SOURCE_DIR}/Source/ASTNodes)
 include_directories(${PROJECT_SOURCE_DIR}/Source/Scanner)

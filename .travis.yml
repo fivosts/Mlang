@@ -22,15 +22,6 @@ matrix:
         - CC=gcc-8
         - CXX=g++-8
 
-    - compiler: gcc
-      addons:
-        apt:
-          sourceline: "ppa:ubuntu-toolchain-r/test"
-          packages: ['g++-9', 'cmake', 'libgtest-dev']
-      env:
-        - CC=gcc-9
-        - CXX=g++-9
-
     - compiler: clang
       addons:
         apt:
@@ -60,18 +51,6 @@ matrix:
       env:
         - CC=clang-8
         - CXX=clang++-8
-
-    - compiler: clang
-      addons:
-        apt:
-          sources:
-              sourceline: 'deb https://apt.llvm.org/xenial/ llvm-toolchain-xenial-9 main'
-              sourceline: 'ppa:ubuntu-toolchain-r/test'
-              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
-          packages: ['clang-9', 'g++-9', 'cmake', 'libgtest-dev']
-      env:
-        - CC=clang-9
-        - CXX=clang++-9
 
 script:
   - $CXX --version

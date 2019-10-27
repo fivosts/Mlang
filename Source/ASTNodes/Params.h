@@ -1,5 +1,4 @@
-#ifndef PARAMS_H
-#define PARAMS_H
+#pragma once
 
 class LayerParams : public ASTNode
 {
@@ -28,5 +27,3 @@ public:
 	MLParams() = default;
 	~MLParams() override = default;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef MODELPROPERTIES_H
-#define MODELPROPERTIES_H
+#pragma once
 
 #include "Attribute.h"
 
@@ -65,5 +64,3 @@ public:
 private:
 	std::unordered_set<std::string> outTens;
 };
-
-#endif

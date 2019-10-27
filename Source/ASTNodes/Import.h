@@ -1,5 +1,4 @@
-#ifndef IMPORT_H
-#define IMPORT_H
+#pragma once
 
 #include "ASTNode.h"
 
@@ -16,5 +15,3 @@ public:
 private:
 	importPath path;
 };
-
-#endif

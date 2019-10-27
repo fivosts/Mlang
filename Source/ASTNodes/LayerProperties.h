@@ -1,5 +1,4 @@
-#ifndef LAYER_PROPERTIES_H
-#define LAYER_PROPERTIES_H
+#pragma once
 
 #include "Params.h"
 
@@ -44,7 +43,8 @@ private:
 	int inSize;
 };
 
-class OutputTimestep : public LSTMParams{
+class OutputTimestep : public LSTMParams
+{
 public:
 	OutputTimestep() = default;
 	~OutputTimestep() override = default;
@@ -53,7 +53,8 @@ private:
 	int outStep;
 };
 
-class HiddenSize : public LSTMParams{
+class HiddenSize : public LSTMParams
+{
 public:
 	HiddenSize() = default;
 	~HiddenSize() override = default;
@@ -62,7 +63,8 @@ private:
 	int hSize;
 };
 
-class NumLayers : public LSTMParams{
+class NumLayers : public LSTMParams
+{
 public:
 	NumLayers() = default;
 	~NumLayers() override = default;
@@ -81,7 +83,8 @@ private:
 	T inFeat;
 };
 
-class OutFeatures : public MLParams{
+class OutFeatures : public MLParams
+{
 public:
 	OutFeatures() = default;
 	~OutFeatures() override = default;
@@ -89,5 +92,3 @@ public:
 private:
 	int outFeat;
 };
-
-#endif

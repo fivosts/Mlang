@@ -1,5 +1,4 @@
-#ifndef ATTRIBUTE_H
-#define ATTRIBUTE_H
+#pragma once
 
 class Attribute : ASTNode
 {
@@ -8,5 +7,3 @@ public:
 	virtual ~Attribute() override = 0;
 
 };
-
-#endif

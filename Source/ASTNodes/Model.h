@@ -1,5 +1,4 @@
-#ifndef MODEL_H
-#define MODEL_H
+#pragma once
 
 #include "ASTNode.h"
 #include "Import.h"
@@ -20,5 +19,3 @@ private:
 	std::unordered_set<Attribute*> attr;
 	std::unordered_set<Layer*> lr;
 };
-
-#endif

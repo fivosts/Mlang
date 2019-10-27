@@ -1,5 +1,4 @@
-#ifndef BLOCK_H
-#define BLOCK_H
+#pragma once
 
 #include "Params.h"
 
@@ -24,5 +23,3 @@ public:
 private:
 	std::unordered_set<HyperParams*> hparams;
 };
-
-#endif

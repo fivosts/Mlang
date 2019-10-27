@@ -1,9 +1,8 @@
-#ifndef LENGTHOF_H
-#define LENGTHOF_H
+#pragma once
 
 #include <string>
 
-class LengthOf 
+class LengthOf : public ASTNode
 {
 public:
 	LengthOf() = default;
@@ -12,5 +11,3 @@ public:
 private:
 	std::string layer;
 };
-
-#endif

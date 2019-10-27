@@ -1,5 +1,4 @@
-#ifndef LAYER_H
-#define LAYER_H
+#pragma once
 
 #include "ASTNode.h"
 #include "Block.h"
@@ -15,7 +14,8 @@ class LSTM : public Layer
 {
 public:
 	LSTM() = default;
-	~LSTM() override = default;
+	~LSTM() override {delete pblock;
+					  delete hblock;}
 
 private:
 	ParamBlock* pblock{NULL};
@@ -26,7 +26,8 @@ class MLP : public Layer
 {
 public:
 	MLP() = default;
-	~MLP() override = default;
+	~MLP() override {delete pblock;
+					  delete hblock;}
 
 private:
 	ParamBlock* pblock{NULL};
@@ -37,10 +38,8 @@ class Sigmoid : public Layer
 {
 public:
 	Sigmoid() = default;
-	~Sigmoid() override = default;
+	~Sigmoid() override {delete pblock;}
 
 private:
 	ParamBlock* pblock{NULL};
 };
-
-#endif

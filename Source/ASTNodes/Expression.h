@@ -1,13 +1,11 @@
-#ifndef BINEXPR_H
-#define BINEXPR_H
+#pragma once
 
-class BinExpr{
+class BinExpr : public ASTNode
+{
 public:
 	BinExpr() = default;
-	~BinExpr() = default;
+	~BinExpr() {delte lhs;}
 private:
 	BinExpr* lhs{NULL};
 	std::string rhs;
 };
-
-#endif

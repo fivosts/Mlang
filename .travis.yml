@@ -37,7 +37,7 @@ matrix:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-5']
           packages: ['clang-5.0', 'g++-7', 'cmake', 'libgtest-dev']
       env:
-        - CC=clang-5
+        - CC=clang-5.0
         - CXX=clang++-5.0
 
     - compiler: clang
@@ -46,7 +46,7 @@ matrix:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-6']
           packages: ['clang-6.0', 'g++-7', 'cmake', 'libgtest-dev']
       env:
-        - CC=clang-6
+        - CC=clang-6.0
         - CXX=clang++-6.0
 
     - compiler: clang

@@ -2,32 +2,94 @@ dist: bionic
 sudo: required
 language:
   - cpp
-compiler:
-  - gcc
-  - clang
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - gcc-7
-      - g++-7
-      - clang-8
-      - clang++-8
-      - cmake
-      - libgtest-dev
-script:
-  # Link gcc-7 and g++-7 to their standard commands
-  - sudo ln -s /usr/bin/gcc-7 /usr/local/bin/gcc
-  - sudo ln -s /usr/bin/g++-7 /usr/local/bin/g++
-  # Link clang-8 and clang++-8 to their standard commands
-  - sudo ln -s /usr/bin/clang-8 /usr/local/bin/clang
-  - sudo ln -s /usr/bin/clang++-8 /usr/local/bin/clang++
-  # Export CC and CXX to tell cmake which compiler to use
-  - export CC=/usr/bin/gcc-7
-  - export CXX=/usr/bin/g++-7
-  # Check versions of gcc, g++ and cmake
-  - gcc -v && g++ -v && cmake --version && clang --version && clang++ --version
-  # Build the system
-  - ./configure
-  - ./build/bin/MLogTest
+
+matrix:
+  include:
+    - compiler: gcc7
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-7
+            - g++-7
+            - cmake
+        env:
+          - C=gcc-7
+          - CXX=g++-7
+
+  include:
+    - compiler: gcc8
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-8
+            - g++-8
+            - cmake
+        env:
+          - C=gcc-8
+          - CXX=g++-8
+
+  include:
+    - compiler: gcc9
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-9
+            - g++-9
+            - cmake
+        env:
+          - C=gcc-9
+          - CXX=g++-9
+
+  include:
+    - compiler: clang6
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang-6
+            - clang++-6
+            - cmake
+        env:
+          - C=clang-61
+          - CXX=clang++-6
+
+  include:
+    - compiler: clang7
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang-7
+            - clang++-7
+            - cmake
+        env:
+          - C=clang-7
+          - CXX=clang++-7
+
+  include:
+    - compiler: clang8
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang-8
+            - clang++-8
+            - cmake
+        env:
+          - C=clang-8
+          - CXX=clang++-8
+
+  script:
+    # Build the system
+    - $C --version && $CXX --version && cmake --version
+    - ./configure
+    - ./build/bin/MLogTest

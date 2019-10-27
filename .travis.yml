@@ -1,100 +1,103 @@
-dist: bionic
-sudo: required
 language: generic
+os: linux
+dist: bionic
 
 matrix:
   include:
     - compiler: gcc
       addons:
         apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - gcc-7
-            - g++-7
-            - cmake
-            - libgtest-dev
-        env:
-          - C=gcc-7
-          - CXX=g++-7
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-7']
+      env:
+        - CXX=g++-7
 
-  include:
     - compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-8']
+      env:
+        - CXX=g++-8
+
+    - compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-8']
+      env:
+        - CXX=g++-8
+
+    - compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-9']
+      env:
+        - CXX=g++-9
+
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-5']
+          packages: ['clang-5.0', 'g++-7']
+      env:
+        - CXX=clang++-5.0
+
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-6']
+          packages: ['clang-6.0', 'g++-7']
+      env:
+        - CXX=clang++-6.0
+
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-7']
+          packages: ['clang-7', 'g++-7']
+      env:
+        - CXX=clang++-7
+
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-8']
+          packages: ['clang-8', 'g++-8']
+      env:
+        - CXX=clang++-8
+
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-8']
+          packages: ['clang-8', 'g++-8']
+      env:
+        - CXX=clang++-8
+
+    - compiler: clang
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-xenial-8']
+          packages: ['clang-8', 'g++-8']
+      env:
+        - CXX=clang++-8
+
+    - compiler: clang
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - sourceline: 'deb https://apt.llvm.org/xenial/ llvm-toolchain-xenial-9 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
-            - gcc-8
-            - g++-8
-            - cmake
-            - libgtest-dev
-        env:
-          - C=gcc-8
-          - CXX=g++-8
-
-  include:
-    - compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - gcc-9
+            - clang-9
             - g++-9
-            - cmake
-            - libgtest-dev
-        env:
-          - C=gcc-9
-          - CXX=g++-9
+      env:
+        - CXX=clang++-9
 
-  include:
-    - compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - clang-6
-            - clang++-6
-            - cmake
-            - libgtest-dev
-        env:
-          - C=clang-61
-          - CXX=clang++-6
-
-  include:
-    - compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - clang-7
-            - clang++-7
-            - cmake
-            - libgtest-dev
-        env:
-          - C=clang-7
-          - CXX=clang++-7
-
-  include:
-    - compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - clang-8
-            - clang++-8
-            - cmake
-            - libgtest-dev
-        env:
-          - C=clang-8
-          - CXX=clang++-8
-
-  script:
-    # Build the system
-    - $C --version && $CXX --version && cmake --version
-    - ./configure
-    - ./build/bin/MLogTest
+script:
+  - $CXX --version
+  - ./configure
+  - ./build/bin/MLogTest

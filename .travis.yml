@@ -1,7 +1,6 @@
 dist: bionic
 sudo: required
-language:
-  - cpp
+language: generic
 
 matrix:
   include:

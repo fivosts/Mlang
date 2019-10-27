@@ -5,7 +5,7 @@ language:
 
 matrix:
   include:
-    - compiler: gcc7
+    - compiler: gcc
       addons:
         apt:
           sources:
@@ -14,12 +14,13 @@ matrix:
             - gcc-7
             - g++-7
             - cmake
+            - libgtest-dev
         env:
           - C=gcc-7
           - CXX=g++-7
 
   include:
-    - compiler: gcc8
+    - compiler: gcc
       addons:
         apt:
           sources:
@@ -28,12 +29,13 @@ matrix:
             - gcc-8
             - g++-8
             - cmake
+            - libgtest-dev
         env:
           - C=gcc-8
           - CXX=g++-8
 
   include:
-    - compiler: gcc9
+    - compiler: gcc
       addons:
         apt:
           sources:
@@ -42,12 +44,13 @@ matrix:
             - gcc-9
             - g++-9
             - cmake
+            - libgtest-dev
         env:
           - C=gcc-9
           - CXX=g++-9
 
   include:
-    - compiler: clang6
+    - compiler: clang
       addons:
         apt:
           sources:
@@ -56,12 +59,13 @@ matrix:
             - clang-6
             - clang++-6
             - cmake
+            - libgtest-dev
         env:
           - C=clang-61
           - CXX=clang++-6
 
   include:
-    - compiler: clang7
+    - compiler: clang
       addons:
         apt:
           sources:
@@ -70,12 +74,13 @@ matrix:
             - clang-7
             - clang++-7
             - cmake
+            - libgtest-dev
         env:
           - C=clang-7
           - CXX=clang++-7
 
   include:
-    - compiler: clang8
+    - compiler: clang
       addons:
         apt:
           sources:
@@ -84,6 +89,7 @@ matrix:
             - clang-8
             - clang++-8
             - cmake
+            - libgtest-dev
         env:
           - C=clang-8
           - CXX=clang++-8

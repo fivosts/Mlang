@@ -3,7 +3,6 @@
 #include "Lexer.h"
 #include "Model.h"
 
-#include <queue>
 #include <memory>
 
 class Parser
@@ -12,6 +11,11 @@ public:
 	Parser(Lexer l) : lex(l) {}
 	~Parser() = default;
 
+	/*!!
+		Queue is not needed atm because lookAhead is not in plans
+		Otherwise, queue will be implemented, and accept will load i
+		items in the queue, as instructed by lookAhead
+	!!*/
 	bool accept(Token &exp)
 	{
 		/*
@@ -20,8 +24,8 @@ public:
 			!!! Don't do unnecessary reads from lexer.
 			Lexer should be responsible to cut this off
 		*/
-
-		return (/*lambda*/ == exp ? true : false)
+		return (tokPend ? *tokPend == exp : [this](){*tokPend = lex.nextToken();
+												return *tokPend;} == exp);
 	}
 	bool expect(Token &exp);
 
@@ -29,7 +33,7 @@ public:
 
 private:
 	Lexer lex;
-	std::queue<Token::TokenType> tokQu;
+	std::unique_ptr<Token> tokPend = NULL;
 
 private:
 	/***** Recursive descent parsing functions  *****/

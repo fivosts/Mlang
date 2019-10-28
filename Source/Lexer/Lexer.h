@@ -8,10 +8,11 @@
 class Lexer
 {
 public:
-	Lexer(std::unique_ptr<Scanner> sc) : sc(c){}
-	~Lexer() {delete sc;}
+	Lexer() = delete;
+	Lexer(std::unique_ptr<Scanner> c) : sc(std::move(c)){}
+	~Lexer() = default;
 	const Token nextToken();
 
 private:
-	std::unique_ptr<Scanner> sc;
+	std::shared_ptr<Scanner> sc;
 };

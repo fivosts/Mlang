@@ -3,4 +3,5 @@ include_directories(Lexer)
 include_directories(Util)
 add_executable(MLog
 				main.cpp
-				Lexer/Lexer.cpp)
+				Lexer/Lexer.cpp
+				Parser/Parser.cpp)

@@ -73,8 +73,9 @@ function build_and_compile()
         mkdir build
     fi
 
-    cd build && cmake .. $CMAKE_ARGS || (echo "Cmake config failed: Error $$"; exit 1)
-    make || (echo "Compilation failed: Error $$"; exit 1)
+    cd build && cmake .. $CMAKE_ARGS || (echo "Cmake config failed: Error $$"; return $$)
+    make || (echo "Compilation failed: Error $$"; return $$)
+    return 0
 }
 
 declare -a ARGS=("$@")
@@ -83,4 +84,4 @@ declare -a CMAKE_ARGS=()
 parse_arguments
 setup_deps
 build_and_compile
-exit 0
+exit $?

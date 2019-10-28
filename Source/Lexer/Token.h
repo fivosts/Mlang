@@ -74,7 +74,7 @@ public:
 	const TokenType &getToken() const{
 		return token;
 	}
-	const bool &operator== (const Token &r)
+	const bool operator== (const Token &r)
 	{
 		return ((token == r.token) && (data == r.data) ? true : false);
 	}

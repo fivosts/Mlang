@@ -33,8 +33,8 @@ private:
 
 private:
 	/***** Recursive descent parsing functions  *****/
-	std::shared_ptr<Model> parseModel();
-	std::shared_ptr<Import> parseImport();
-	std::shared_ptr<Attribute> parseAttribute();
-	std::shared_ptr<Layer> parseLayer();
+	std::unique_ptr<Model> parseModel();
+	std::unique_ptr<Import> parseImport();
+	std::unique_ptr<Attribute> parseAttribute();
+	std::unique_ptr<Layer> parseLayer();
 };

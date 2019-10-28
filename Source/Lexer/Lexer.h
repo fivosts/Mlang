@@ -1,5 +1,4 @@
-#ifndef LEXER_H
-#define LEXER_H
+#pragma once
 
 #include "Scanner.h"
 #include "Token.h"
@@ -16,5 +15,3 @@ public:
 private:
 	std::unique_ptr<Scanner> sc;
 };
-
-#endif

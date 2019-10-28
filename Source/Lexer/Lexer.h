@@ -8,7 +8,7 @@ class Lexer
 {
 public:
 	Lexer(Scanner *c) : sc(c){}
-	~Lexer() = default;
+	~Lexer() {delete sc;}
 	const Token nextToken();
 
 private:

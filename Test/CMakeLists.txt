@@ -5,8 +5,8 @@ add_executable(MLogTest
 				Lexer.cpp
 				${PROJECT_SOURCE_DIR}/Source/Lexer/Lexer.cpp)
 
-target_compile_definitions(MLogTest
-				PRIVATE MODEL_PATH="${PROJECT_SOURCE_DIR}/Models/")
+target_compile_options (MLog PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)
+target_compile_definitions(MLogTest PRIVATE MODEL_PATH="${PROJECT_SOURCE_DIR}/Models/")
 
 if (LEXDBG)
 	target_compile_definitions(MLogTest PRIVATE LEXDBG)

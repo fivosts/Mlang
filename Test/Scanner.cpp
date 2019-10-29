@@ -17,9 +17,6 @@ namespace MLogTest
         ASSERT_NO_THROW({
             while(sc->nextChar() != EOF){}
         });
-        ASSERT_NO_THROW({
-            delete sc;
-        });
     }
 
     TEST(ScannerTest, Normal)
@@ -30,9 +27,6 @@ namespace MLogTest
         ASSERT_NO_THROW({
             while(sc->nextChar() != EOF){}
         });
-        ASSERT_NO_THROW({
-            delete sc;
-        });
     }
 
     TEST(ScannerTest, Binary)
@@ -42,9 +36,6 @@ namespace MLogTest
         });
         ASSERT_NO_THROW({
             while(sc->nextChar() != EOF){}
-        });
-        ASSERT_NO_THROW({
-            delete sc;
         });
     }
 }

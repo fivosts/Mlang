@@ -26,8 +26,6 @@ namespace MLogTest
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) == TokenBag.end());
         ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
-
-        delete sc;
     }
 
     TEST(LexerTest, Normal)
@@ -45,8 +43,6 @@ namespace MLogTest
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) == TokenBag.end());
         ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
-
-        delete sc;
     }
 
     TEST(LexerTest, Binary)
@@ -64,8 +60,6 @@ namespace MLogTest
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
         ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
-
-        delete sc;
     }
 
     TEST(LexerTest, BadString1)
@@ -83,8 +77,6 @@ namespace MLogTest
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
         ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
-
-        delete sc;
     }
 
     TEST(LexerTest, BadString2)
@@ -102,8 +94,6 @@ namespace MLogTest
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
         ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
-
-        delete sc;
     }
 
     TEST(LexerTest, BadString3)
@@ -121,8 +111,6 @@ namespace MLogTest
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
         ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
-
-        delete sc;
     }
 
     TEST(LexerTest, BadString4)
@@ -140,8 +128,6 @@ namespace MLogTest
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
         ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
-
-        delete sc;
     }
 
     TEST(LexerTest, BadID1)
@@ -159,8 +145,6 @@ namespace MLogTest
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
         ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
-
-        delete sc;
     }
 
     TEST(LexerTest, Bool1)
@@ -178,8 +162,6 @@ namespace MLogTest
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::BOOL_LITERAL) != TokenBag.end());
         ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
-
-        delete sc;
     }
 
     TEST(LexerTest, Bool2)
@@ -197,8 +179,6 @@ namespace MLogTest
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::BOOL_LITERAL) != TokenBag.end());
         ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
-
-        delete sc;
     }
 
     TEST(LexerTest, BadInt1)
@@ -216,8 +196,6 @@ namespace MLogTest
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INT_LITERAL) != TokenBag.end());
         ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
-
-        delete sc;
     }
 }
 

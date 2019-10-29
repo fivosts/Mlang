@@ -7,14 +7,19 @@
 #define FULL_PATH(M) MODEL_PATH M
 #endif
 
-static Scanner *sc;
+namespace
+{
+    auto getSc = [](const char *file){
+                    std::unique_ptr<Scanner> sc(new Scanner(file));
+                    return std::move(sc);
+                    };
+}
 
 namespace MLogTest
 {
     TEST(LexerTest, Empty)
     {
-        std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("empty.mlog")));
-        Lexer lex(sc);
+        Lexer lex(getSc(FULL_PATH("empty.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
         Token curr = lex.nextToken();
@@ -30,8 +35,7 @@ namespace MLogTest
 
     TEST(LexerTest, Normal)
     {
-        std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("ase_model.mlog")));
-        Lexer lex(sc);
+        Lexer lex(getSc(FULL_PATH("ase_model.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
         Token curr = lex.nextToken();
@@ -47,8 +51,7 @@ namespace MLogTest
 
     TEST(LexerTest, Binary)
     {
-        std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("binary.mlog")));
-        Lexer lex(sc);
+        Lexer lex(getSc(FULL_PATH("binary.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
         Token curr = lex.nextToken();
@@ -64,8 +67,7 @@ namespace MLogTest
 
     TEST(LexerTest, BadString1)
     {
-        std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("bad_string1.mlog")));
-        Lexer lex(sc);
+        Lexer lex(getSc(FULL_PATH("bad_string1.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
         Token curr = lex.nextToken();
@@ -81,8 +83,7 @@ namespace MLogTest
 
     TEST(LexerTest, BadString2)
     {
-        std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("bad_string2.mlog")));
-        Lexer lex(sc);
+        Lexer lex(getSc(FULL_PATH("bad_string2.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
         Token curr = lex.nextToken();
@@ -98,8 +99,7 @@ namespace MLogTest
 
     TEST(LexerTest, BadString3)
     {
-        std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("bad_string3.mlog")));
-        Lexer lex(sc);
+        Lexer lex(getSc(FULL_PATH("bad_string3.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
         Token curr = lex.nextToken();
@@ -115,8 +115,7 @@ namespace MLogTest
 
     TEST(LexerTest, BadString4)
     {
-        std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("bad_string4.mlog")));
-        Lexer lex(sc);
+        Lexer lex(getSc(FULL_PATH("bad_string4.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
         Token curr = lex.nextToken();
@@ -132,8 +131,7 @@ namespace MLogTest
 
     TEST(LexerTest, BadID1)
     {
-        std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("bad_id1.mlog")));
-        Lexer lex(sc);
+        Lexer lex(getSc(FULL_PATH("bad_id1.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
         Token curr = lex.nextToken();
@@ -149,8 +147,7 @@ namespace MLogTest
 
     TEST(LexerTest, Bool1)
     {
-        std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("bool1.mlog")));
-        Lexer lex(sc);
+        Lexer lex(getSc(FULL_PATH("bool1.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
         Token curr = lex.nextToken();
@@ -166,8 +163,7 @@ namespace MLogTest
 
     TEST(LexerTest, Bool2)
     {
-        std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("bool2.mlog")));
-        Lexer lex(sc);
+        Lexer lex(getSc(FULL_PATH("bool2.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
         Token curr = lex.nextToken();
@@ -183,8 +179,7 @@ namespace MLogTest
 
     TEST(LexerTest, BadInt1)
     {
-        std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("bad_int1.mlog")));
-        Lexer lex(sc);
+        Lexer lex(getSc(FULL_PATH("bad_int1.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
         Token curr = lex.nextToken();

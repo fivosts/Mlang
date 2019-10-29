@@ -74,7 +74,7 @@ public:
 	const TokenType &getToken() const{
 		return token;
 	}
-	const bool operator== (const Token &r)
+	bool operator== (const Token &r)
 	{
 		return ((token == r.token) && (data == r.data) ? true : false);
 	}
@@ -82,8 +82,8 @@ public:
 
 private:
 	TokenType token;
-	std::string data;
 	Position pos;
+	std::string data;
 	public:
 	#ifdef LEXDBG
 		static std::unordered_map<TokenType, std::string> tokenMap;

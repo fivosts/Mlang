@@ -12,6 +12,7 @@
 #include "Scanner.h"
 #include "Token.h"
 #include "Lexer.h"
+#include "Parser.h"
 #include <iostream>
 
 typedef Token::TokenType type;
@@ -19,6 +20,7 @@ typedef Token::TokenType type;
 int main(){
 	std::string line;
 	Scanner *a = new Scanner("/home/foitsi01/MLog/Models/ase_model.mlog");
+	delete a;
 	// std::ifstream a;
 	// a->open("/home/foitsi01/MLog/Models/ase_model.mlog");
 

@@ -17,6 +17,7 @@ public:
 		items in the queue, as instructed by lookAhead
 	!!*/
 
+private:
 	/* Convert this to variadic function as well*/
 	inline bool accept(Token &exp)
 	{
@@ -31,27 +32,18 @@ public:
 	}
 
 	template <typename T>
-	bool expect(T &exp)
+	inline bool expect(T &ct)
 	{
-		return !logErr(accept(ct));
+		return accept(ct);
 	}
 
 	template <typename T, typename... U>
-	bool expect(T &ct, U... &rt)
+	inline bool expect(T &ct, U... &rt)
 	{
-		return !logErr(accept(ct)) && expect(rt...);
+		return accept(ct) && expect(rt...);
 	}
 
-	/* To be refactored */
-	inline bool logErr(bool &st)
-	{
-		if (st)
-			return false;
-		else
-			// log the error somewhere: a) who b) where c) why
-			return true;
-	}
-
+public:
 	std::shared_ptr<Model> parse() { return parseModel(); }
 
 private:

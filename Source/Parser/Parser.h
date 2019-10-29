@@ -18,14 +18,10 @@ public:
 	!!*/
 	bool accept(Token &exp)
 	{
-		/*
-			if queue is empty, invoke lambda to fetch one from lexer
-			Otherwise load the queue
-			!!! Don't do unnecessary reads from lexer.
-			Lexer should be responsible to cut this off
-		*/
-		return (tokPend ? *tokPend == exp : [this](){*tokPend = lex.nextToken();
-												return *tokPend;} == exp);
+		if (!tokPend)
+			*tokPend = lex.nextToken();
+
+		return *tokPend == exp;	
 	}
 	bool expect(Token &exp);
 

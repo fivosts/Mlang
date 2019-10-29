@@ -16,7 +16,7 @@ public:
 		Otherwise, queue will be implemented, and accept will load i
 		items in the queue, as instructed by lookAhead
 	!!*/
-	bool accept(Token &exp)
+	inline bool accept(Token &exp)
 	{
 		/*
 			if queue is empty, invoke lambda to fetch one from lexer
@@ -27,7 +27,28 @@ public:
 		return (tokPend ? *tokPend == exp : [this](){*tokPend = lex.nextToken();
 												return *tokPend;} == exp);
 	}
-	bool expect(Token &exp);
+
+	template <typename T>
+	bool expect(T &exp)
+	{
+		return !logErr(accept(ct));
+	}
+
+	template <typename T, typename... U>
+	bool expect(T &ct, U... &rt)
+	{
+		return !logErr(accept(ct)) && expect(rt...);
+	}
+
+	/* To be refactored */
+	inline bool logErr(bool &st)
+	{
+		if (st)
+			return false;
+		else
+			// log the error somewhere: a) who b) where c) why
+			return true;
+	}
 
 	std::shared_ptr<Model> parse() { return parseModel(); }
 

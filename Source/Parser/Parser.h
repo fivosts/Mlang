@@ -18,10 +18,10 @@ public:
 	!!*/
 	bool accept(Token &exp)
 	{
-		if (!tokPend)
-			*tokPend = lex.nextToken();
-
-		return *tokPend == exp;	
+		return (tokPend ? *tokPend == exp 
+						: [this](){
+						  *tokPend = lex.nextToken();
+						  return *tokPend;}() == exp);
 	}
 	bool expect(Token &exp);
 

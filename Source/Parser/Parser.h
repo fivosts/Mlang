@@ -44,6 +44,7 @@ private:
 	}
 
 public:
+	// encapsulate parseModel into a try catch for lexer errors
 	std::shared_ptr<Model> parse() { return parseModel(); }
 
 private:

@@ -16,6 +16,8 @@ public:
 		Otherwise, queue will be implemented, and accept will load i
 		items in the queue, as instructed by lookAhead
 	!!*/
+
+	/* Convert this to variadic function as well*/
 	inline bool accept(Token &exp)
 	{
 		/*

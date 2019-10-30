@@ -47,13 +47,14 @@ public:
 	std::shared_ptr<Model> parse() { return parseModel(); }
 
 private:
-	Lexer lex;
-	std::unique_ptr<Token> tokPend = NULL;
-
-private:
 	/***** Recursive descent parsing functions  *****/
 	std::unique_ptr<Model> parseModel();
 	std::unique_ptr<Import> parseImport();
 	std::unique_ptr<Attribute> parseAttribute();
 	std::unique_ptr<Layer> parseLayer();
+	
+private:
+	Lexer lex;
+	std::unique_ptr<Token> tokPend = NULL;
+
 };

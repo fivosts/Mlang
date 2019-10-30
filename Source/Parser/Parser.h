@@ -40,7 +40,7 @@ private:
 	}
 
 	template <typename T, typename... U>
-	inline bool expect(T &ct, U... &rt)
+	inline bool expect(T &ct, U & ...rt)
 	{
 		return accept(ct) && expect(rt...);
 	}

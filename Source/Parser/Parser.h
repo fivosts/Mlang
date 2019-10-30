@@ -11,38 +11,35 @@ public:
 	Parser(Lexer l) : lex(l) {}
 	~Parser() = default;
 
-	/*!!
-		Queue is not needed atm because lookAhead is not in plans
-		Otherwise, queue will be implemented, and accept will load i
-		items in the queue, as instructed by lookAhead
-	!!*/
-
 private:
-	/* Convert this to variadic function as well*/
-	inline bool accept(Token &exp)
-	{
-		/*
-			if queue is empty, invoke lambda to fetch one from lexer
-			Otherwise load the queue
-			!!! Don't do unnecessary reads from lexer.
-			Lexer should be responsible to cut this off after eof
-		*/
-		return (tokPend ? *tokPend == exp 
-						: [this](){
-						  *tokPend = lex.nextToken();
-						  return *tokPend;}() == exp);
-	}
 
 	template <typename T>
-	inline bool expect(T &ct)
+	inline bool accept(T&& ct)
 	{
-		return accept(ct);
+		return (tokPend ? *tokPend == ct 
+						: [this](){
+						  *tokPend = lex.nextToken();
+						  return *tokPend;}() == ct);
 	}
 
 	template <typename T, typename... U>
-	inline bool expect(T &ct, U & ...rt)
+	inline bool accept(T&& ct, U&& ...rt)
 	{
-		return accept(ct) && expect(rt...);
+		return accept(ct) && accept(std::forward(rt...));
+	}
+
+	template <typename T>
+	inline bool expect(T&& ct)
+	{
+		bool ret = accept(ct);
+		tokPend = NULL;
+		return ret;
+	}
+
+	template <typename T, typename... U>
+	inline bool expect(T&& ct, U&& ...rt)
+	{
+		return expect(ct) && expect(std::forward(rt...));
 	}
 
 public:

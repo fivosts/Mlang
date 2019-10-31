@@ -1,6 +1,8 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
+#include "Except.h"
+
 #include <string>
 #ifdef LEXDBG
 	#include <unordered_map>
@@ -71,9 +73,21 @@ public:
 	}
 	~Token() = default;
 
-	const TokenType &getToken() const{
+	const TokenType &getToken() const
+	{
 		return token;
 	}
+
+	const std::string getStrPos() const
+	{
+		return joinWhSpace("l:" + std::to_string(pos.first), "c:" + std::to_string(pos.second) + ":");
+	}
+
+	const std::string getData() const
+	{
+		return data;
+	}
+
 	bool operator== (const Token &r)
 	{
 		return ((token == r.token) && (data == r.data) ? true : false);

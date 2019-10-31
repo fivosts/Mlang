@@ -1,5 +1,4 @@
 #include "Lexer.h"
-#include "Util.h"
 
 #ifdef LEXDBG
 std::unordered_map<Token::TokenType, std::string> Token::tokenMap = {
@@ -25,42 +24,42 @@ const Token Lexer::nextToken()
 		current = sc->nextChar();
 		if (current == 'i')
 		{
-		current = sc->nextChar();
-		if (current == 'm')
-		{
-		current = sc->nextChar();
-		if (current == 'p')
-		{
-		current = sc->nextChar();
-		if (current == 'o')
-		{
-		current = sc->nextChar();
-		if (current == 'r')
-		{
-		current = sc->nextChar();
-		if (current == 't')
-		{
-			return Token(Token::TokenType::IMPORT, cpos);
+			current = sc->nextChar();
+			if (current == 'm')
+			{
+			current = sc->nextChar();
+			if (current == 'p')
+			{
+			current = sc->nextChar();
+			if (current == 'o')
+			{
+			current = sc->nextChar();
+			if (current == 'r')
+			{
+			current = sc->nextChar();
+			if (current == 't')
+			{
+				return Token(Token::TokenType::IMPORT, cpos);
 		}}}}}}
 		
 		else if (current == 'd')
 		{
-		current = sc->nextChar();
-		if (current == 'e')
-		{
-		current = sc->nextChar();
-		if (current == 'f')
-		{
-		current = sc->nextChar();
-		if (current == 'i')
-		{
-		current = sc->nextChar();
-		if (current == 'n')
-		{
-		current = sc->nextChar();
-		if (current == 'e')
-		{
-			return Token(Token::TokenType::DEFINE, cpos);
+			current = sc->nextChar();
+			if (current == 'e')
+			{
+			current = sc->nextChar();
+			if (current == 'f')
+			{
+			current = sc->nextChar();
+			if (current == 'i')
+			{
+			current = sc->nextChar();
+			if (current == 'n')
+			{
+			current = sc->nextChar();
+			if (current == 'e')
+			{
+				return Token(Token::TokenType::DEFINE, cpos);
 		}}}}}}
 	}
 	// Identifiers and BOOL literals
@@ -184,10 +183,6 @@ const Token Lexer::nextToken()
 	{
 		return Token(Token::TokenType::END, cpos);
 	}
-	// INVALID Token if not recognized.
-	// else{
-	// 	// Throw an error here
-	// 	return Token(Token::TokenType::INVALID, cpos, current);
-	// }
+
 	return Token(Token::TokenType::INVALID, cpos, current);
 }

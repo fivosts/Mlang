@@ -22,11 +22,11 @@ namespace MLogTest
         Lexer lex(getSc(FULL_PATH("empty.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
-        Token curr = lex.safeNextToken();
+        Token curr = lex.nextToken();
         TokenBag.insert(curr.getToken());
         while(curr.getToken() != Token::TokenType::END)
         {
-            curr = lex.safeNextToken();
+            curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) == TokenBag.end());
@@ -38,11 +38,11 @@ namespace MLogTest
         Lexer lex(getSc(FULL_PATH("ase_model.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
-        Token curr = lex.safeNextToken();
+        Token curr = lex.nextToken();
         TokenBag.insert(curr.getToken());
         while(curr.getToken() != Token::TokenType::END)
         {
-            curr = lex.safeNextToken();
+            curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) == TokenBag.end());
@@ -54,11 +54,11 @@ namespace MLogTest
         Lexer lex(getSc(FULL_PATH("binary.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
-        Token curr = lex.safeNextToken();
+        Token curr = lex.nextToken();
         TokenBag.insert(curr.getToken());
         while(curr.getToken() != Token::TokenType::END)
         {
-            curr = lex.safeNextToken();
+            curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
@@ -70,11 +70,11 @@ namespace MLogTest
         Lexer lex(getSc(FULL_PATH("bad_string1.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
-        Token curr = lex.safeNextToken();
+        Token curr = lex.nextToken();
         TokenBag.insert(curr.getToken());
         while(curr.getToken() != Token::TokenType::END)
         {
-            curr = lex.safeNextToken();
+            curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
@@ -86,11 +86,11 @@ namespace MLogTest
         Lexer lex(getSc(FULL_PATH("bad_string2.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
-        Token curr = lex.safeNextToken();
+        Token curr = lex.nextToken();
         TokenBag.insert(curr.getToken());
         while(curr.getToken() != Token::TokenType::END)
         {
-            curr = lex.safeNextToken();
+            curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
@@ -102,11 +102,11 @@ namespace MLogTest
         Lexer lex(getSc(FULL_PATH("bad_string3.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
-        Token curr = lex.safeNextToken();
+        Token curr = lex.nextToken();
         TokenBag.insert(curr.getToken());
         while(curr.getToken() != Token::TokenType::END)
         {
-            curr = lex.safeNextToken();
+            curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
@@ -118,11 +118,11 @@ namespace MLogTest
         Lexer lex(getSc(FULL_PATH("bad_string4.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
-        Token curr = lex.safeNextToken();
+        Token curr = lex.nextToken();
         TokenBag.insert(curr.getToken());
         while(curr.getToken() != Token::TokenType::END)
         {
-            curr = lex.safeNextToken();
+            curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
@@ -134,11 +134,11 @@ namespace MLogTest
         Lexer lex(getSc(FULL_PATH("bad_id1.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
-        Token curr = lex.safeNextToken();
+        Token curr = lex.nextToken();
         TokenBag.insert(curr.getToken());
         while(curr.getToken() != Token::TokenType::END)
         {
-            curr = lex.safeNextToken();
+            curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) != TokenBag.end());
@@ -150,11 +150,11 @@ namespace MLogTest
         Lexer lex(getSc(FULL_PATH("bool1.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
-        Token curr = lex.safeNextToken();
+        Token curr = lex.nextToken();
         TokenBag.insert(curr.getToken());
         while(curr.getToken() != Token::TokenType::END)
         {
-            curr = lex.safeNextToken();
+            curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::BOOL_LITERAL) != TokenBag.end());
@@ -166,11 +166,11 @@ namespace MLogTest
         Lexer lex(getSc(FULL_PATH("bool2.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
-        Token curr = lex.safeNextToken();
+        Token curr = lex.nextToken();
         TokenBag.insert(curr.getToken());
         while(curr.getToken() != Token::TokenType::END)
         {
-            curr = lex.safeNextToken();
+            curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::BOOL_LITERAL) != TokenBag.end());
@@ -182,11 +182,11 @@ namespace MLogTest
         Lexer lex(getSc(FULL_PATH("bad_int1.mlog")));
         std::unordered_set<Token::TokenType> TokenBag;
         
-        Token curr = lex.safeNextToken();
+        Token curr = lex.nextToken();
         TokenBag.insert(curr.getToken());
         while(curr.getToken() != Token::TokenType::END)
         {
-            curr = lex.safeNextToken();
+            curr = lex.nextToken();
             TokenBag.insert(curr.getToken());
         }
         ASSERT_TRUE(TokenBag.find(Token::TokenType::INT_LITERAL) != TokenBag.end());

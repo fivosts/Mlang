@@ -44,7 +44,11 @@ private:
 
 public:
 	// encapsulate parseModel into a try catch for lexer errors
-	std::shared_ptr<Model> parse() { return parseModel(); }
+	std::shared_ptr<Model> safeParseModel()
+	{
+		try 						{	return parseModel();	}
+		catch (CompExcept& ex)		{	throw;					}	
+	}
 
 private:
 	/***** Recursive descent parsing functions  *****/

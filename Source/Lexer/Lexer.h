@@ -2,6 +2,7 @@
 
 #include "Scanner.h"
 #include "Token.h"
+#include "Except.h"
 
 #include <memory>
 
@@ -11,13 +12,16 @@ public:
 	Lexer() = delete;
 	Lexer(std::unique_ptr<Scanner> &&c) : sc(std::move(c)){}
 	~Lexer() = default;
+
+	// TODO move this to private section
 	const Token nextToken();
+
 	const Token safeNextToken()
 	{
 		Token t = nextToken();
 		if (t.getToken() == Token::TokenType::INVALID)
 		{
-			throw "Lexing error";
+			throw CompExcept(joinWhSpace(t.getStrPos(), "Use of undeclared identifier", t.getData()));
 		}		
 		return t;
 	}

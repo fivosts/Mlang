@@ -20,7 +20,7 @@ public:
 	Lexer(std::string fp)
 	{
 		try
-		{	sc = std::unique_ptr<Scanner>(new Scanner(fp));	}
+		{	sc = std::make_unique<Scanner>(fp);	}
 		catch (CompExcept &ex)
 		{	throw;											}
 	}

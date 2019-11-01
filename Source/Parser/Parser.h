@@ -20,7 +20,7 @@ public:
 	Parser(std::unique_ptr<Scanner> &&sc)
 	{
 		try
-		{	lex = std::unique_ptr<Lexer>(new Lexer(std::move(sc)));	}
+		{	lex = std::make_unique<Lexer>(std::move(sc));	}
 		catch(CompExcept &ex)
 		{	throw;				}
 	}
@@ -28,7 +28,7 @@ public:
 	Parser(std::string fp)
 	{
 		try
-		{	lex = std::unique_ptr<Lexer>(new Lexer(fp));	}
+		{	lex = std::make_unique<Lexer>(fp);	}
 		catch(CompExcept &ex)
 		{	throw;											}
 	}
@@ -82,9 +82,9 @@ public:
 private:
 	/***** Recursive descent parsing functions  *****/
 	std::unique_ptr<Model> parseModel();
-	std::unique_ptr<Import> parseImport();
-	std::unique_ptr<Attribute> parseAttribute();
-	std::unique_ptr<Layer> parseLayer();
+	std::unordered_set<std::unique_ptr<Import>> parseImport();
+	std::unordered_set<std::unique_ptr<Attribute>> parseAttribute();
+	std::unordered_set<std::unique_ptr<Layer>> parseLayer();
 	
 private:
 	std::unique_ptr<Lexer> lex = NULL;

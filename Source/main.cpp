@@ -25,7 +25,7 @@ int main(){
 		std::unique_ptr<Parser> p(new Parser(TEST_PATH));
 	}
 	catch(CompExcept &e){
-		std::cout << "Oups!" << std::endl;
+		std::cout << "Oops: " << e.what() << std::endl;
 	}
 	// std::ifstream a;
 	// a->open("/home/foitsi01/MLog/Models/ase_model.mlog");

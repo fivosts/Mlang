@@ -8,8 +8,36 @@
 class Parser
 {	
 public:
-	Parser(Lexer l) : lex(l) {}
-	~Parser() = default;
+	Parser() = delete;
+	Parser(std::unique_ptr<Lexer> &&l)
+	{
+		try
+		{	lex = std::move(l);	}
+		catch(CompExcept &ex)
+		{	throw;				}
+	}
+
+	Parser(std::unique_ptr<Scanner> &&sc)
+	{
+		try
+		{	lex = std::unique_ptr<Lexer>(new Lexer(std::move(sc)));	}
+		catch(CompExcept &ex)
+		{	throw;				}
+	}
+
+	Parser(std::string fp)
+	{
+		try
+		{	lex = std::unique_ptr<Lexer>(new Lexer(fp));	}
+		catch(CompExcept &ex)
+		{	throw;											}
+	}
+	
+	~Parser()
+	{
+		lex = NULL;
+		tokPend = NULL;
+	}
 
 private:
 
@@ -18,7 +46,7 @@ private:
 	{
 		return (tokPend ? *tokPend == ct 
 						: [this](){
-						  *tokPend = lex.nextToken();
+						  *tokPend = lex->nextToken();
 						  return *tokPend;}() == ct);
 	}
 
@@ -58,7 +86,7 @@ private:
 	std::unique_ptr<Layer> parseLayer();
 	
 private:
-	Lexer lex;
+	std::unique_ptr<Lexer> lex = NULL;
 	std::unique_ptr<Token> tokPend = NULL;
 
 };

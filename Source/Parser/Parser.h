@@ -74,7 +74,8 @@ public:
 	// encapsulate parseModel into a try catch for lexer errors
 	std::shared_ptr<Model> safeParseModel()
 	{
-		try 						{	return parseModel();	}
+		try 						{	model = parseModel();
+										return model;			}
 		catch (CompExcept& ex)		{	throw;					}	
 	}
 
@@ -88,5 +89,5 @@ private:
 private:
 	std::unique_ptr<Lexer> lex = NULL;
 	std::unique_ptr<Token> tokPend = NULL;
-
+	std::shared_ptr<Model> model = NULL;
 };

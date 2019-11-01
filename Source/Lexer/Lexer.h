@@ -28,12 +28,6 @@ public:
 	{
 		sc = NULL;
 	}
-	// Lexer &operator= (Lexer &rhs)
-	// {
-	// 	sc = std::move(rhs.sc);
-	// 	rhs.sc = NULL;
-	// 	return this;
-	// }
 
 	// TODO move this to private section
 	const Token nextToken();

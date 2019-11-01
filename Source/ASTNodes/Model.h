@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ASTNode.h"
+#include "Model.h"
 #include "Import.h"
 #include "Attribute.h"
 #include "Layer.h"
@@ -22,9 +23,9 @@ public:
 	
 	virtual ~Model() override
 	{
-		imp = NULL;
-		attr = NULL;
-		lr = NULL;
+		// imp = NULL;
+		// attr = NULL;
+		// lr = NULL;
 	}
 
 

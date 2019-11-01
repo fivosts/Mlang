@@ -10,7 +10,7 @@ class Import : ASTNode
 {
 public:
 	Import() = default;
-	~Import() override = default;
+	virtual ~Import() override = default;
 
 private:
 	importPath path;

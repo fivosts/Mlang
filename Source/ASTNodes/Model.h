@@ -20,7 +20,12 @@ public:
 		  setPtr<Attribute> &&a,
 		  setPtr<Layer> &&l) : imp(std::move(i)), attr(std::move(a)), lr(std::move(l)) {}
 	
-	virtual ~Model() override = default;
+	virtual ~Model() override
+	{
+		imp = NULL;
+		attr = NULL;
+		lr = NULL;
+	}
 
 
 private:

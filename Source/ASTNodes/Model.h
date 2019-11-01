@@ -11,11 +11,20 @@
 class Model : ASTNode
 {
 public:
-	Model() = default;
-	~Model() override = default;
+
+	template<typename T>
+	using setPtr = std::unordered_set<std::unique_ptr<T>>;
+
+	Model() = delete;
+	Model(setPtr<Import> &&i,
+		  setPtr<Attribute> &&a,
+		  setPtr<Layer> &&l) : imp(std::move(i)), attr(std::move(a)), lr(std::move(l)) {}
+	
+	virtual ~Model() override = default;
+
 
 private:
-	std::unordered_set<Import*> imp;
-	std::unordered_set<Attribute*> attr;
-	std::unordered_set<Layer*> lr;
+	setPtr<Import> imp;
+	setPtr<Attribute> attr;
+	setPtr<Layer> lr;
 };

@@ -5,6 +5,7 @@
 class CompExcept : public std::runtime_error
 {
 public:
+    CompExcept() = delete;
     CompExcept(std::string what) : runtime_error(what) {}
 };
 

@@ -1,6 +1,8 @@
 #ifndef SCANNER_H
 #define SCANNER_H
 
+#include "Except.h"
+
 #include <fstream>
 #include <iostream>
 #include <functional>
@@ -22,10 +24,10 @@ public:
         this->exceptions(std::ifstream::failbit);
         
         try
-        {this->open(filePath);}
+        { this->open(filePath);}
 
         catch (const std::ifstream::failure &e)
-        {throw "Could not open file!";/*TODO Send Error report*/}
+        { throw CompExcept(joinWhSpace("Scanner: Could not open file: ", filePath ) ); }
 
         return;
     }

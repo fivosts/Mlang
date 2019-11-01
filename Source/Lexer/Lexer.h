@@ -10,8 +10,30 @@ class Lexer
 {
 public:
 	Lexer() = delete;
-	Lexer(std::unique_ptr<Scanner> &&c) : sc(std::move(c)){}
-	~Lexer() = default;
+	Lexer(std::unique_ptr<Scanner> &&c)
+	{
+		try
+		{	sc = std::move(c);	}
+		catch (CompExcept &ex)
+		{	throw;				}
+	}
+	Lexer(std::string fp)
+	{
+		try
+		{	sc = std::unique_ptr<Scanner>(new Scanner(fp));	}
+		catch (CompExcept &ex)
+		{	throw;											}
+	}
+	~Lexer()
+	{
+		sc = NULL;
+	}
+	// Lexer &operator= (Lexer &rhs)
+	// {
+	// 	sc = std::move(rhs.sc);
+	// 	rhs.sc = NULL;
+	// 	return this;
+	// }
 
 	// TODO move this to private section
 	const Token nextToken();
@@ -43,5 +65,5 @@ private:
 	}
 
 private:
-	std::shared_ptr<Scanner> sc;
+	std::unique_ptr<Scanner> sc;
 };

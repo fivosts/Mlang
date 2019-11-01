@@ -15,12 +15,18 @@
 #include "Parser.h"
 #include <iostream>
 
+#define TEST_PATH "/home/foitsi01/MLog/Models/ase_model.mlog"
+
 typedef Token::TokenType type;
 
 int main(){
-	std::string line;
-	Scanner *a = new Scanner("/home/foitsi01/MLog/Models/ase_model.mlog");
-	delete a;
+
+	try{
+		std::unique_ptr<Parser> p(new Parser(TEST_PATH));
+	}
+	catch(CompExcept &e){
+		std::cout << "Oups!" << std::endl;
+	}
 	// std::ifstream a;
 	// a->open("/home/foitsi01/MLog/Models/ase_model.mlog");
 

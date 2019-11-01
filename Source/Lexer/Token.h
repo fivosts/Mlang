@@ -88,7 +88,7 @@ public:
 		return data;
 	}
 
-	bool operator== (const Token &r)
+	bool operator== (const Token &r) const
 	{
 		return ((token == r.token) && (data == r.data) ? true : false);
 	}

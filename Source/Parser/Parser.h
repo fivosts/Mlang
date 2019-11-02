@@ -66,6 +66,10 @@ private:
 	}
 
 	// This function is broken unless you set a queuing system.
+	// Comments:
+	// 1) expect must return a token
+	// 2) template deduced expect makes no sense. Which would you return ?
+	// 3) expect must throw exception for parsing error should it not find the token
 	template <typename T, typename... U>
 	inline bool expect(T&& ct, U&& ...rt)
 	{

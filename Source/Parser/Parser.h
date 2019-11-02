@@ -46,10 +46,11 @@ private:
 	{
 		return (tokPend ? *tokPend == ct 
 						: [this](){
-						  *tokPend = lex->nextToken();
+						  *tokPend = lex->safeNextToken();
 						  return *tokPend;}() == ct);
 	}
 
+	// This function is broken unless you set a queuing system.
 	template <typename T, typename... U>
 	inline bool accept(T&& ct, U&& ...rt)
 	{
@@ -64,6 +65,7 @@ private:
 		return ret;
 	}
 
+	// This function is broken unless you set a queuing system.
 	template <typename T, typename... U>
 	inline bool expect(T&& ct, U&& ...rt)
 	{

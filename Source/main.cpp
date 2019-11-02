@@ -23,6 +23,7 @@ int main(){
 
 	try{
 		std::unique_ptr<Parser> p(new Parser(TEST_PATH));
+		p->safeParseModel();
 	}
 	catch(CompExcept &e){
 		std::cout << "Oops: " << e.what() << std::endl;

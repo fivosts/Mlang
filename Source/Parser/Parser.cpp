@@ -15,13 +15,13 @@ std::unique_ptr<Model> Parser::parseModel()
 std::unordered_set<std::unique_ptr<Import>> Parser::parseImport(){
     // std::unordered_set<std::unique_ptr<Import>> a;
     // return a;
-    while(accept(TType::IMPORT))
-    {
-        expect(TType::IMPORT);
-        // on the fly push the return of expect to the set
-        Token impPath = expect(TType::STR_LITERAL);
-        expect(TType::NEWLINE);
-    }
+    // while(accept(TType::IMPORT))
+    // {
+    //     expect(TType::IMPORT);
+    //     // on the fly push the return of expect to the set
+    //     Token impPath = expect(TType::STR_LITERAL);
+    //     expect(TType::NEWLINE);
+    // }
 
     return {};
 }

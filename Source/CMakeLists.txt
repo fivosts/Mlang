@@ -5,6 +5,7 @@ include_directories(Util)
 add_executable(MLog
 				main.cpp
 				Lexer/Lexer.cpp
-				Parser/Parser.cpp)
+				Parser/Parser.cpp
+				ASTNodes/ASTNode.cpp)
 
 target_compile_options (MLog PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)

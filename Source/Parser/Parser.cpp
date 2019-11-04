@@ -10,9 +10,9 @@ typedef Token::TokenType TType;
 
 std::unique_ptr<Model> Parser::parseModel()
 {
-    return std::make_unique<Model>(Parser::parseImport(),
-                                    Parser::parseAttribute(),
-                                    Parser::parseLayer() );
+    return std::make_unique<Model>(parseImport(),
+                                    parseAttribute(),
+                                    parseLayer() );
 }
 
 setPtr<Import> Parser::parseImport(){
@@ -25,14 +25,20 @@ setPtr<Import> Parser::parseImport(){
         expect(TType::NEWLINE);
         imports.insert(std::make_unique<Import>(Import(importElement.getData())));
     }
-
     return imports;
 }
 
 setPtr<Attribute> Parser::parseAttribute(){
-    // setPtr<Attribute> a;
-    // return a;
-    return {};
+    setPtr<Attribute> attr;
+
+    while(accept(TType::DEFINE))
+    {
+        expect(TType::DEINE));
+        Token defineElement = parseIdentifier(expect(TType::IDENTIFIER));
+        expect(TType::NEWLINE);
+    }
+
+    return attr;
 }
 
 setPtr<Layer> Parser::parseLayer(){

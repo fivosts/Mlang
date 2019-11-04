@@ -9,7 +9,8 @@ typedef std::string importPath;
 class Import : ASTNode
 {
 public:
-	Import() = default;
+	Import() = delete;
+	Import(importPath ip) : path(ip) {}
 	virtual ~Import() override = default;
 
 private:

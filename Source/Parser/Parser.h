@@ -41,43 +41,25 @@ public:
 
 private:
 
-	template <typename T>
-	inline bool accept(T&& ct)
+	inline bool accept(Token::TokenType&& ctt)
 	{
-		return (tokPend ? *tokPend == ct 
+		return (tokPend ? *tokPend == ctt 
 						: [this](){
 						  *tokPend = lex->safeNextToken();
-						  return *tokPend;}() == ct);
+						  return *tokPend;}() == ctt);
 	}
 
-	// This function is broken unless you set a queuing system.
-	template <typename T, typename... U>
-	inline bool accept(T&& ct, U&& ...rt)
+	inline Token expect(Token::TokenType &&ctt)
 	{
-		return accept(ct) && accept(std::forward(rt...));
-	}
+		if (!accept(std::move(ctt)))
+			throw CompExcept("Parsing error bla bla");
 
-	template <typename T>
-	inline bool expect(T&& ct)
-	{
-		bool ret = accept(ct);
+		Token expected = *tokPend;
 		tokPend = NULL;
-		return ret;
-	}
-
-	// This function is broken unless you set a queuing system.
-	// Comments:
-	// 1) expect must return a token
-	// 2) template deduced expect makes no sense. Which would you return ?
-	// 3) expect must throw exception for parsing error should it not find the token
-	template <typename T, typename... U>
-	inline bool expect(T&& ct, U&& ...rt)
-	{
-		return expect(ct) && expect(std::forward(rt...));
+		return expected;
 	}
 
 public:
-	// encapsulate parseModel into a try catch for lexer errors
 	std::shared_ptr<Model> safeParseModel()
 	{
 		try 						{	model = parseModel();

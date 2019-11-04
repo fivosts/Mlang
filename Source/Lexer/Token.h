@@ -93,6 +93,10 @@ public:
 		return ((token == r.token) && (data == r.data) ? true : false);
 	}
 
+	bool operator== (const TokenType &rt) const
+	{
+		return ( token == rt ? true : false);
+	}
 
 private:
 	TokenType token;

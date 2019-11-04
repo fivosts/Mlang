@@ -9,8 +9,8 @@ attribute ::= '#define' ( network_name      # Optional - defaulted
                         | input_tensors     # Mandatory
                         | output_tensors    # Mandatory
                         | backend           # Optional - defaulted
-                        | target )          # Optional - defaulted
-                        
+                        | target            # Optional - defaulted
+                        ) '\n'
 
 layer ::= LSTM
         | MLP

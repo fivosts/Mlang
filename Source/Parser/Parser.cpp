@@ -3,7 +3,10 @@
 // template<typename T>
 // using setPtr = std::unordered_set<std::unique_ptr<T>>;
 
+template<typename T>
+using setPtr = std::unordered_set<std::unique_ptr<T>>;
 typedef Token::TokenType TType;
+
 
 std::unique_ptr<Model> Parser::parseModel()
 {
@@ -12,28 +15,28 @@ std::unique_ptr<Model> Parser::parseModel()
                                     Parser::parseLayer() );
 }
 
-std::unordered_set<std::unique_ptr<Import>> Parser::parseImport(){
-    // std::unordered_set<std::unique_ptr<Import>> a;
-    // return a;
-    // while(accept(TType::IMPORT))
-    // {
-    //     expect(TType::IMPORT);
-    //     // on the fly push the return of expect to the set
-    //     Token impPath = expect(TType::STR_LITERAL);
-    //     expect(TType::NEWLINE);
-    // }
+setPtr<Import> Parser::parseImport(){
 
+    setPtr<Import> imports;
+    while(accept(TType::IMPORT))
+    {
+        expect(TType::IMPORT);
+        Token importElement = expect(TType::STR_LITERAL);
+        expect(TType::NEWLINE);
+        imports.insert(std::make_unique<Import>(Import(importElement.getData())));
+    }
+
+    return imports;
+}
+
+setPtr<Attribute> Parser::parseAttribute(){
+    // setPtr<Attribute> a;
+    // return a;
     return {};
 }
 
-std::unordered_set<std::unique_ptr<Attribute>> Parser::parseAttribute(){
-    // std::unordered_set<std::unique_ptr<Attribute>> a;
-    // return a;
-    return {};
-}
-
-std::unordered_set<std::unique_ptr<Layer>> Parser::parseLayer(){
-    // std::unordered_set<std::unique_ptr<Layer>> a;
+setPtr<Layer> Parser::parseLayer(){
+    // setPtr<Layer> a;
     // return a;
     return {};
 }

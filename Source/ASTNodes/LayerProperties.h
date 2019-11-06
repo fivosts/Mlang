@@ -74,7 +74,8 @@ private:
 };
 
 template <class T>
-class InFeatures : public MLParams{
+class InFeatures : public MLParams
+{
 public:
 	// InFeatures() = default;
 	// ~InFeatures() override = default;

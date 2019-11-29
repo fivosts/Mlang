@@ -12,6 +12,9 @@ public:
 	NetworkName(std::string n) : name(n) {}
 	~NetworkName() override = default;
 
+	virtual void printData() override{
+		std::cout << name << std::endl;
+	}
 private:
 	std::string name;
 };

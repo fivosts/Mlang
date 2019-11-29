@@ -42,7 +42,9 @@ setPtr<Attribute> Parser::parseAttribute()
         //     throw CompExcept("Parsing Error: Attribute identifier not found");
         // }
         // parseIdentifier(defType);
-        AttrObj = parseIdentifier(expect(TType::IDENTIFIER);
+
+        // This obj should be of type subclass and have constructed its members already
+        std::unique_ptr<Attribute> AttrObj = parseIdentifier(expect(TType::IDENTIFIER));
 
         expect(TType::NEWLINE);
     }
@@ -65,7 +67,34 @@ Token Parser::parseIdentifier(Token expID)
     switch (IDName)
     {
         case "network_name":
-
+            // That here is the field of the object
+            // that will be constructed
+            parseStrLiteral();
+            break;
+        
+        case "cuda_available":
+            parseBoolLiteral();
+            break;
+        
+        case "backend":
+            parseStrLiteral();
+            break;
+        
+        case "target":
+            parseStrLiteral();
+            break;
+        
+        case "input_tensors":
+            parseStrArray();
+            break;
+        
+        case "output_tensors":
+            parseStrArray();
+            break;
+        
+        default:
+            throw CompExcept("Parsing Error: Identifier not recognized");
+            break;
     }
     return;
 }

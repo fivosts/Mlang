@@ -8,7 +8,8 @@
 class NetworkName : public Attribute, public Identifier
 {
 public:
-	NetworkName() = default;
+	NetworkName() = delete;
+	NetworkName(std::string n) : name(n) {}
 	~NetworkName() override = default;
 
 private:
@@ -18,7 +19,8 @@ private:
 class Backend : public Attribute, public Identifier
 {
 public:
-	Backend() = default;
+	Backend() = delete;
+	Backend(std::string b) : bend(b) {} 
 	~Backend() override = default;
 
 private:
@@ -28,7 +30,8 @@ private:
 class Target : public Attribute, public Identifier
 {
 public:
-	Target() = default;
+	Target() = delete;
+	Target(std::string t) : target(t) {}
 	~Target() override = default;
 
 private:
@@ -38,7 +41,8 @@ private:
 class CUDA : public Attribute, public Identifier
 {
 public:
-	CUDA() = default;
+	CUDA() = delete;
+	CUDA(bool c) : cuda(c) {}
 	~CUDA() override = default;
 
 private:
@@ -48,7 +52,8 @@ private:
 class InpTensors : public Attribute, public Identifier
 {
 public:
-	InpTensors() = default;
+	InpTensors() = delete;
+	InpTensors(std::unordered_set<std::string> iT) : inTens(iT) {}
 	~InpTensors() override = default;
 
 private:
@@ -58,7 +63,8 @@ private:
 class OutTensors : public Attribute, public Identifier
 {
 public:
-	OutTensors() = default;
+	OutTensors() = delete;
+	OutTensors(std::unordered_set<std::string> oT) : outTens(oT) {}
 	~OutTensors() override = default;
 
 private:

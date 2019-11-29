@@ -36,7 +36,14 @@ setPtr<Attribute> Parser::parseAttribute()
     while(accept(TType::DEFINE))
     {
         expect(TType::DEFINE);
-        Token defType = parseIdentifier<Attribute>(expect(TType::IDENTIFIER));
+        // Token defType = expect(TType::IDENTIFIER);
+        // if (AttrIDTypes.find(defType.getData()) == AttrIDTypes.end())
+        // {
+        //     throw CompExcept("Parsing Error: Attribute identifier not found");
+        // }
+        // parseIdentifier(defType);
+        AttrObj = parseIdentifier(expect(TType::IDENTIFIER);
+
         expect(TType::NEWLINE);
     }
     // new Attribute will be called here
@@ -50,17 +57,15 @@ setPtr<Layer> Parser::parseLayer()
     return {};
 }
 
-template<typename T>
-Token parseIdentifier(Token expID)
+// template<typename T>
+Token Parser::parseIdentifier(Token expID)
 {
-    // if data of identifier belongs to the map of T, then we are fine
-    if (T::IDMap.find(expID.getData()) != T::IDMap.end())
+    std::string IDName = expID.getData();
+
+    switch (IDName)
     {
-        // element found in the type's map and everything is fine
+        case "network_name":
+
     }
-    else
-    {
-        // We've got a parsing error because the wrong identifier was used for a specific field.
-        throw CompExcept(joinWhSpace("Parsing Error", expID.getStrPos(), "Identifier", expID.getData(), "not found for type", T::));
-    }
+    return;
 }

@@ -18,7 +18,8 @@ private:
 class Output : public LayerParams, public Identifier
 {
 public:
-	Output() = default;
+	Output() = delete;
+	Output(std::string o) : outp(o) {} 
 	~Output() override = default;
 
 private:
@@ -28,7 +29,8 @@ private:
 class LayerName : public LayerParams, public Identifier
 {
 public:
-	LayerName() = default;
+	LayerName() = delete;
+	LayerName(std::string n) : name(n) {}
 	~LayerName() override = default;
 
 private:
@@ -38,7 +40,8 @@ private:
 class InputSize : public LSTMParams, public Identifier
 {
 public:
-	InputSize() = default;
+	InputSize() = delete;
+	InputSize(int is) : inSize(is) {}
 	~InputSize() override = default;
 
 private:
@@ -48,7 +51,8 @@ private:
 class OutputTimestep : public LSTMParams, public Identifier
 {
 public:
-	OutputTimestep() = default;
+	OutputTimestep() = delete;
+	OutputTimestep(int os) : outStep(os) {}
 	~OutputTimestep() override = default;
 
 private:
@@ -58,7 +62,8 @@ private:
 class HiddenSize : public LSTMParams, public Identifier
 {
 public:
-	HiddenSize() = default;
+	HiddenSize() = delete;
+	HiddenSize(int hs) : hSize(hs) {}
 	~HiddenSize() override = default;
 
 private:
@@ -68,7 +73,8 @@ private:
 class NumLayers : public LSTMParams, public Identifier
 {
 public:
-	NumLayers() = default;
+	NumLayers() = delete;
+	NumLayers(int nl) : nLayers(nl) {}
 	~NumLayers() override = default;
 
 private:
@@ -79,7 +85,8 @@ template <class T>
 class InFeatures : public MLParams, public Identifier
 {
 public:
-	InFeatures() = default;
+	InFeatures() = delete;
+	InFeatures(T if) : inFeat(if) {}
 	~InFeatures() override = default;
 
 private:
@@ -89,7 +96,8 @@ private:
 class OutFeatures : public MLParams, public Identifier
 {
 public:
-	OutFeatures() = default;
+	OutFeatures() = delete;
+	OutFeatures(int of) : outFeat(of) {}
 	~OutFeatures() override = default;
 
 private:

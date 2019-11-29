@@ -1,5 +1,7 @@
 #include "Parser.h"
 #include "Import.h"
+#include "ModelProperties.h"
+#include "LayerProperties.h"
 // template<typename T>
 // using setPtr = std::unordered_set<std::unique_ptr<T>>;
 
@@ -44,7 +46,10 @@ setPtr<Attribute> Parser::parseAttribute()
         // parseIdentifier(defType);
 
         // This obj should be of type subclass and have constructed its members already
-        std::unique_ptr<Attribute> AttrObj = parseIdentifier(expect(TType::IDENTIFIER));
+        // std::unique_ptr<Attribute> AttrObj = static_cast<Attribute*>(parseIdentifier(expect(TType::IDENTIFIER)));
+        Attribute* AttrObj = static_cast<Attribute*>(parseIdentifier(expect(TType::IDENTIFIER)));
+
+        (void)AttrObj;
 
         expect(TType::NEWLINE);
     }
@@ -59,42 +64,56 @@ setPtr<Layer> Parser::parseLayer()
     return {};
 }
 
+// Dummy
+std::string parseStrLiteral()
+{
+    return "a";
+}
+
 // template<typename T>
-Token Parser::parseIdentifier(Token expID)
+Identifier* Parser::parseIdentifier(Token expID)
 {
     std::string IDName = expID.getData();
 
-    switch (IDName)
+    if (IDName == "network_name")
     {
-        case "network_name":
+        return new NetworkName(parseStrLiteral());
+    }
+    else if (IDName == "layer_name")
+    {
+        return new LayerName(parseStrLiteral());
+    }
+
+    return nullptr;
+    // switch (IDName)
+    // {
+    //     case "network_name":
             // That here is the field of the object
             // that will be constructed
-            parseStrLiteral();
-            break;
         
-        case "cuda_available":
-            parseBoolLiteral();
-            break;
+        // case "cuda_available":
+        //     parseBoolLiteral();
+        //     break;
         
-        case "backend":
-            parseStrLiteral();
-            break;
+        // case "backend":
+        //     parseStrLiteral();
+        //     break;
         
-        case "target":
-            parseStrLiteral();
-            break;
+        // case "target":
+        //     parseStrLiteral();
+        //     break;
         
-        case "input_tensors":
-            parseStrArray();
-            break;
+        // case "input_tensors":
+        //     parseStrArray();
+        //     break;
         
-        case "output_tensors":
-            parseStrArray();
-            break;
+        // case "output_tensors":
+        //     parseStrArray();
+        //     break;
         
-        default:
-            throw CompExcept("Parsing Error: Identifier not recognized");
-            break;
-    }
-    return;
+    //     default:
+    //         throw CompExcept("Parsing Error: Identifier not recognized");
+    //         break;
+    // }
 }
+

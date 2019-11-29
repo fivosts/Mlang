@@ -2,6 +2,7 @@
 
 #include "Lexer.h"
 #include "Model.h"
+#include "Identifier.h"
 
 #include <memory>
 
@@ -73,7 +74,9 @@ private:
 	std::unordered_set<std::unique_ptr<Import>> parseImport();
 	std::unordered_set<std::unique_ptr<Attribute>> parseAttribute();
 	std::unordered_set<std::unique_ptr<Layer>> parseLayer();
-	/* template<typename T>*/ Token parseIdentifier(Token expID);
+
+	// template<typename T> 
+	Identifier *parseIdentifier(Token expID);
 
 private:
 	std::unique_ptr<Lexer> lex = NULL;

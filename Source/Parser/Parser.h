@@ -74,6 +74,7 @@ private:
 	std::unordered_set<std::unique_ptr<Import>> parseImport();
 	std::unordered_set<std::unique_ptr<Attribute>> parseAttribute();
 	std::unordered_set<std::unique_ptr<Layer>> parseLayer();
+	void parseNewLines();
 
 	// template<typename T> 
 	Identifier *parseIdentifier(Token expID);

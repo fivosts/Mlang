@@ -19,22 +19,32 @@ std::unique_ptr<Model> Parser::parseModel()
 
 setPtr<Import> Parser::parseImport()
 {
-
     setPtr<Import> imports;
     while(accept(TType::IMPORT))
     {
         expect(TType::IMPORT);
         Token importElement = expect(TType::STR_LITERAL);
-        expect(TType::NEWLINE);
+        parseNewLines();
         imports.insert(std::make_unique<Import>(Import(importElement.getData())));
     }
     return imports;
+}
+
+void Parser::parseNewLines()
+{
+    expect(TType::NEWLINE);
+    while (accept(TType::NEWLINE))
+    {
+        expect(TType::NEWLINE);
+    }
+    return;
 }
 
 setPtr<Attribute> Parser::parseAttribute()
 {
     setPtr<Attribute> attr;
 
+    std::cout << "Attributes\n";
     while(accept(TType::DEFINE))
     {
         expect(TType::DEFINE);
@@ -44,14 +54,15 @@ setPtr<Attribute> Parser::parseAttribute()
         //     throw CompExcept("Parsing Error: Attribute identifier not found");
         // }
         // parseIdentifier(defType);
+    std::cout << "In while\n";
 
         // This obj should be of type subclass and have constructed its members already
         // std::unique_ptr<Attribute> AttrObj = static_cast<Attribute*>(parseIdentifier(expect(TType::IDENTIFIER)));
         Attribute* AttrObj = static_cast<Attribute*>(parseIdentifier(expect(TType::IDENTIFIER)));
 
-        (void)AttrObj;
+        AttrObj->printData();
 
-        expect(TType::NEWLINE);
+        parseNewLines();
     }
     // new Attribute will be called here
     return attr;

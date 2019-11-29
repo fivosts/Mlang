@@ -73,7 +73,8 @@ private:
 	std::unordered_set<std::unique_ptr<Import>> parseImport();
 	std::unordered_set<std::unique_ptr<Attribute>> parseAttribute();
 	std::unordered_set<std::unique_ptr<Layer>> parseLayer();
-	
+	/* template<typename T>*/ Token parseIdentifier(Token expID);
+
 private:
 	std::unique_ptr<Lexer> lex = NULL;
 	std::unique_ptr<Token> tokPend = NULL;

@@ -5,7 +5,7 @@
 #include <string>
 #include <unordered_set>
 
-class NetworkName : public Attribute
+class NetworkName : public Attribute, public Identifier
 {
 public:
 	NetworkName() = default;
@@ -15,7 +15,7 @@ private:
 	std::string name;
 };
 
-class Backend : public Attribute
+class Backend : public Attribute, public Identifier
 {
 public:
 	Backend() = default;
@@ -25,7 +25,7 @@ private:
 	std::string bend;
 };
 
-class Target : public Attribute
+class Target : public Attribute, public Identifier
 {
 public:
 	Target() = default;
@@ -35,7 +35,7 @@ private:
 	std::string target;
 };
 
-class CUDA : public Attribute
+class CUDA : public Attribute, public Identifier
 {
 public:
 	CUDA() = default;
@@ -45,7 +45,7 @@ private:
 	bool cuda;
 };
 
-class InpTensors : public Attribute
+class InpTensors : public Attribute, public Identifier
 {
 public:
 	InpTensors() = default;
@@ -55,7 +55,7 @@ private:
 	std::unordered_set<std::string> inTens;
 };
 
-class OutTensors : public Attribute
+class OutTensors : public Attribute, public Identifier
 {
 public:
 	OutTensors() = default;

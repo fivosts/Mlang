@@ -2,10 +2,11 @@
 
 #include "Identifier.h"
 #include "Params.h"
+#include "Expression.h"
 
 #include <string>
 
-class Input : public LayerParams, public Identifier
+class Input : public LayerParams
 {
 public:
 	Input() = default;
@@ -15,7 +16,7 @@ private:
 	BinExpr *inp;
 };
 
-class Output : public LayerParams, public Identifier
+class Output : public LayerParams
 {
 public:
 	Output() = delete;
@@ -26,7 +27,7 @@ private:
 	std::string outp;
 };
 
-class LayerName : public LayerParams, public Identifier
+class LayerName : public LayerParams
 {
 public:
 	LayerName() = delete;
@@ -37,7 +38,7 @@ private:
 	std::string name;
 };
 
-class InputSize : public LSTMParams, public Identifier
+class InputSize : public LSTMParams
 {
 public:
 	InputSize() = delete;
@@ -48,7 +49,7 @@ private:
 	int inSize;
 };
 
-class OutputTimestep : public LSTMParams, public Identifier
+class OutputTimestep : public LSTMParams
 {
 public:
 	OutputTimestep() = delete;
@@ -59,7 +60,7 @@ private:
 	int outStep;
 };
 
-class HiddenSize : public LSTMParams, public Identifier
+class HiddenSize : public LSTMParams
 {
 public:
 	HiddenSize() = delete;
@@ -70,7 +71,7 @@ private:
 	int hSize;
 };
 
-class NumLayers : public LSTMParams, public Identifier
+class NumLayers : public LSTMParams
 {
 public:
 	NumLayers() = delete;
@@ -82,18 +83,18 @@ private:
 };
 
 template <class T>
-class InFeatures : public MLParams, public Identifier
+class InFeatures : public MLParams
 {
 public:
 	InFeatures() = delete;
-	InFeatures(T if) : inFeat(if) {}
+	InFeatures(T inf) : inFeat(inf) {}
 	~InFeatures() override = default;
 
 private:
 	T inFeat;
 };
 
-class OutFeatures : public MLParams, public Identifier
+class OutFeatures : public MLParams
 {
 public:
 	OutFeatures() = delete;

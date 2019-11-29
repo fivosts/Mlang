@@ -5,7 +5,7 @@
 #include <string>
 #include <unordered_set>
 
-class NetworkName : public Attribute, public Identifier
+class NetworkName : public Attribute
 {
 public:
 	NetworkName() = delete;
@@ -16,7 +16,7 @@ private:
 	std::string name;
 };
 
-class Backend : public Attribute, public Identifier
+class Backend : public Attribute
 {
 public:
 	Backend() = delete;
@@ -27,7 +27,7 @@ private:
 	std::string bend;
 };
 
-class Target : public Attribute, public Identifier
+class Target : public Attribute
 {
 public:
 	Target() = delete;
@@ -38,7 +38,7 @@ private:
 	std::string target;
 };
 
-class CUDA : public Attribute, public Identifier
+class CUDA : public Attribute
 {
 public:
 	CUDA() = delete;
@@ -49,7 +49,7 @@ private:
 	bool cuda;
 };
 
-class InpTensors : public Attribute, public Identifier
+class InpTensors : public Attribute
 {
 public:
 	InpTensors() = delete;
@@ -60,7 +60,7 @@ private:
 	std::unordered_set<std::string> inTens;
 };
 
-class OutTensors : public Attribute, public Identifier
+class OutTensors : public Attribute
 {
 public:
 	OutTensors() = delete;

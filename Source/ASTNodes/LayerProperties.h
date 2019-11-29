@@ -1,10 +1,11 @@
 #pragma once
 
+#include "Identifier.h"
 #include "Params.h"
 
 #include <string>
 
-class Input : public LayerParams
+class Input : public LayerParams, public Identifier
 {
 public:
 	Input() = default;
@@ -14,17 +15,17 @@ private:
 	BinExpr *inp;
 };
 
-class Output : public LayerParams
+class Output : public LayerParams, public Identifier
 {
 public:
 	Output() = default;
-	~Output() = default;
+	~Output() override = default;
 
 private:
 	std::string outp;
 };
 
-class LayerName : public LayerParams
+class LayerName : public LayerParams, public Identifier
 {
 public:
 	LayerName() = default;
@@ -34,7 +35,8 @@ private:
 	std::string name;
 };
 
-class InputSize : public LSTMParams{
+class InputSize : public LSTMParams, public Identifier
+{
 public:
 	InputSize() = default;
 	~InputSize() override = default;
@@ -43,7 +45,7 @@ private:
 	int inSize;
 };
 
-class OutputTimestep : public LSTMParams
+class OutputTimestep : public LSTMParams, public Identifier
 {
 public:
 	OutputTimestep() = default;
@@ -53,7 +55,7 @@ private:
 	int outStep;
 };
 
-class HiddenSize : public LSTMParams
+class HiddenSize : public LSTMParams, public Identifier
 {
 public:
 	HiddenSize() = default;
@@ -63,7 +65,7 @@ private:
 	int hSize;
 };
 
-class NumLayers : public LSTMParams
+class NumLayers : public LSTMParams, public Identifier
 {
 public:
 	NumLayers() = default;
@@ -74,17 +76,17 @@ private:
 };
 
 template <class T>
-class InFeatures : public MLParams
+class InFeatures : public MLParams, public Identifier
 {
 public:
-	// InFeatures() = default;
-	// ~InFeatures() override = default;
+	InFeatures() = default;
+	~InFeatures() override = default;
 
 private:
 	T inFeat;
 };
 
-class OutFeatures : public MLParams
+class OutFeatures : public MLParams, public Identifier
 {
 public:
 	OutFeatures() = default;

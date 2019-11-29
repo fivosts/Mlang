@@ -29,9 +29,9 @@ public:
 	Parser(std::string fp)
 	{
 		try
-		{	lex = std::make_unique<Lexer>(fp);	}
+		{	lex = std::make_unique<Lexer>(fp);		}
 		catch(CompExcept &ex)
-		{	throw;											}
+		{	throw;									}
 	}
 	
 	~Parser()
@@ -46,7 +46,7 @@ private:
 	{
 		return (tokPend ? *tokPend == ctt 
 						: [this](){
-						  *tokPend = lex->safeNextToken();
+						  tokPend = std::make_unique<Token>(lex->safeNextToken());
 						  return *tokPend;}() == ctt);
 	}
 

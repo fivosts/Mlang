@@ -29,6 +29,9 @@ function parse_arguments()
         -h|--help)
             help 0
             ;;
+	-SC|--SCDBG)
+	    CMAKE_ARGS+="-DSCDBG=ON"
+	    ;;
         -T|--TOKDBG)
             CMAKE_ARGS+="-DTOKDBG=ON"
             ;;

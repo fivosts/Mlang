@@ -5,6 +5,9 @@ function help()
     echo ""
     echo "  -h, --help"
     echo "              Print help message"
+    echo ""
+    echo "CMake Build options:"
+    echo ""
     echo "  -L, --TOKDBG"
     echo "              Enable lexer debugging output"
     echo "  -P, --PARDBG"
@@ -13,6 +16,11 @@ function help()
     echo "              Enable semantic analyzer debugging output"
     echo "  -C, --CODEDBG"
     echo "              Enable code generator debugging output"
+    echo ""
+    echo "Compile options:"
+    echo ""
+    echo "  -clean"
+    echo "              Delete build folder to clean compile"
     echo ""
     echo "If no argument is provided, cmake is invoked with"
     echo "all preprocessor flags set to off by default."
@@ -47,6 +55,9 @@ function parse_arguments()
         -C|--CODEDBG)
             CMAKE_ARGS+="-DCODEDBG=ON"
             ;;
+        -clean)
+            BUILD_ARGS+="-clean"
+            ;;
         *)
             echo "configure: Unrecognized option " $arg
             help 1
@@ -74,6 +85,15 @@ function setup_deps()
 
 function build_and_compile()
 {
+
+    for arg in "${BUILD_ARGS[@]}"; do
+    case "$arg" in
+        -clean)
+            rm -rf build/
+            ;;
+    esac
+    done
+    
     echo "Configuring MLog"
     if [ ! -d "build" ]; then 
         mkdir build
@@ -86,6 +106,7 @@ function build_and_compile()
 
 declare -a ARGS=("$@")
 declare -a CMAKE_ARGS=()
+declare -a BUILD_ARGS=()
 
 parse_arguments
 setup_deps

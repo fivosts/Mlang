@@ -63,6 +63,9 @@ private:
         }
         else
             ++pos.second;
+        #ifdef SCDBG
+            printf("SCANNER: %c\n", c);
+        #endif
         return c;
     }
 

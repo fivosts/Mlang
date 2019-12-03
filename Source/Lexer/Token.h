@@ -62,14 +62,14 @@ public:
 	Token() = delete;
 	//maybe add template instead of overload ?
 	Token(TokenType t, Position p, std::string d = "") : token(t), pos(p), data(d) {
- 		#ifdef LEXDBG
-			PRINT_TOKEN(tokenMap[t], d);
-		#endif
+	#ifdef LEXDBG
+		print();
+	#endif
 	}
 	Token(TokenType t, Position p, char d) : token(t), pos(p), data((const char*)&d) {
-		#ifdef LEXDBG
-			PRINT_TOKEN(tokenMap[t], d);
-		#endif
+	#ifdef LEXDBG
+		print();
+	#endif
 	}
 	~Token() = default;
 
@@ -88,6 +88,13 @@ public:
 		return data;
 	}
 
+#ifdef LEXDBG
+	void print() const
+	{
+		PRINT_TOKEN(tokenMap[token], data);
+		return;
+	}
+#endif
 	bool operator== (const Token &r) const
 	{
 		return ((token == r.token) && (data == r.data) ? true : false);
@@ -102,10 +109,12 @@ private:
 	TokenType token;
 	Position pos;
 	std::string data;
-	public:
-	#ifdef LEXDBG
-		static std::unordered_map<TokenType, std::string> tokenMap;
-	#endif
+
+#ifdef LEXDBG
+public:
+	static std::unordered_map<TokenType, std::string> tokenMap;
+#endif
+
 };
 
 #endif

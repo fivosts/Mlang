@@ -3,9 +3,9 @@ add_executable(MLogTest
 				TestRunner.cpp
 				Scanner.cpp
 				Lexer.cpp
-				# Parser.cpp
+				Parser.cpp
 				${PROJECT_SOURCE_DIR}/Source/Lexer/Lexer.cpp
-				# ${PROJECT_SOURCE_DIR}/Source/Parser/Parser.cpp
+				${PROJECT_SOURCE_DIR}/Source/Parser/Parser.cpp
 				)
 
 target_compile_options (MLog PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)

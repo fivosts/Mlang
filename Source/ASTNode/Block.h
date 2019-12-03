@@ -4,22 +4,27 @@
 
 #include <unordered_set>
 
+template<typename T>
+using setParams<T> = std::unordered_set<std::unique_ptr<T>>;
+
 class ParamBlock : public ASTNode
 {
 public:
-	ParamBlock() = default;
+	ParamBlock() = delete;
+	ParamBlock(setParams<LayerParams> lp) : lparams(lp) {}
 	~ParamBlock() = default;
 
 private:
-	std::unordered_set<LayerParams*> lparams;
+	setParams<LayerParams> lparams;
 };
 
 class HyperparamBlock : public ASTNode
 {
 public:
-	HyperparamBlock() = default;
+	HyperparamBlock() = delete;
+	HyperparamBlock(setParams<HyperParams> hp) : hparams(hp) {}
 	~HyperparamBlock() = default;
 
 private:
-	std::unordered_set<HyperParams*> hparams;
+	setParams<HyperParams> hparams;
 };

@@ -19,6 +19,9 @@ std::unique_ptr<Model> Parser::parseModel()
 
 setPtr<Import> Parser::parseImport()
 {
+#ifdef PARDBG
+    printf("PARSER: parseImport()\n");
+#endif
     setPtr<Import> imports;
     while(accept(TType::IMPORT))
     {
@@ -32,6 +35,9 @@ setPtr<Import> Parser::parseImport()
 
 void Parser::parseNewLines()
 {
+#ifdef PARDBG
+    printf("PARSER: parseNewLines()\n");
+#endif
     expect(TType::NEWLINE);
     while (accept(TType::NEWLINE))
     {
@@ -42,6 +48,9 @@ void Parser::parseNewLines()
 
 setPtr<Attribute> Parser::parseAttribute()
 {
+#ifdef PARDBG
+    printf("PARSER: parseAttribute()\n");
+#endif
     setPtr<Attribute> attr;
 
     std::cout << "Attributes\n";
@@ -70,6 +79,9 @@ setPtr<Attribute> Parser::parseAttribute()
 
 setPtr<Layer> Parser::parseLayer()
 {
+#ifdef PARDBG
+    printf("PARSER: parseLayer()\n");
+#endif
     // setPtr<Layer> a;
     // return a;
     return {};
@@ -78,12 +90,18 @@ setPtr<Layer> Parser::parseLayer()
 // Dummy
 std::string parseStrLiteral()
 {
+#ifdef PARDBG
+    printf("PARSER: parseStrLiteral()\n");
+#endif
     return "a";
 }
 
 // template<typename T>
 Identifier* Parser::parseIdentifier(Token expID)
 {
+#ifdef PARDBG
+    printf("PARSER: parseIdentifier()\n");
+#endif
     std::string IDName = expID.getData();
 
     if (IDName == "network_name")

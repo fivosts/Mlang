@@ -9,11 +9,12 @@
 class Input : public LayerParams
 {
 public:
-	Input() = default;
-	~Input() override { delete inp; }
+	Input() = delete;
+	Input(BinExpr bi) : inp(bi) {}
+	~Input() override = default;
 
 private:
-	BinExpr *inp;
+	BinExpr inp;
 };
 
 class Output : public LayerParams

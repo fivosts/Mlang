@@ -38,22 +38,22 @@ function parse_arguments()
             help 0
             ;;
 	    -SC|--SCDBG)
-	        CMAKE_ARGS+="-DSCDBG=ON"
+	        CMAKE_ARGS+="-DSCDBG=ON "
 	        ;;
         -T|--TOKDBG)
-            CMAKE_ARGS+="-DTOKDBG=ON"
+            CMAKE_ARGS+="-DTOKDBG=ON "
             ;;
 	    -L|--LEXDBG)
-	        CMAKE_ARGS+="-DLEXDBG=ON"
+	        CMAKE_ARGS+="-DLEXDBG=ON "
 	        ;;
         -P|--PARDBG)
-            CMAKE_ARGS+="-DPARDBG=ON"
+            CMAKE_ARGS+="-DPARDBG=ON "
             ;;
         -S|--SEMDBG)
-            CMAKE_ARGS+="-DSEMDBG=ON"
+            CMAKE_ARGS+="-DSEMDBG=ON "
             ;;
         -C|--CODEDBG)
-            CMAKE_ARGS+="-DCODEDBG=ON"
+            CMAKE_ARGS+="-DCODEDBG=ON "
             ;;
         -clean)
             BUILD_ARGS+="-clean"
@@ -93,7 +93,7 @@ function build_and_compile()
             ;;
     esac
     done
-    
+
     echo "Configuring MLog"
     if [ ! -d "build" ]; then 
         mkdir build

@@ -13,7 +13,7 @@ public:
 	~NetworkName() override = default;
 
 	virtual void printData() override{
-		std::cout << name << std::endl;
+		std::cout << "I am definitely in the right place! My network name is: " << name << std::endl;
 	}
 private:
 	std::string name;

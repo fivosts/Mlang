@@ -22,7 +22,7 @@ public:
 		try
 		{	sc = std::make_unique<Scanner>(fp);	}
 		catch (CompExcept &ex)
-		{	throw;											}
+		{	throw;								}
 	}
 	~Lexer()
 	{

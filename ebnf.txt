@@ -67,7 +67,7 @@ output ::= 'output' '=' STR '\n'
 ## Generic Types
 IDENTIFIER ::= 'network_name' | 'backend' | 'target' | 'cuda_available'         # Attribute
              | 'input_tensors' | 'output_tensors'                               # Attribute
-             | 'input' | 'output' | 'name'                                      # LayerParams
+             | 'input' | 'output' | 'layer_name'                                # LayerParams
              | 'input_size' | 'output_timestep' | 'hidden_size' | 'num_layers'  # LSTMParams 
              | 'in_features' | 'out_features'                                   # MLParams
              | 'hyperparam_block'                                               # ASTNode

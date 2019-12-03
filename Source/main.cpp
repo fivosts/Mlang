@@ -15,7 +15,7 @@
 #include "Parser.h"
 #include <iostream>
 
-#define TEST_PATH "/home/foitsi01/MLog/Models/ase_model.mlog"
+#define TEST_PATH "./Models/ase_model.mlog"
 
 typedef Token::TokenType type;
 

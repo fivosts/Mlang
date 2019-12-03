@@ -4,7 +4,7 @@
 #include "Except.h"
 
 #include <string>
-#ifdef LEXDBG
+#ifdef TOKDBG
 	#include <unordered_map>
 #endif
 
@@ -62,12 +62,12 @@ public:
 	Token() = delete;
 	//maybe add template instead of overload ?
 	Token(TokenType t, Position p, std::string d = "") : token(t), pos(p), data(d) {
-	#ifdef LEXDBG
+	#ifdef TOKDBG
 		print();
 	#endif
 	}
 	Token(TokenType t, Position p, char d) : token(t), pos(p), data((const char*)&d) {
-	#ifdef LEXDBG
+	#ifdef TOKDBG
 		print();
 	#endif
 	}
@@ -88,7 +88,7 @@ public:
 		return data;
 	}
 
-#ifdef LEXDBG
+#ifdef TOKDBG
 	void print() const
 	{
 		PRINT_TOKEN(tokenMap[token], data);
@@ -110,7 +110,7 @@ private:
 	Position pos;
 	std::string data;
 
-#ifdef LEXDBG
+#ifdef TOKDBG
 public:
 	static std::unordered_map<TokenType, std::string> tokenMap;
 #endif

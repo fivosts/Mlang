@@ -12,9 +12,9 @@ add_executable(MLogTest
 target_compile_options (MLog PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)
 target_compile_definitions(MLogTest PRIVATE MODEL_PATH="${PROJECT_SOURCE_DIR}/Models/")
 
-if (LEXDBG)
-	target_compile_definitions(MLogTest PRIVATE LEXDBG)
-ENDIF(LEXDBG)
+if (TOKDBG)
+	target_compile_definitions(MLogTest PRIVATE TOKDBG)
+ENDIF(TOKDBG)
 
 target_link_libraries(MLogTest gtest pthread)
 

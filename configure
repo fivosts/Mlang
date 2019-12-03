@@ -5,7 +5,7 @@ function help()
     echo ""
     echo "  -h, --help"
     echo "              Print help message"
-    echo "  -L, --LEXDBG"
+    echo "  -L, --TOKDBG"
     echo "              Enable lexer debugging output"
     echo "  -P, --PARDBG"
     echo "              Enable parser debugging output"
@@ -29,8 +29,8 @@ function parse_arguments()
         -h|--help)
             help 0
             ;;
-        -L|--LEXDBG)
-            CMAKE_ARGS+="-DLEXDBG=ON"
+        -L|--TOKDBG)
+            CMAKE_ARGS+="-DTOKDBG=ON"
             ;;
         -P|--PARDBG)
             CMAKE_ARGS+="-DPARDBG=ON"

@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include <unordered_set>
 
-#include "Lexer.h"
+#include "Parser.h"
 
 #ifdef MODEL_PATH
 #define FULL_PATH(M) MODEL_PATH M
@@ -38,18 +38,9 @@ namespace MLogTest
 
     TEST(ParserTest, Normal)
     {
-        Lexer lex(getSc(FULL_PATH("ase_model.mlog")));
-        std::unordered_set<Token::TokenType> TokenBag;
-        
-        Token curr = lex.nextToken();
-        TokenBag.insert(curr.getToken());
-        while(curr.getToken() != Token::TokenType::END)
-        {
-            curr = lex.nextToken();
-            TokenBag.insert(curr.getToken());
-        }
-        ASSERT_TRUE(TokenBag.find(Token::TokenType::INVALID) == TokenBag.end());
-        ASSERT_FALSE(TokenBag.find(Token::TokenType::END) == TokenBag.end());
+        Parser par(FULL_PATH("ase_model.mlog"));
+        par.safeParseModel();
+
     }
 
     TEST(ParserTest, Binary)

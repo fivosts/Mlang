@@ -12,9 +12,29 @@ add_executable(MLogTest
 target_compile_options (MLog PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)
 target_compile_definitions(MLogTest PRIVATE MODEL_PATH="${PROJECT_SOURCE_DIR}/Models/")
 
+if (SCDBG)
+	target_compile_definitions(MLogTest PRIVATE SCDBG)
+ENDIF(SCDBG)
+
 if (TOKDBG)
 	target_compile_definitions(MLogTest PRIVATE TOKDBG)
 ENDIF(TOKDBG)
+
+if (LEXDBG)
+	target_compile_definitions(MLogTest PRIVATE LEXDBG)
+ENDIF(LEXDBG)
+
+if (PARDBG)
+	target_compile_definitions(MLogTest PRIVATE PARDBG)
+ENDIF(PARDBG)
+
+if (SEMDBG)
+	target_compile_definitions(MLogTest PRIVATE SEMDBG)
+ENDIF(SEMDBG)
+
+if (CODEDBG)
+	target_compile_definitions(MLogTest PRIVATE CODEDBG)
+ENDIF(CODEDBG)
 
 target_link_libraries(MLogTest gtest pthread)
 

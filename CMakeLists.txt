@@ -15,7 +15,12 @@ else()
     message(FATAL_ERROR "Unknown compiler " ${CMAKE_CXX_COMPILER_ID} ". Aborting.")
 endif()
 
-OPTION(TOKDBG "Select ON to print lexing result" OFF)
+OPTION(SCDBG "Select ON to enable scanner traces" OFF)
+OPTION(TOKDBG "Select ON to enable token traces" OFF)
+OPTION(LEXDBG "Select ON to enable lexer traces" OFF)
+OPTION(PARDBG "Select ON to enable parser traces" OFF)
+OPTION(SEMDBG "Select ON to enable semantic analyser traces" OFF)
+OPTION(CODEDBG "Select ON to enable code generator traces" OFF)
 
 # if (TOKDBG)
 #     set(TOKDBG ON CACHE BOOL "Select ON to print lexing result")

@@ -82,8 +82,10 @@ private:
 	std::unordered_set<std::unique_ptr<Layer>> parseLayer();
 	void parseNewLines();
 
-	// template<typename T> 
 	Identifier *parseIdentifier(Token expID);
+
+	std::string parseStrLiteral();
+	bool parseBoolLiteral();
 
 private:
 	std::unique_ptr<Lexer> lex = NULL;

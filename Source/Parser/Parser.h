@@ -44,6 +44,9 @@ private:
 
 	inline bool accept(Token::TokenType&& ctt)
 	{
+	#ifdef PARDBG
+		printf("PARSER:\t\taccept()\n");
+	#endif
 		return (tokPend ? *tokPend == ctt 
 						: [this](){
 						  tokPend = std::make_unique<Token>(lex->safeNextToken());
@@ -52,6 +55,9 @@ private:
 
 	inline Token expect(Token::TokenType &&ctt)
 	{
+	#ifdef PARDBG
+		printf("PARSER:\t\texpect()\n");
+	#endif
 		if (!accept(std::move(ctt)))
 			throw CompExcept("Parsing error bla bla");
 

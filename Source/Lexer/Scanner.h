@@ -66,11 +66,11 @@ private:
         #ifdef SCDBG
             if (c != '\n')
             {
-                printf("SCANNER: %c\n", c);
+                printf("SCANNER:\t\t%c\n", c);
             }
             else
             {
-                printf("SCANNER: \\n\n");
+                printf("SCANNER:\t\t\\n\n");
             }
             
         #endif

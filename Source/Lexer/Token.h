@@ -19,7 +19,7 @@ TOKENIZE(RSBR)		TOKENIZE(END)		TOKENIZE(INVALID)
 #define TOKEN_STRING(TOKEN) #TOKEN
 #define TOKEN_MAP(TOKEN)  {TokenType::TOKEN, #TOKEN },
 #define PRINT_TOKEN(TOKEN, CHAR) ( \
-			std::cout << "TOKEN: " << TOKEN << " " << CHAR << std::endl \
+			std::cout << "TOKEN:\t\t" << TOKEN << " " << CHAR << std::endl \
 		)
 
 class Token

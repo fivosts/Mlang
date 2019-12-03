@@ -69,8 +69,8 @@ setPtr<Attribute> Parser::parseAttribute()
 
         // This obj should be of type subclass and have constructed its members already
         // std::unique_ptr<Attribute> AttrObj = static_cast<Attribute*>(parseIdentifier(expect(TType::IDENTIFIER)));
-        // Attribute* AttrObj = static_cast<Attribute*>(parseIdentifier(expect(TType::IDENTIFIER)));
-        Identifier* AttrObj = parseIdentifier(expect(TType::IDENTIFIER));
+        Attribute* AttrObj = static_cast<Attribute*>(parseIdentifier(expect(TType::IDENTIFIER)));
+        // Identifier* AttrObj = parseIdentifier(expect(TType::IDENTIFIER));
 
         AttrObj->printData();
 
@@ -90,15 +90,6 @@ setPtr<Layer> Parser::parseLayer()
     return {};
 }
 
-// Dummy
-std::string parseStrLiteral()
-{
-#ifdef PARDBG
-    printf("PARSER:\t\tparseStrLiteral()\n");
-#endif
-    return "a";
-}
-
 Identifier* Parser::parseIdentifier(Token expID)
 {
 #ifdef PARDBG
@@ -115,75 +106,78 @@ Identifier* Parser::parseIdentifier(Token expID)
     }
     else if (IDName == "backend")
     {
-
+        return new Backend(parseStrLiteral());
     }
     else if (IDName == "target")
     {
-
+        return new Target(parseStrLiteral());
     }
-    else if (IDname == "cuda_available")
+    else if (IDName == "cuda_available")
     {
-
+        return new CUDA(parseBoolLiteral());
     }
     else if (IDName == "input_tensors")
     {
-
+        //! TODO this can be a string array
+        return new InpTensors(parseStrArrLiteral());
     }
     else if (IDName == "output_tensors")
     {
-
+        //! TODO this can be a string array
+        return new OutTensors(parseStrArrLiteral());
     }
     ////////////////////////
     //! LayerParams
     ////////////////////////
     else if (IDName == "input")
     {
-
+        return new Input(parseBinExpr());
     }
     else if (IDName == "output")
     {
-
+        return new Output(parseStrLiteral());
     }
     else if (IDName == "layer_name")
     {
-
+        return new LayerName(parseStrLiteral());
     }
     ////////////////////////
     //! LSTMParams
     ////////////////////////
     else if (IDName == "input_size")
     {
-
+        return new InputSize(parseIntLiteral());
     }
     else if (IDName == "output_timestep")
     {
-
+        return new OutputTimestep(parseIntLiteral());
     }
     else if (IDName == "hidden_size")
     {
-
+        return new HiddenSize(parseIntLiteral());
     }
     else if (IDName == "num_layers")
     {
-
+        return new NumLayers(parseIntLiteral());
     }
     ////////////////////////
     //! MLParams
     ////////////////////////
     else if (IDName == "in_features")
     {
-
+        //! TODO this looks troublesome
+        // return new InFeatures<T>();
     }
     else if (IDName == "out_features")
     {
-
+        return new OutFeatures(parseIntLiteral());
     }
     ////////////////////////
     //! ASTNode
     ////////////////////////
     else if (IDName == "hyperparam_block")
     {
-
+        // return new HyperparamBlock(parseHyperparamBlock());
     }
     else if (IDName == "len")
     {
@@ -216,3 +210,45 @@ Identifier* Parser::parseIdentifier(Token expID)
 
 }
 
+//! TODO Dummy
+std::string Parser::parseStrLiteral()
+{
+#ifdef PARDBG
+    printf("PARSER:\t\tparseStrLiteral()\n");
+#endif
+    return "a";
+}
+
+//! TODO Dummy!
+std::unordered_set<std::string> Parser::parseStrArrLiteral()
+{
+    return {"a", "b"};
+}
+
+//! TODO Dummy!!
+int Parser::parseIntLiteral()
+{
+    return 0;
+}
+
+//! TODO Dummy!!
+BinExpr Parser::parseBinExpr()
+{
+    return BinExpr();
+}
+
+//! TODO Dummy!
+// HyperparamBlock Parser::parseHyperparamBlock()
+// {
+//     return HyperparamBlock();
+// }
+
+//! TODO Dummy
+bool Parser::parseBoolLiteral()
+{
+#ifdef PARDBG
+    printf("PARSER:\t\tparseBoolLiteral()\n");
+#endif
+
+    return true;
+}

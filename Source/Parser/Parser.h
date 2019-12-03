@@ -3,6 +3,7 @@
 #include "Lexer.h"
 #include "Model.h"
 #include "Identifier.h"
+#include "Expression.h"
 
 #include <memory>
 
@@ -85,7 +86,14 @@ private:
 	Identifier *parseIdentifier(Token expID);
 
 	std::string parseStrLiteral();
+
+	//! TODO More dummy than ever!
+	std::unordered_set<std::string> parseStrArrLiteral();
+
 	bool parseBoolLiteral();
+	int parseIntLiteral();
+	// HyperparamBlock parseHyperparamBlock();
+	BinExpr parseBinExpr();
 
 private:
 	std::unique_ptr<Lexer> lex = NULL;

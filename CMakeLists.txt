@@ -7,10 +7,10 @@ project(MLOG,
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     # TODO on clang
-    message("Using Clang")
+    message("-- Using Clang")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     # TODO on GCC
-    message("Using GCC")
+    message("-- Using GCC")
 else()
     message(FATAL_ERROR "Unknown compiler " ${CMAKE_CXX_COMPILER_ID} ". Aborting.")
 endif()

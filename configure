@@ -68,17 +68,17 @@ function parse_arguments()
 
 function setup_deps()
 {
-    echo "Scanning for apt package dependencies"
+    echo "-- Scanning for apt package dependencies"
 
     while IFS="" read -r DEP_PACK || [ -n "$DEP_PACK" ]
     do
         PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $DEP_PACK|grep "install ok installed")
         # echo Checking for somelib: $PKG_OK
         if [ "" == "$PKG_OK" ]; then
-        echo "Installing $DEP_PACK"
+        echo "-- Installing $DEP_PACK"
         sudo apt --yes install $DEP_PACK
         else
-            echo "$DEP_PACK is installed"
+            echo "-- $DEP_PACK is installed"
         fi
     done < DEPS.txt
 }
@@ -94,7 +94,7 @@ function build_and_compile()
     esac
     done
 
-    echo "Configuring MLog"
+    echo "-- Configuring MLog"
     if [ ! -d "build" ]; then 
         mkdir build
     fi

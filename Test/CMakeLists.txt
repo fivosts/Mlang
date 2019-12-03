@@ -4,6 +4,7 @@ add_executable(MLogTest
 				Scanner.cpp
 				Lexer.cpp
 				Parser.cpp
+				${PROJECT_SOURCE_DIR}/Source/ASTNode/ASTNode.cpp
 				${PROJECT_SOURCE_DIR}/Source/Lexer/Lexer.cpp
 				${PROJECT_SOURCE_DIR}/Source/Parser/Parser.cpp
 				)
@@ -17,7 +18,7 @@ ENDIF(LEXDBG)
 
 target_link_libraries(MLogTest gtest pthread)
 
-include_directories(${PROJECT_SOURCE_DIR}/Source/ASTNodes)
+include_directories(${PROJECT_SOURCE_DIR}/Source/ASTNode)
 include_directories(${PROJECT_SOURCE_DIR}/Source/Scanner)
 include_directories(${PROJECT_SOURCE_DIR}/Source/Lexer)
 include_directories(${PROJECT_SOURCE_DIR}/Source/Parser)

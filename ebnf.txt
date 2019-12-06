@@ -10,7 +10,7 @@ attribute ::= '#define' ( network_name      # Optional - defaulted
                         | output_tensors    # Mandatory
                         | backend           # Optional - defaulted
                         | target            # Optional - defaulted
-                        ) '\n'
+                        )
 
 layer ::= LSTM
         | MLP
@@ -28,13 +28,13 @@ params ::= input        # Mandatory
 
 hyperparam_block ::= 'hyperparam_block' '{' ( (lstm_hparams)* | (mlp_hparams)* ) '}' '\n'
 
-lstm_hparams ::= input_size '\n'        # Mandatory
-              | output_timestep '\n'    # Mandatory
-              | hidden_size '\n'        # Mandatory
-              | num_layers '\n'         # Mandatory
+lstm_hparams ::= input_size         	# Mandatory
+              | output_timestep 	# Mandatory
+              | hidden_size 	        # Mandatory
+              | num_layers          	# Mandatory
 
-mlp_hparams ::= in_features '\n'        # Mandatory
-              | out_features '\n'       # Mandatory
+mlp_hparams ::= in_features         	# Mandatory
+              | out_features        	# Mandatory
 
 BinExpr ::= STR  
             | BinExpr '+' STR

@@ -298,10 +298,21 @@ std::unordered_set<std::string> Parser::parseStrArrLiteral()
     return {"a", "b"};
 }
 
-//! TODO Dummy!!
 int Parser::parseIntLiteral()
 {
-    return 0;
+#ifdef PARDBG
+    printf("PARSER:\t\tparseIntLiteral()\n");
+#endif
+    Token intID = expect(TType::INT_LITERAL);
+    try
+    {
+        return std::stoi(expect(TType::INT_LITERAL).getData());
+    }
+    catch(const std::exception& e)
+    {
+        throw CompExcept("Parsing Error: Invalid int literal");
+    }
+    
 }
 
 //! TODO Dummy!!

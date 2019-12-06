@@ -108,12 +108,12 @@ std::unique_ptr<Attribute> Parser::parseIdentifier(Token expectedID, specializer
     }
     else if (IDName == "input_tensors")
     {
-        //! TODO this can be a string array
+        //! TODO this MUST be a string array
         return std::unique_ptr<Attribute>(new InpTensors(parseStrArrLiteral()));
     }
     else if (IDName == "output_tensors")
     {
-        //! TODO this can be a string array
+        //! TODO this MUST be a string array
         return std::unique_ptr<Attribute>(new OutTensors(parseStrArrLiteral()));
     }
     else

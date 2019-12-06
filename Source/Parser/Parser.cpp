@@ -291,10 +291,20 @@ std::string Parser::parseStrLiteral()
     return expect(TType::STR_LITERAL).getData();
 }
 
-//! TODO Dummy!
 std::unordered_set<std::string> Parser::parseStrArrLiteral()
 {
-    return {"a", "b"};
+    std::unordered_set<std::string> strArr;
+    expect(TType::LSBR);
+    if (accept(TType::STR_LITERAL))
+        strArr.insert(parseStrLiteral());
+    
+    while(accept(TType::COMMA))
+    {
+        expect(TType::COMMA);
+        strArr.insert(parseStrLiteral());
+    }
+    expect(TType::RSBR);
+    return strArr;
 }
 
 int Parser::parseIntLiteral()

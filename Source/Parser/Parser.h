@@ -146,8 +146,6 @@ private:
 	void parseNewLines();
 
 	std::string parseStrLiteral();
-
-	//! TODO More dummy than ever!
 	std::unordered_set<std::string> parseStrArrLiteral();
 
 	bool parseBoolLiteral();

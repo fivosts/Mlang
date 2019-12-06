@@ -69,10 +69,10 @@ setPtr<Attribute> Parser::parseAttribute()
 
         // This obj should be of type subclass and have constructed its members already
         // std::unique_ptr<Attribute> AttrObj = static_cast<Attribute*>(parseIdentifier(expect(TType::IDENTIFIER)));
-        Attribute* AttrObj = static_cast<Attribute*>(parseIdentifier(expect(TType::IDENTIFIER)));
+        // Attribute* AttrObj = static_cast<Attribute*>(parseIdentifier<Attribute>(expect(TType::IDENTIFIER)));
         // Identifier* AttrObj = parseIdentifier(expect(TType::IDENTIFIER));
 
-        AttrObj->printData();
+        // AttrObj->printData();
 
         parseNewLines();
     }
@@ -90,92 +90,124 @@ setPtr<Layer> Parser::parseLayer()
     return {};
 }
 
-Identifier* Parser::parseIdentifier(Token expID)
+template<typename T>
+std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<T>)
 {
-#ifdef PARDBG
-    printf("PARSER:\t\tparseIdentifier()\n");
-#endif
-    std::string IDName = expID.getData();
+    throw CompExcept("Parsing Error: Identifier type not recognized");
+}
 
-    ////////////////////////
-    //! Attributes
-    ////////////////////////
+std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<Attribute>)
+{
+    std::string IDName = expectedID.getData();
+
     if (IDName == "network_name")
     {
-        return new NetworkName(parseStrLiteral());
+        return std::unique_ptr<Identifier>(new NetworkName(parseStrLiteral()));
     }
     else if (IDName == "backend")
     {
-        return new Backend(parseStrLiteral());
+        return std::unique_ptr<Identifier>(new Backend(parseStrLiteral()));
     }
     else if (IDName == "target")
     {
-        return new Target(parseStrLiteral());
+        return std::unique_ptr<Identifier>(new Target(parseStrLiteral()));
     }
     else if (IDName == "cuda_available")
     {
-        return new CUDA(parseBoolLiteral());
+        return std::unique_ptr<Identifier>(new CUDA(parseBoolLiteral()));
     }
     else if (IDName == "input_tensors")
     {
         //! TODO this can be a string array
-        return new InpTensors(parseStrArrLiteral());
+        return std::unique_ptr<Identifier>(new InpTensors(parseStrArrLiteral()));
     }
     else if (IDName == "output_tensors")
     {
         //! TODO this can be a string array
-        return new OutTensors(parseStrArrLiteral());
+        return std::unique_ptr<Identifier>(new OutTensors(parseStrArrLiteral()));
     }
-    ////////////////////////
-    //! LayerParams
-    ////////////////////////
-    else if (IDName == "input")
+    else
     {
-        return new Input(parseBinExpr());
+        throw CompExcept("Parsing Error: Attribute not recognized");
+    }
+    return nullptr;
+}
+
+std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<LayerParams>)
+{
+    std::string IDName = expectedID.getData();
+
+    if (IDName == "input")
+    {
+        return std::unique_ptr<LayerParams>(new Input(parseBinExpr()));
     }
     else if (IDName == "output")
     {
-        return new Output(parseStrLiteral());
+        return std::unique_ptr<LayerParams>(new Output(parseStrLiteral()));
     }
     else if (IDName == "layer_name")
     {
-        return new LayerName(parseStrLiteral());
+        return std::unique_ptr<LayerParams>(new LayerName(parseStrLiteral()));
     }
-    ////////////////////////
-    //! LSTMParams
-    ////////////////////////
-    else if (IDName == "input_size")
+    else
     {
-        return new InputSize(parseIntLiteral());
+        throw CompExcept("Parsing Error: LayerParam not recognized");
+    }
+    return nullptr;
+    
+}
+
+std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<LSTMParams>)
+{
+    std::string IDName = expectedID.getData();
+
+    if (IDName == "input_size")
+    {
+        return std::unique_ptr<LSTMParams>(new InputSize(parseIntLiteral()));
     }
     else if (IDName == "output_timestep")
     {
-        return new OutputTimestep(parseIntLiteral());
+        return std::unique_ptr<LSTMParams>(new OutputTimestep(parseIntLiteral()));
     }
     else if (IDName == "hidden_size")
     {
-        return new HiddenSize(parseIntLiteral());
+        return std::unique_ptr<LSTMParams>(new HiddenSize(parseIntLiteral()));
     }
     else if (IDName == "num_layers")
     {
-        return new NumLayers(parseIntLiteral());
+        return std::unique_ptr<LSTMParams>(new NumLayers(parseIntLiteral()));
     }
-    ////////////////////////
-    //! MLParams
-    ////////////////////////
-    else if (IDName == "in_features")
+    else
+    {
+        throw CompExcept("Parsing Error: LSTMParam not recognized");
+    }
+    return nullptr;
+}
+
+std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<MLParams>)
+{
+    std::string IDName = expectedID.getData();
+    if (IDName == "in_features")
     {
         //! TODO this looks troublesome
         // return new InFeatures<T>();
     }
     else if (IDName == "out_features")
     {
-        return new OutFeatures(parseIntLiteral());
+        return std::unique_ptr<MLParams>(new OutFeatures(parseIntLiteral()));
     }
-    ////////////////////////
-    //! ASTNode
-    ////////////////////////
-    else if (IDName == "hyperparam_block")
+    else
+    {
+        throw CompExcept("Parsing Error: MLParam not recognized");
+    }
+    return nullptr;
+}
+
+std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<ASTNode>)
+{
+    std::string IDName = expectedID.getData();
+    
+    if (IDName == "hyperparam_block")
     {
         // return parseHyperparamBlock();
     }
@@ -183,10 +215,18 @@ Identifier* Parser::parseIdentifier(Token expID)
     {
 
     }
-    ////////////////////////
-    //! Layer
-    ////////////////////////
-    else if (IDName == "LSTM")
+    else
+    {
+        throw CompExcept("Parsing Error: ASTNode not recognized");
+    }
+    return nullptr;
+}
+
+std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<Layer>)
+{
+    std::string IDName = expectedID.getData();
+   
+    if (IDName == "LSTM")
     {
 
     }
@@ -200,14 +240,10 @@ Identifier* Parser::parseIdentifier(Token expID)
     }
     else
     {
-        // crash
-        // TODO this
-        throw;
+        throw CompExcept("Parsing Error: Layer not recognized");
     }
 
-    // TODO this
     return nullptr;
-
 }
 
 //! TODO Dummy

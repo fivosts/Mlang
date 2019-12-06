@@ -12,5 +12,5 @@ public:
 
 	virtual void printData() {
 		std::cout << "This message is wrong\n";
-	};
+	}
 };

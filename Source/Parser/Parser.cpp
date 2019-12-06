@@ -261,6 +261,9 @@ int Parser::parseIntLiteral()
 //! TODO Dummy!!
 BinExpr Parser::parseBinExpr()
 {
+#ifdef PARDBG
+    printf("PARSER:\t\tparseBinExpr()\n");
+#endif
     return BinExpr();
 }
 
@@ -268,7 +271,7 @@ template<typename T>
 std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
 {
 #ifdef PARDBG
-    printf("PARSER:\t\parseHyperparamBlock()\n");
+    printf("PARSER:\t\tparseHyperparamBlock()\n");
 #endif
 
     Token HBlockID = expect(TType::IDENTIFIER, "hyperparam_block");
@@ -279,9 +282,13 @@ std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
 template<typename T>
 setPtr<T> Parser::parseBlockParams()
 {
+#ifdef PARDBG
+    printf("PARSER:\t\tparseBlockParams()\n");
+#endif
     setPtr<T> a;
     return a;
 }
+
 //! TODO Dummy
 bool Parser::parseBoolLiteral()
 {

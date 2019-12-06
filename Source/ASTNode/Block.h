@@ -22,7 +22,7 @@ private:
 class HyperparamBlock : public ASTNode, public Identifier
 {
 public:
-	HyperparamBlock() = delete;
+	HyperparamBlock() = default;
 	HyperparamBlock(setParams<HyperParams> hp) : hparams(std::move(hp)) {}
 	~HyperparamBlock() = default;
 

@@ -237,13 +237,12 @@ BinExpr Parser::parseBinExpr()
     return BinExpr();
 }
 
-//! TODO Dummy!
 std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
 {
 #ifdef PARDBG
     printf("PARSER:\t\parseHyperparamBlock()\n");
 #endif
-    return std::move(std::unique_ptr<HyperparamBlock>(new HyperparamBlock()));
+    return std::unique_ptr<HyperparamBlock>(new HyperparamBlock());
 }
 
 //! TODO Dummy

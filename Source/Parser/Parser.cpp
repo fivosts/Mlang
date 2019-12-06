@@ -110,6 +110,7 @@ std::unique_ptr<Attribute> Parser::parseIdentifier(Token expectedID, specializer
 std::unique_ptr<LayerParams> Parser::parseIdentifier(Token expectedID, specializer<LayerParams>)
 {
     std::string IDName = expectedID.getData();
+    expect(TType::ASSIGN);
 
     if (IDName == "input")
     {
@@ -134,7 +135,8 @@ std::unique_ptr<LayerParams> Parser::parseIdentifier(Token expectedID, specializ
 std::unique_ptr<LSTMParams> Parser::parseIdentifier(Token expectedID, specializer<LSTMParams>)
 {
     std::string IDName = expectedID.getData();
-
+    expect(TType::ASSIGN);
+    
     if (IDName == "input_size")
     {
         return std::unique_ptr<LSTMParams>(new InputSize(parseIntLiteral()));
@@ -161,6 +163,8 @@ std::unique_ptr<LSTMParams> Parser::parseIdentifier(Token expectedID, specialize
 std::unique_ptr<MLParams> Parser::parseIdentifier(Token expectedID, specializer<MLParams>)
 {
     std::string IDName = expectedID.getData();
+    expect(TType::ASSIGN);
+    
     if (IDName == "in_features")
     {
         //! TODO this looks troublesome
@@ -245,6 +249,8 @@ setPtr<T> Parser::parseBlockParams()
     printf("PARSER:\t\tparseBlockParams()\n");
 #endif
     setPtr<T> a;
+
+
     return a;
 }
 

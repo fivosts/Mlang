@@ -26,7 +26,7 @@ params ::= input        # Mandatory
          | output       # Mandatory
          | layer_name   # Optional
 
-hyperparam_block ::= 'hyperparam_block' '{' ( (lstm_hparams)* | (mlp_hparams)* ) '}'
+hyperparam_block ::= 'hyperparam_block' '{' ( (lstm_hparams)* | (mlp_hparams)* ) '}' '\n'
 
 lstm_hparams ::= input_size '\n'        # Mandatory
               | output_timestep '\n'    # Mandatory

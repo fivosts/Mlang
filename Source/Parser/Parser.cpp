@@ -289,7 +289,7 @@ std::string Parser::parseStrLiteral()
 #ifdef PARDBG
     printf("PARSER:\t\tparseStrLiteral()\n");
 #endif
-    return "a";
+    return expect(TType::STR_LITERAL).getData();
 }
 
 //! TODO Dummy!

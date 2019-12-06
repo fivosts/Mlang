@@ -61,9 +61,6 @@ setPtr<Attribute> Parser::parseAttribute()
     {
         expect(TType::DEFINE);
         std::unique_ptr<Attribute> attr = parseIdentifier<Attribute>(expect(TType::IDENTIFIER));
-        
-        attr->printData();
-        
         parseNewLines();
         attrSet.insert(std::move(attr));
     }

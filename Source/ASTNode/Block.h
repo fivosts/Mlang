@@ -22,12 +22,10 @@ private:
 class HyperparamBlock : public ASTNode, public Identifier
 {
 public:
-	// TODO delete
-	HyperparamBlock() = default;
-	// HyperparamBlock(setParams<HyperParams> hp) : hparams(hp) {}
+	HyperparamBlock() = delete;
+	HyperparamBlock(setParams<HyperParams> hp) : hparams(std::move(hp)) {}
 	~HyperparamBlock() = default;
 
 private:
-	//! TODO this unique ptr will nag about this line
 	setParams<HyperParams> hparams;
 };

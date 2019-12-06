@@ -177,7 +177,7 @@ Identifier* Parser::parseIdentifier(Token expID)
     ////////////////////////
     else if (IDName == "hyperparam_block")
     {
-        // return new HyperparamBlock(parseHyperparamBlock());
+        // return parseHyperparamBlock();
     }
     else if (IDName == "len")
     {
@@ -238,10 +238,10 @@ BinExpr Parser::parseBinExpr()
 }
 
 //! TODO Dummy!
-// HyperparamBlock Parser::parseHyperparamBlock()
-// {
-//     return HyperparamBlock();
-// }
+std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
+{
+    return std::move(std::unique_ptr<HyperparamBlock>(new HyperparamBlock()));
+}
 
 //! TODO Dummy
 bool Parser::parseBoolLiteral()

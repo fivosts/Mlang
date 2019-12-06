@@ -92,7 +92,7 @@ private:
 
 	bool parseBoolLiteral();
 	int parseIntLiteral();
-	// HyperparamBlock parseHyperparamBlock();
+	std::unique_ptr<HyperparamBlock> parseHyperparamBlock();
 	BinExpr parseBinExpr();
 
 private:

@@ -13,9 +13,9 @@ public:
 class LSTM : public Layer
 {
 public:
-	LSTM() = default;
-	~LSTM() override {delete pblock;
-					  delete hblock;}
+	LSTM() = delete;
+	LSTM(std::unique_ptr<ParamBlock> pb) : pblock(std::move(pb)) {}
+	~LSTM() override { delete hblock; }
 
 private:
 	std::unique_ptr<ParamBlock> pblock;
@@ -25,9 +25,9 @@ private:
 class MLP : public Layer
 {
 public:
-	MLP() = default;
-	~MLP() override {delete pblock;
-					  delete hblock;}
+	MLP() = delete;
+	MLP(std::unique_ptr<ParamBlock> pb) : pblock(std::move(pb)) {}
+	~MLP() override { delete hblock;}
 
 private:
 	std::unique_ptr<ParamBlock> pblock;
@@ -37,8 +37,9 @@ private:
 class Sigmoid : public Layer
 {
 public:
-	Sigmoid() = default;
-	~Sigmoid() override {delete pblock;}
+	Sigmoid() = delete;
+	Sigmoid(std::unique_ptr<ParamBlock> pb) : pblock(std::move(pb)) {}
+	~Sigmoid() override = default;
 
 private:
 	std::unique_ptr<ParamBlock> pblock;

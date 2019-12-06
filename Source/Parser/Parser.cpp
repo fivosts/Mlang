@@ -258,6 +258,7 @@ std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
     return std::unique_ptr<HyperparamBlock>(new HyperparamBlock(params));
 }
 
+// TODO
 template<typename T>
 setPtr<T> Parser::parseBlockParams()
 {

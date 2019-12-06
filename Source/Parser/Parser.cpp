@@ -56,28 +56,18 @@ setPtr<Attribute> Parser::parseAttribute()
     printf("PARSER:\t\tparseAttribute()\n");
 #endif
 
-    setPtr<Attribute> attr;
+    setPtr<Attribute> attrSet;
     while(accept(TType::DEFINE))
     {
         expect(TType::DEFINE);
-        // Token defType = expect(TType::IDENTIFIER);
-        // if (AttrIDTypes.find(defType.getData()) == AttrIDTypes.end())
-        // {
-        //     throw CompExcept("Parsing Error: Attribute identifier not found");
-        // }
-        // parseIdentifier(defType);
-
-        // This obj should be of type subclass and have constructed its members already
-        // std::unique_ptr<Attribute> AttrObj = static_cast<Attribute*>(parseIdentifier(expect(TType::IDENTIFIER)));
-        std::unique_ptr<Attribute> AttrObj = parseIdentifier<Attribute>(expect(TType::IDENTIFIER));
-        // Identifier* AttrObj = parseIdentifier(expect(TType::IDENTIFIER));
-
-        AttrObj->printData();
-
+        std::unique_ptr<Attribute> attr = parseIdentifier<Attribute>(expect(TType::IDENTIFIER));
+        
+        attr->printData();
+        
         parseNewLines();
+        attrSet.insert(std::move(attr));
     }
-    // new Attribute will be called here
-    return attr;
+    return attrSet;
 }
 
 setPtr<Layer> Parser::parseLayer()

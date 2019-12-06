@@ -11,7 +11,7 @@ class ParamBlock : public ASTNode
 {
 public:
 	ParamBlock() = delete;
-	ParamBlock(setParams<LayerParams> lp) : lparams(lp) {}
+	ParamBlock(setParams<LayerParams> lp) : lparams(std::move(lp)) {}
 	~ParamBlock() = default;
 
 private:

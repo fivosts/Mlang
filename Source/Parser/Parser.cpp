@@ -91,40 +91,40 @@ setPtr<Layer> Parser::parseLayer()
 }
 
 template<typename T>
-std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<T>)
+std::unique_ptr<T> Parser::parseIdentifier(Token expectedID, specializer<T>)
 {
     throw CompExcept("Parsing Error: Identifier type not recognized");
 }
 
-std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<Attribute>)
+std::unique_ptr<Attribute> Parser::parseIdentifier(Token expectedID, specializer<Attribute>)
 {
     std::string IDName = expectedID.getData();
 
     if (IDName == "network_name")
     {
-        return std::unique_ptr<Identifier>(new NetworkName(parseStrLiteral()));
+        return std::unique_ptr<Attribute>(new NetworkName(parseStrLiteral()));
     }
     else if (IDName == "backend")
     {
-        return std::unique_ptr<Identifier>(new Backend(parseStrLiteral()));
+        return std::unique_ptr<Attribute>(new Backend(parseStrLiteral()));
     }
     else if (IDName == "target")
     {
-        return std::unique_ptr<Identifier>(new Target(parseStrLiteral()));
+        return std::unique_ptr<Attribute>(new Target(parseStrLiteral()));
     }
     else if (IDName == "cuda_available")
     {
-        return std::unique_ptr<Identifier>(new CUDA(parseBoolLiteral()));
+        return std::unique_ptr<Attribute>(new CUDA(parseBoolLiteral()));
     }
     else if (IDName == "input_tensors")
     {
         //! TODO this can be a string array
-        return std::unique_ptr<Identifier>(new InpTensors(parseStrArrLiteral()));
+        return std::unique_ptr<Attribute>(new InpTensors(parseStrArrLiteral()));
     }
     else if (IDName == "output_tensors")
     {
         //! TODO this can be a string array
-        return std::unique_ptr<Identifier>(new OutTensors(parseStrArrLiteral()));
+        return std::unique_ptr<Attribute>(new OutTensors(parseStrArrLiteral()));
     }
     else
     {
@@ -133,7 +133,7 @@ std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specialize
     return nullptr;
 }
 
-std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<LayerParams>)
+std::unique_ptr<LayerParams> Parser::parseIdentifier(Token expectedID, specializer<LayerParams>)
 {
     std::string IDName = expectedID.getData();
 
@@ -157,7 +157,7 @@ std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specialize
     
 }
 
-std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<LSTMParams>)
+std::unique_ptr<LSTMParams> Parser::parseIdentifier(Token expectedID, specializer<LSTMParams>)
 {
     std::string IDName = expectedID.getData();
 
@@ -184,7 +184,7 @@ std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specialize
     return nullptr;
 }
 
-std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<MLParams>)
+std::unique_ptr<MLParams> Parser::parseIdentifier(Token expectedID, specializer<MLParams>)
 {
     std::string IDName = expectedID.getData();
     if (IDName == "in_features")
@@ -203,7 +203,7 @@ std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specialize
     return nullptr;
 }
 
-std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<ASTNode>)
+std::unique_ptr<ASTNode> Parser::parseIdentifier(Token expectedID, specializer<ASTNode>)
 {
     std::string IDName = expectedID.getData();
     
@@ -222,7 +222,7 @@ std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specialize
     return nullptr;
 }
 
-std::unique_ptr<Identifier> Parser::parseIdentifier(Token expectedID, specializer<Layer>)
+std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Layer>)
 {
     std::string IDName = expectedID.getData();
    

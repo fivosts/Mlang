@@ -87,19 +87,19 @@ private:
 	void parseNewLines();
 
 	template<typename T>
-	std::unique_ptr<Identifier> parseIdentifier(Token expectedID)
+	std::unique_ptr<T> parseIdentifier(Token expectedID)
 	{
 		return parseIdentifier(expectedID, specializer<T>());
 	}
-	
+
 	template<typename T>
-	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<T>);
-	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<Attribute>);
-	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<LayerParams>);
-	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<LSTMParams>);
-	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<MLParams>);
-	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<ASTNode>);
-	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<Layer>);
+	std::unique_ptr<T> parseIdentifier(Token expectedID, specializer<T>);
+	std::unique_ptr<Attribute> parseIdentifier(Token expectedID, specializer<Attribute>);
+	std::unique_ptr<LayerParams> parseIdentifier(Token expectedID, specializer<LayerParams>);
+	std::unique_ptr<LSTMParams> parseIdentifier(Token expectedID, specializer<LSTMParams>);
+	std::unique_ptr<MLParams> parseIdentifier(Token expectedID, specializer<MLParams>);
+	std::unique_ptr<ASTNode> parseIdentifier(Token expectedID, specializer<ASTNode>);
+	std::unique_ptr<Layer> parseIdentifier(Token expectedID, specializer<Layer>);
 
 	std::string parseStrLiteral();
 

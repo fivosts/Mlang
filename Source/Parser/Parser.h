@@ -7,6 +7,9 @@
 
 #include <memory>
 
+template<typename T>
+struct specializer {typedef T type; };
+
 class Parser
 {	
 public:
@@ -83,7 +86,20 @@ private:
 	std::unordered_set<std::unique_ptr<Layer>> parseLayer();
 	void parseNewLines();
 
-	Identifier *parseIdentifier(Token expID);
+	template<typename T>
+	std::unique_ptr<Identifier> parseIdentifier(Token expectedID)
+	{
+		return parseIdentifier(expectedID, specializer<T>());
+	}
+	
+	template<typename T>
+	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<T>);
+	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<Attribute>);
+	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<LayerParams>);
+	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<LSTMParams>);
+	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<MLParams>);
+	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<ASTNode>);
+	std::unique_ptr<Identifier> parseIdentifier(Token expectedID, specializer<Layer>);
 
 	std::string parseStrLiteral();
 

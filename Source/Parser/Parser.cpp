@@ -114,15 +114,21 @@ std::unique_ptr<LayerParams> Parser::parseIdentifier(Token expectedID, specializ
 
     if (IDName == "input")
     {
-        return std::unique_ptr<LayerParams>(new Input(parseBinExpr()));
+        BinExpr e = parseBinExpr();
+        parseNewLines();
+        return std::unique_ptr<LayerParams>(new Input(e));
     }
     else if (IDName == "output")
     {
-        return std::unique_ptr<LayerParams>(new Output(parseStrLiteral()));
+        std::string str = parseStrLiteral();
+        parseNewLines();
+        return std::unique_ptr<LayerParams>(new Output(str));
     }
     else if (IDName == "layer_name")
     {
-        return std::unique_ptr<LayerParams>(new LayerName(parseStrLiteral()));
+        std::string str = parseStrLiteral();
+        parseNewLines();
+        return std::unique_ptr<LayerParams>(new LayerName(str));
     }
     else
     {
@@ -207,7 +213,10 @@ std::unique_ptr<MLParams> Parser::parseIdentifier(Token expectedID, specializer<
 std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Layer>)
 {
     std::string IDName = expectedID.getData();
-   
+    expect(TType::ASSIGN);
+    expect(TType::LBRA);
+    // parseParams here
+
     if (IDName == "LSTM")
     {
 
@@ -266,7 +275,6 @@ void Parser::parseNewLines()
     }
     return;
 }
-
 
 //! TODO Dummy
 std::string Parser::parseStrLiteral()

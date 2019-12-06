@@ -18,7 +18,7 @@ public:
 					  delete hblock;}
 
 private:
-	ParamBlock* pblock{NULL};
+	std::unique_ptr<ParamBlock> pblock;
 	HyperparamBlock* hblock{NULL};
 };
 
@@ -30,7 +30,7 @@ public:
 					  delete hblock;}
 
 private:
-	ParamBlock* pblock{NULL};
+	std::unique_ptr<ParamBlock> pblock;
 	HyperparamBlock* hblock{NULL};
 };
 
@@ -41,5 +41,5 @@ public:
 	~Sigmoid() override {delete pblock;}
 
 private:
-	ParamBlock* pblock{NULL};
+	std::unique_ptr<ParamBlock> pblock;
 };

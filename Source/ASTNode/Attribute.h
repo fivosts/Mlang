@@ -1,10 +1,9 @@
 #pragma once
 
 #include "ASTNode.h"
-#include "Identifier.h"
 #include <iostream>
 
-class Attribute : public ASTNode, public Identifier
+class Attribute : public ASTNode
 {
 public:
 	Attribute() = default;

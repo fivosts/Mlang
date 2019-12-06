@@ -1,16 +1,15 @@
 #pragma once
 
 #include "ASTNode.h"
-#include "Identifier.h"
 
-class LayerParams : public ASTNode, public Identifier
+class LayerParams : public ASTNode
 {
 public:
 	LayerParams() = default;
 	virtual ~LayerParams() = 0;
 };
 
-class HyperParams : public ASTNode, public Identifier
+class HyperParams : public ASTNode
 {
 public:
 	HyperParams() = default;

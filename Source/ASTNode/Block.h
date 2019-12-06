@@ -11,18 +11,17 @@ class ParamBlock : public ASTNode
 {
 public:
 	ParamBlock() = delete;
-	// ParamBlock(setParams<LayerParams> lp) : lparams(lp) {}
+	ParamBlock(setParams<LayerParams> lp) : lparams(lp) {}
 	~ParamBlock() = default;
 
 private:
-	//! TODO this unique ptr will nag about this line
 	setParams<LayerParams> lparams;
 };
 
-class HyperparamBlock : public ASTNode, public Identifier
+class HyperparamBlock : public ASTNode
 {
 public:
-	HyperparamBlock() = default;
+	HyperparamBlock() = delete;
 	HyperparamBlock(setParams<HyperParams> hp) : hparams(std::move(hp)) {}
 	~HyperparamBlock() = default;
 

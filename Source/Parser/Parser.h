@@ -143,9 +143,10 @@ private:
 	template<typename T>
 	std::unordered_set<std::unique_ptr<T>> parseBlockParams();
 
+	void parseNewLines();
+
 	std::string parseStrLiteral();
 
-	void parseNewLines();
 	//! TODO More dummy than ever!
 	std::unordered_set<std::string> parseStrArrLiteral();
 

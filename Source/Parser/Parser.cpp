@@ -283,7 +283,6 @@ void Parser::parseNewLines()
     return;
 }
 
-//! TODO Dummy
 std::string Parser::parseStrLiteral()
 {
 #ifdef PARDBG

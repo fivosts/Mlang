@@ -7,12 +7,14 @@
 
 #include <memory>
 
-template<typename T>
-struct specializer {typedef T type; };
+
 
 class Parser
 {	
 public:
+/*
+	Constructors and destructor
+*/
 	Parser() = delete;
 	Parser(std::unique_ptr<Lexer> &&l)
 	{
@@ -44,6 +46,16 @@ public:
 		tokPend = NULL;
 	}
 
+/*
+	Type definitions
+*/
+private:
+	template<typename T>
+	struct specializer {typedef T type; };
+
+/*
+	Helper parsing functions
+*/
 private:
 
 	inline bool accept(Token::TokenType&& ctt)
@@ -60,7 +72,7 @@ private:
 	inline bool accept(Token::TokenType&& ctt, std::string &&expStr)
 	{
 	#ifdef PARDBG
-		printf("PARSER:\t\taccept()\n");
+		printf("PARSER:\t\taccept(...)\n");
 	#endif
 		return (tokPend ? *tokPend == ctt && tokPend->getData() == expStr
 						: [this](){
@@ -84,7 +96,7 @@ private:
 	inline Token expect(Token::TokenType &&ctt, std::string &&expStr)
 	{
 	#ifdef PARDBG
-		printf("PARSER:\t\texpect()\n");
+		printf("PARSER:\t\texpect(...)\n");
 	#endif
 		if (!accept(std::move(ctt), std::move(expStr)))
 			throw CompExcept("Parsing error bla bla");
@@ -94,6 +106,9 @@ private:
 		return expected;
 	}
 
+/*
+	Parsing interface of class
+*/
 public:
 	std::shared_ptr<Model> safeParseModel()
 	{
@@ -108,16 +123,13 @@ private:
 	std::unordered_set<std::unique_ptr<Import>> parseImport();
 	std::unordered_set<std::unique_ptr<Attribute>> parseAttribute();
 	std::unordered_set<std::unique_ptr<Layer>> parseLayer();
-	void parseNewLines();
 
 	template<typename T>
-	std::unique_ptr<T> parseIdentifier(Token expectedID)
-	{
-		return parseIdentifier(expectedID, specializer<T>());
-	}
+	std::unique_ptr<T> parseIdentifier(Token expectedID) {	return parseIdentifier(expectedID, specializer<T>());}
 
 	template<typename T>
 	std::unique_ptr<T> parseIdentifier(Token expectedID, specializer<T>);
+
 	std::unique_ptr<Attribute> parseIdentifier(Token expectedID, specializer<Attribute>);
 	std::unique_ptr<LayerParams> parseIdentifier(Token expectedID, specializer<LayerParams>);
 	std::unique_ptr<LSTMParams> parseIdentifier(Token expectedID, specializer<LSTMParams>);
@@ -125,20 +137,21 @@ private:
 	// std::unique_ptr<ASTNode> parseIdentifier(Token expectedID, specializer<ASTNode>);
 	std::unique_ptr<Layer> parseIdentifier(Token expectedID, specializer<Layer>);
 
-	std::string parseStrLiteral();
-
-	//! TODO More dummy than ever!
-	std::unordered_set<std::string> parseStrArrLiteral();
-
-	bool parseBoolLiteral();
-	int parseIntLiteral();
-	
 	template<typename T>
 	std::unique_ptr<HyperparamBlock> parseHyperparamBlock();
 
 	template<typename T>
 	std::unordered_set<std::unique_ptr<T>> parseBlockParams();
-	
+
+	std::string parseStrLiteral();
+
+	void parseNewLines();
+	//! TODO More dummy than ever!
+	std::unordered_set<std::string> parseStrArrLiteral();
+
+	bool parseBoolLiteral();
+	int parseIntLiteral();	
+
 	BinExpr parseBinExpr();
 
 private:

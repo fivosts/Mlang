@@ -151,7 +151,7 @@ const Token Lexer::nextToken()
 			current = sc->nextChar();
 			intID += current;
 		}
-		return Token(Token::TokenType::INT_LITERAL, cpos);
+		return Token(Token::TokenType::INT_LITERAL, cpos, intID);
 	}
 	// LBRA, RBRA, LPAR, RPAR, LSBR, RSBR Tokens
 	else if (current == '{')

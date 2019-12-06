@@ -230,9 +230,12 @@ std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
 #ifdef PARDBG
     printf("PARSER:\t\tparseHyperparamBlock()\n");
 #endif
-
     Token HBlockID = expect(TType::IDENTIFIER, "hyperparam_block");
-    return std::unique_ptr<HyperparamBlock>(new HyperparamBlock(parseBlockParams<T>()));
+    expect(TType::LBRA);
+    setPtr<T> params = parseBlockParams<T>();
+    expect(TType::RBRA);
+    parseNewLines();
+    return std::unique_ptr<HyperparamBlock>(new HyperparamBlock(params));
 }
 
 template<typename T>

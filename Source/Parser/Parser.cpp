@@ -312,7 +312,6 @@ int Parser::parseIntLiteral()
     {
         throw CompExcept("Parsing Error: Invalid int literal");
     }
-    
 }
 
 //! TODO Dummy!!

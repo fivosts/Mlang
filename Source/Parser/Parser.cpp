@@ -37,17 +37,14 @@ setPtr<Import> Parser::parseImport()
     return imports;
 }
 
-void Parser::parseNewLines()
+setPtr<Layer> Parser::parseLayer()
 {
 #ifdef PARDBG
-    printf("PARSER:\t\tparseNewLines()\n");
+    printf("PARSER:\t\tparseLayer()\n");
 #endif
-    expect(TType::NEWLINE);
-    while (accept(TType::NEWLINE))
-    {
-        expect(TType::NEWLINE);
-    }
-    return;
+    // setPtr<Layer> a;
+    // return a;
+    return {};
 }
 
 setPtr<Attribute> Parser::parseAttribute()
@@ -65,16 +62,6 @@ setPtr<Attribute> Parser::parseAttribute()
         attrSet.insert(std::move(attr));
     }
     return attrSet;
-}
-
-setPtr<Layer> Parser::parseLayer()
-{
-#ifdef PARDBG
-    printf("PARSER:\t\tparseLayer()\n");
-#endif
-    // setPtr<Layer> a;
-    // return a;
-    return {};
 }
 
 template<typename T>
@@ -237,6 +224,41 @@ std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Lay
     return nullptr;
 }
 
+template<typename T>
+std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
+{
+#ifdef PARDBG
+    printf("PARSER:\t\tparseHyperparamBlock()\n");
+#endif
+
+    Token HBlockID = expect(TType::IDENTIFIER, "hyperparam_block");
+    return std::unique_ptr<HyperparamBlock>(new HyperparamBlock(parseBlockParams<T>()));
+}
+
+template<typename T>
+setPtr<T> Parser::parseBlockParams()
+{
+#ifdef PARDBG
+    printf("PARSER:\t\tparseBlockParams()\n");
+#endif
+    setPtr<T> a;
+    return a;
+}
+
+void Parser::parseNewLines()
+{
+#ifdef PARDBG
+    printf("PARSER:\t\tparseNewLines()\n");
+#endif
+    expect(TType::NEWLINE);
+    while (accept(TType::NEWLINE))
+    {
+        expect(TType::NEWLINE);
+    }
+    return;
+}
+
+
 //! TODO Dummy
 std::string Parser::parseStrLiteral()
 {
@@ -265,28 +287,6 @@ BinExpr Parser::parseBinExpr()
     printf("PARSER:\t\tparseBinExpr()\n");
 #endif
     return BinExpr();
-}
-
-template<typename T>
-std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
-{
-#ifdef PARDBG
-    printf("PARSER:\t\tparseHyperparamBlock()\n");
-#endif
-
-    Token HBlockID = expect(TType::IDENTIFIER, "hyperparam_block");
-
-    return std::unique_ptr<HyperparamBlock>(new HyperparamBlock(parseBlockParams<T>()));
-}
-
-template<typename T>
-setPtr<T> Parser::parseBlockParams()
-{
-#ifdef PARDBG
-    printf("PARSER:\t\tparseBlockParams()\n");
-#endif
-    setPtr<T> a;
-    return a;
 }
 
 //! TODO Dummy

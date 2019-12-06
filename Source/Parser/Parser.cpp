@@ -2,8 +2,6 @@
 #include "Import.h"
 #include "ModelProperties.h"
 #include "LayerProperties.h"
-// template<typename T>
-// using setPtr = std::unordered_set<std::unique_ptr<T>>;
 
 template<typename T>
 using setPtr = std::unordered_set<std::unique_ptr<T>>;
@@ -37,6 +35,7 @@ setPtr<Import> Parser::parseImport()
     return imports;
 }
 
+// TODO
 setPtr<Layer> Parser::parseLayer()
 {
 #ifdef PARDBG
@@ -92,12 +91,10 @@ std::unique_ptr<Attribute> Parser::parseIdentifier(Token expectedID, specializer
     }
     else if (IDName == "input_tensors")
     {
-        //! TODO this MUST be a string array
         return std::unique_ptr<Attribute>(new InpTensors(parseStrArrLiteral()));
     }
     else if (IDName == "output_tensors")
     {
-        //! TODO this MUST be a string array
         return std::unique_ptr<Attribute>(new OutTensors(parseStrArrLiteral()));
     }
     else
@@ -217,12 +214,13 @@ std::unique_ptr<MLParams> Parser::parseIdentifier(Token expectedID, specializer<
 //     return nullptr;
 // }
 
+// TODO
 std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Layer>)
 {
     std::string IDName = expectedID.getData();
     expect(TType::ASSIGN);
     expect(TType::LBRA);
-    // parseParams here
+    // parseParams here TODO
 
     if (IDName == "LSTM")
     {

@@ -183,7 +183,9 @@ std::unique_ptr<MLParams> Parser::parseIdentifier(Token expectedID, specializer<
     }
     else if (IDName == "out_features")
     {
-        return std::unique_ptr<MLParams>(new OutFeatures(parseIntLiteral()));
+        int id = parseIntLiteral();
+        parseNewLines();
+        return std::unique_ptr<MLParams>(new OutFeatures(id));
     }
     else
     {

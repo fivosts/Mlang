@@ -323,6 +323,14 @@ int Parser::parseIntLiteral()
     }
 }
 
+bool Parser::parseBoolLiteral()
+{
+#ifdef PARDBG
+    printf("PARSER:\t\tparseBoolLiteral()\n");
+#endif
+    return expect(TType::BOOL_LITERAL).getData() == "True";
+}
+
 //! TODO Dummy!!
 BinExpr Parser::parseBinExpr()
 {
@@ -332,12 +340,3 @@ BinExpr Parser::parseBinExpr()
     return BinExpr();
 }
 
-//! TODO Dummy
-bool Parser::parseBoolLiteral()
-{
-#ifdef PARDBG
-    printf("PARSER:\t\tparseBoolLiteral()\n");
-#endif
-
-    return true;
-}

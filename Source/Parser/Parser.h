@@ -147,9 +147,8 @@ private:
 
 	std::string parseStrLiteral();
 	std::unordered_set<std::string> parseStrArrLiteral();
-
-	bool parseBoolLiteral();
 	int parseIntLiteral();	
+	bool parseBoolLiteral();
 
 	BinExpr parseBinExpr();
 

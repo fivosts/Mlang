@@ -69,10 +69,10 @@ setPtr<Attribute> Parser::parseAttribute()
 
         // This obj should be of type subclass and have constructed its members already
         // std::unique_ptr<Attribute> AttrObj = static_cast<Attribute*>(parseIdentifier(expect(TType::IDENTIFIER)));
-        // Attribute* AttrObj = static_cast<Attribute*>(parseIdentifier<Attribute>(expect(TType::IDENTIFIER)));
+        std::unique_ptr<Attribute> AttrObj = parseIdentifier<Attribute>(expect(TType::IDENTIFIER));
         // Identifier* AttrObj = parseIdentifier(expect(TType::IDENTIFIER));
 
-        // AttrObj->printData();
+        AttrObj->printData();
 
         parseNewLines();
     }
@@ -210,6 +210,7 @@ std::unique_ptr<ASTNode> Parser::parseIdentifier(Token expectedID, specializer<A
     if (IDName == "hyperparam_block")
     {
         // return parseHyperparamBlock();
+        return parseHyperparamBlock();
     }
     else if (IDName == "len")
     {

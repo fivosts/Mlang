@@ -111,9 +111,9 @@ std::unique_ptr<LayerParams> Parser::parseIdentifier(Token expectedID, specializ
 
     if (IDName == "input")
     {
-        BinExpr e = parseBinExpr();
+        std::unique_ptr<BinExpr> e = parseBinExpr();
         parseNewLines();
-        return std::unique_ptr<LayerParams>(new Input(e));
+        return std::unique_ptr<LayerParams>(new Input(std::move(e)));
     }
     else if (IDName == "output")
     {
@@ -336,6 +336,12 @@ std::unique_ptr<BinExpr> Parser::parseBinExpr()
 #ifdef PARDBG
     printf("PARSER:\t\tparseBinExpr()\n");
 #endif
-    return BinExpr();
+    std::string lhs = parseStrLiteral();
+    if (accept(TType::PLUS))
+    {
+        expect(TType::PLUS);
+        return std::unique_ptr<BinExpr>(new BinExpr(parseBinExpr(), lhs));
+    }
+    return std::unique_ptr<BinExpr>(new BinExpr(lhs));
 }
 

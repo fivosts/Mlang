@@ -331,7 +331,7 @@ bool Parser::parseBoolLiteral()
 }
 
 //! TODO Dummy!!
-BinExpr Parser::parseBinExpr()
+std::unique_ptr<BinExpr> Parser::parseBinExpr()
 {
 #ifdef PARDBG
     printf("PARSER:\t\tparseBinExpr()\n");

@@ -150,7 +150,7 @@ private:
 	int parseIntLiteral();	
 	bool parseBoolLiteral();
 
-	BinExpr parseBinExpr();
+	std::unique_ptr<BinExpr> parseBinExpr();
 
 private:
 	std::unique_ptr<Lexer> lex = NULL;

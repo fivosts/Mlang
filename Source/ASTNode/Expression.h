@@ -3,9 +3,10 @@
 class BinExpr : public ASTNode
 {
 public:
-	BinExpr() = default;
-	~BinExpr() {delete lhs;}
+	BinExpr() = delete;
+	BinExpr(std::unique_ptr<BinExpr> b) : lhs(std::move(b)) {}
+	~BinExpr() = default;
 private:
-	BinExpr* lhs{NULL};
+	std::unique_ptr<BinExpr> lhs;
 	std::string rhs;
 };

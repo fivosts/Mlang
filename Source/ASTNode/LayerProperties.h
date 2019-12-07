@@ -9,11 +9,11 @@ class Input : public LayerParams
 {
 public:
 	Input() = delete;
-	Input(BinExpr bi) : inp(bi) {}
+	Input(std::unique_ptr<BinExpr> bi) : inp(std::move(bi)) {}
 	~Input() override = default;
 
 private:
-	BinExpr inp;
+	std::unique_ptr<BinExpr> inp;
 };
 
 class Output : public LayerParams

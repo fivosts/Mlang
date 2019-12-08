@@ -50,7 +50,7 @@ public:
 	~CUDA() override = default;
 
 private:
-	bool cuda;
+	[[maybe_unused]] bool cuda;
 };
 
 class InpTensors : public Attribute

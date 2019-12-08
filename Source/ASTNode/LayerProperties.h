@@ -46,7 +46,7 @@ public:
 	~InputSize() override = default;
 
 private:
-	[[maybe_unused]] int inSize;
+	int inSize;
 };
 
 class OutputTimestep : public LSTMParams
@@ -57,7 +57,7 @@ public:
 	~OutputTimestep() override = default;
 
 private:
-	[[maybe_unused]] int outStep;
+	int outStep;
 };
 
 class HiddenSize : public LSTMParams
@@ -68,7 +68,7 @@ public:
 	~HiddenSize() override = default;
 
 private:
-	[[maybe_unused]] int hSize;
+	int hSize;
 };
 
 class NumLayers : public LSTMParams
@@ -79,7 +79,7 @@ public:
 	~NumLayers() override = default;
 
 private:
-	[[maybe_unused]] int nLayers;
+	int nLayers;
 };
 
 template <class T>
@@ -102,5 +102,5 @@ public:
 	~OutFeatures() override = default;
 
 private:
-	[[maybe_unused]] int outFeat;
+	int outFeat;
 };

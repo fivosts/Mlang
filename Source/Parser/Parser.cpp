@@ -43,26 +43,26 @@ void Parser::parseAttribute(setPtr<Attribute> &&attributes)
     printf("PARSER:\t\tparseAttribute()\n");
 #endif
 
-    setPtr<Attribute> attrSet;
-    while(accept(TType::DEFINE))
+    if (accept(TType::DEFINE))
     {
         expect(TType::DEFINE);
         std::unique_ptr<Attribute> attr = parseIdentifier<Attribute>(expect(TType::IDENTIFIER));
         parseNewLines();
-        attrSet.insert(std::move(attr));
+        attributes.insert(std::move(attr));
+        parseAttribute(std::move(attributes));
     }
-    return attrSet;
+    return;
 }
 
 // TODO
-void Parser::parseLayer(setPtr<Layer> &&layers)
+void Parser::parseLayer(setPtr<Layer> /* &&layers */ )
 {
 #ifdef PARDBG
     printf("PARSER:\t\tparseLayer()\n");
 #endif
     // setPtr<Layer> a;
     // return a;
-    return {};
+    return;
 }
 
 template<typename T>
@@ -260,15 +260,15 @@ std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
 
 // TODO
 template<typename T>
-setPtr<T> Parser::parseBlockParams()
+void Parser::parseBlockParams(setPtr<T> &&bl)
 {
 #ifdef PARDBG
     printf("PARSER:\t\tparseBlockParams()\n");
 #endif
-    setPtr<T> a;
+    // setPtr<T> a;
 
 
-    return a;
+    return;
 }
 
 void Parser::parseNewLines()

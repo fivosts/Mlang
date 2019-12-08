@@ -9,6 +9,7 @@ public:
 	Attribute() = default;
 	virtual ~Attribute() override = 0;
 
+	//TODO
 	virtual void printData() {
 		std::cout << "This message is wrong\n";
 	}

@@ -10,11 +10,15 @@ std::unique_ptr<Model> Parser::parseModel()
 
     /* The order of evaluation of function arguments is unspecified. */
     /* They have to be specified explicitly */
-    setPtr<Import> tempA;
-    parseImport(std::move(tempA));
-    setPtr<Attribute> tempB = parseAttribute();
-    setPtr<Layer> tempC = parseLayer();
-    return std::make_unique<Model>(std::move(tempA), std::move(tempB), std::move(tempC));
+    setPtr<Import> imp;
+    setPtr<Attribute> attr;
+    setPtr<Layer> lay;
+
+    parseImport(std::move(imp));
+    parseAttribute(std::move(attr));
+    parseLayer(std::move(lay));
+
+    return std::make_unique<Model>(std::move(imp), std::move(attr), std::move(lay));
 }
 
 void Parser::parseImport(setPtr<Import> &&imports)
@@ -22,7 +26,6 @@ void Parser::parseImport(setPtr<Import> &&imports)
 #ifdef PARDBG
     printf("PARSER:\t\tparseImport()\n");
 #endif
-    // setPtr<Import> imports;
     if (accept(TType::IMPORT))
     {
         expect(TType::IMPORT);
@@ -31,28 +34,10 @@ void Parser::parseImport(setPtr<Import> &&imports)
         imports.insert(std::make_unique<Import>(Import(importElement.getData())));
         parseImport(std::move(imports));   
     }
-    // while(accept(TType::IMPORT))
-    // {
-    //     expect(TType::IMPORT);
-    //     Token importElement = expect(TType::STR_LITERAL);
-    //     parseNewLines();
-    //     imports.insert(std::make_unique<Import>(Import(importElement.getData())));
-    // }
     return;
 }
 
-// TODO
-setPtr<Layer> Parser::parseLayer()
-{
-#ifdef PARDBG
-    printf("PARSER:\t\tparseLayer()\n");
-#endif
-    // setPtr<Layer> a;
-    // return a;
-    return {};
-}
-
-setPtr<Attribute> Parser::parseAttribute()
+void Parser::parseAttribute(setPtr<Attribute> &&attributes)
 {
 #ifdef PARDBG
     printf("PARSER:\t\tparseAttribute()\n");
@@ -67,6 +52,17 @@ setPtr<Attribute> Parser::parseAttribute()
         attrSet.insert(std::move(attr));
     }
     return attrSet;
+}
+
+// TODO
+void Parser::parseLayer(setPtr<Layer> &&layers)
+{
+#ifdef PARDBG
+    printf("PARSER:\t\tparseLayer()\n");
+#endif
+    // setPtr<Layer> a;
+    // return a;
+    return {};
 }
 
 template<typename T>

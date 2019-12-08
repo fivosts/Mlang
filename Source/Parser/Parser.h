@@ -125,9 +125,9 @@ public:
 private:
 	/***** Recursive descent parsing functions  *****/
 	std::unique_ptr<Model> parseModel();
-	void parseImport(std::unordered_set<std::unique_ptr<Import>> &&imports);
-	std::unordered_set<std::unique_ptr<Attribute>> parseAttribute();
-	std::unordered_set<std::unique_ptr<Layer>> parseLayer();
+	void parseImport(setPtr<Import> &&imports);
+	void parseAttribute(setPtr<Attribute> &&attributes);
+	void parseLayer(setPtr<Layer> &&layers);
 
 	template<typename T>
 	std::unique_ptr<T> parseIdentifier(Token expectedID) {	return parseIdentifier(expectedID, specializer<T>());}
@@ -147,7 +147,7 @@ private:
 
 	template<typename T>
 	//TODO
-	std::unordered_set<std::unique_ptr<T>> parseBlockParams();
+	setPtr<T> parseBlockParams();
 
 	void parseNewLines();
 

@@ -292,6 +292,9 @@ std::string Parser::parseStrLiteral()
 
 std::unordered_set<std::string> Parser::parseStrArrLiteral()
 {
+#ifdef PARDBG
+    printf("PARSER:\t\tparseStrArrLiteral()\n");
+#endif
     std::unordered_set<std::string> strArr;
     expect(TType::LSBR);
     if (accept(TType::STR_LITERAL))

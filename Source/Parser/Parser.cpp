@@ -275,9 +275,9 @@ void Parser::parseNewLines()
     printf("PARSER:\t\tparseNewLines()\n");
 #endif
     expect(TType::NEWLINE);
-    while (accept(TType::NEWLINE))
+    if (accept(TType::NEWLINE))
     {
-        expect(TType::NEWLINE);
+        parseNewLine();
     }
     return;
 }

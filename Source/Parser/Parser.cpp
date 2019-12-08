@@ -2,10 +2,7 @@
 #include "Import.h"
 #include "ModelProperties.h"
 #include "LayerProperties.h"
-
-template<typename T>
-using setPtr = std::unordered_set<std::unique_ptr<T>>;
-typedef Token::TokenType TType;
+#include <algorithm>
 
 
 std::unique_ptr<Model> Parser::parseModel()
@@ -13,26 +10,35 @@ std::unique_ptr<Model> Parser::parseModel()
 
     /* The order of evaluation of function arguments is unspecified. */
     /* They have to be specified explicitly */
-    setPtr<Import> tempA = parseImport();
+    setPtr<Import> tempA;
+    parseImport(std::move(tempA));
     setPtr<Attribute> tempB = parseAttribute();
     setPtr<Layer> tempC = parseLayer();
     return std::make_unique<Model>(std::move(tempA), std::move(tempB), std::move(tempC));
 }
 
-setPtr<Import> Parser::parseImport()
+void Parser::parseImport(setPtr<Import> &&imports)
 {
 #ifdef PARDBG
     printf("PARSER:\t\tparseImport()\n");
 #endif
-    setPtr<Import> imports;
-    while(accept(TType::IMPORT))
+    // setPtr<Import> imports;
+    if (accept(TType::IMPORT))
     {
         expect(TType::IMPORT);
         Token importElement = expect(TType::STR_LITERAL);
         parseNewLines();
         imports.insert(std::make_unique<Import>(Import(importElement.getData())));
+        parseImport(std::move(imports));   
     }
-    return imports;
+    // while(accept(TType::IMPORT))
+    // {
+    //     expect(TType::IMPORT);
+    //     Token importElement = expect(TType::STR_LITERAL);
+    //     parseNewLines();
+    //     imports.insert(std::make_unique<Import>(Import(importElement.getData())));
+    // }
+    return;
 }
 
 // TODO

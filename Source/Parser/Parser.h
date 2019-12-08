@@ -49,6 +49,12 @@ public:
 	Type definitions
 */
 private:
+
+	template<typename T>
+	using setPtr = std::unordered_set<std::unique_ptr<T>>;
+	
+	typedef Token::TokenType TType;
+	
 	template<typename T>
 	struct specializer {typedef T type; };
 
@@ -119,7 +125,7 @@ public:
 private:
 	/***** Recursive descent parsing functions  *****/
 	std::unique_ptr<Model> parseModel();
-	std::unordered_set<std::unique_ptr<Import>> parseImport();
+	void parseImport(std::unordered_set<std::unique_ptr<Import>> &&imports);
 	std::unordered_set<std::unique_ptr<Attribute>> parseAttribute();
 	std::unordered_set<std::unique_ptr<Layer>> parseLayer();
 

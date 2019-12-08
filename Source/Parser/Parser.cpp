@@ -252,7 +252,8 @@ std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
 #endif
     expect(TType::IDENTIFIER, "hyperparam_block");
     expect(TType::LBRA);
-    setPtr<T> params = parseBlockParams<T>();
+    setPtr<T> params;
+    parseBlockParams<T>(params);
     expect(TType::RBRA);
     parseNewLines();
     return std::unique_ptr<HyperparamBlock>(new HyperparamBlock(params));

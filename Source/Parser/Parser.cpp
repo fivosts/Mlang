@@ -277,7 +277,7 @@ void Parser::parseNewLines()
     expect(TType::NEWLINE);
     if (accept(TType::NEWLINE))
     {
-        parseNewLine();
+        parseNewLines();
     }
     return;
 }
@@ -296,14 +296,21 @@ std::unordered_set<std::string> Parser::parseStrArrLiteral()
     printf("PARSER:\t\tparseStrArrLiteral()\n");
 #endif
     std::unordered_set<std::string> strArr;
-    expect(TType::LSBR);
     if (accept(TType::STR_LITERAL))
-        strArr.insert(parseStrLiteral());
-    
-    while(accept(TType::COMMA))
+        return 
+        {
+            parseStrLiteral()
+        };
+
+    expect(TType::LSBR);
+    if (!accept(TType::RSBR))
     {
-        expect(TType::COMMA);
         strArr.insert(parseStrLiteral());
+        while(accept(TType::COMMA))
+        {
+            expect(TType::COMMA);
+            strArr.insert(parseStrLiteral());
+        }
     }
     expect(TType::RSBR);
     return strArr;

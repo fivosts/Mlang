@@ -143,25 +143,22 @@ std::unique_ptr<LSTMParams> Parser::parseIdentifier(Token expectedID, specialize
     std::string IDName = expectedID.getData();
     expect(TType::ASSIGN);
     int id = parseIntLiteral();
+    parseNewLines();
 
     if (IDName == "input_size")
     {
-        parseNewLines();
         return std::unique_ptr<LSTMParams>(new InputSize(id));
     }
     else if (IDName == "output_timestep")
     {
-        parseNewLines();
         return std::unique_ptr<LSTMParams>(new OutputTimestep(id));
     }
     else if (IDName == "hidden_size")
     {
-        parseNewLines();
         return std::unique_ptr<LSTMParams>(new HiddenSize(id));
     }
     else if (IDName == "num_layers")
     {
-        parseNewLines();
         return std::unique_ptr<LSTMParams>(new NumLayers(id));
     }
     else
@@ -260,15 +257,18 @@ std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
     return std::unique_ptr<HyperparamBlock>(new HyperparamBlock(params));
 }
 
-// TODO
 template<typename T>
-void Parser::parseBlockParams(setPtr<T> &&bl)
+void Parser::parseBlockParams(setPtr<T> &&bp)
 {
 #ifdef PARDBG
     printf("PARSER:\t\tparseBlockParams()\n");
 #endif
-    // setPtr<T> a;
-    (void)bl;
+    if (accept(TType::IDENTIFIER))
+    {
+        bp.insert(parseIdentifier<T>(expect(TType::IDENTIFIER)));
+        parseBlockParams(bp);
+    }
+
     return;
 }
 

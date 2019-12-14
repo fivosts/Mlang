@@ -55,13 +55,15 @@ void Parser::parseAttribute(setPtr<Attribute> &&attributes)
 }
 
 // TODO
-void Parser::parseLayer(setPtr<Layer> /* &&layers */ )
+void Parser::parseLayer(setPtr<Layer> &&layers)
 {
 #ifdef PARDBG
     printf("PARSER:\t\tparseLayer()\n");
 #endif
-    // setPtr<Layer> a;
-    // return a;
+    if (accept(TType::IDENTIFIER))
+    {
+    	parseIdentifier<Layer>()
+    }
     return;
 }
 

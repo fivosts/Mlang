@@ -62,7 +62,9 @@ void Parser::parseLayer(setPtr<Layer> &&layers)
 #endif
     if (accept(TType::IDENTIFIER))
     {
-    	parseIdentifier<Layer>()
+    	layers.insert(parseIdentifier<Layer>());
+    	parseNewLines();
+    	parseLayer(layers);
     }
     return;
 }

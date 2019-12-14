@@ -54,7 +54,6 @@ void Parser::parseAttribute(setPtr<Attribute> &&attributes)
     return;
 }
 
-// TODO
 void Parser::parseLayer(setPtr<Layer> &&layers)
 {
 #ifdef PARDBG
@@ -62,9 +61,9 @@ void Parser::parseLayer(setPtr<Layer> &&layers)
 #endif
     if (accept(TType::IDENTIFIER))
     {
-    	layers.insert(parseIdentifier<Layer>());
+    	layers.insert(parseIdentifier<Layer>(expect(TType::IDENTIFIER)));
     	parseNewLines();
-    	parseLayer(layers);
+    	parseLayer(std::move(layers));
     }
     return;
 }
@@ -255,7 +254,7 @@ std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
     expect(TType::IDENTIFIER, "hyperparam_block");
     expect(TType::LBRA);
     setPtr<T> params;
-    parseBlockParams<T>(params);
+    parseBlockParams<T>(std::move(params));
     expect(TType::RBRA);
     parseNewLines();
     return std::unique_ptr<HyperparamBlock>(new HyperparamBlock(params));
@@ -270,7 +269,7 @@ void Parser::parseBlockParams(setPtr<T> &&bp)
     if (accept(TType::IDENTIFIER))
     {
         bp.insert(parseIdentifier<T>(expect(TType::IDENTIFIER)));
-        parseBlockParams(bp);
+        parseBlockParams(std::move(bp));
     }
 
     return;

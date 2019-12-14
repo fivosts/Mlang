@@ -66,10 +66,9 @@ void Parser::parseLayer(setPtr<Layer> /* &&layers */ )
 }
 
 template<typename T>
-std::unique_ptr<T> Parser::parseIdentifier(Token expectedID, specializer<T>)
+std::unique_ptr<T> Parser::parseIdentifier(Token /* expectedID */, specializer<T>)
 {
     //TODO add info to the exception
-    (void) expectedID;
     throw CompExcept("Parsing Error: Identifier type not recognized");
 }
 

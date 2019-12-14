@@ -15,9 +15,9 @@ class LSTM : public Layer
 public:
 	LSTM() = delete;
 	LSTM(std::unique_ptr<ParamBlock> pb,
-		std::unique_ptr<HyperparamBlock> hb) : pblock(std::move(pb), 
-											hblock(std::move(hb))) {}
-	~LSTM() override { delete hblock; }
+		std::unique_ptr<HyperparamBlock> hb) : pblock(std::move(pb)), 
+											   hblock(std::move(hb)) {}
+	~LSTM() override = default;
 
 private:
 	std::unique_ptr<ParamBlock> pblock;
@@ -29,9 +29,9 @@ class MLP : public Layer
 public:
 	MLP() = delete;
 	MLP(std::unique_ptr<ParamBlock> pb, 
-		std::unique_ptr<HyperparamBlock> hb) : pblock(std::move(pb), 
-											hblock(std::move(hb))) {}
-	~MLP() override { delete hblock;}
+		std::unique_ptr<HyperparamBlock> hb) : pblock(std::move(pb)), 
+											hblock(std::move(hb)) {}
+	~MLP() override = default;
 
 private:
 	std::unique_ptr<ParamBlock> pblock;

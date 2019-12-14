@@ -127,7 +127,7 @@ private:
 	std::unique_ptr<Model> parseModel();
 	void parseImport(setPtr<Import> &&imports);
 	void parseAttribute(setPtr<Attribute> &&attributes);
-	void parseLayer(setPtr<Layer> /* &&layers */ );
+	void parseLayer(setPtr<Layer> &&layers);
 
 	template<typename T>
 	std::unique_ptr<T> parseIdentifier(Token expectedID) {	return parseIdentifier(expectedID, specializer<T>());}

@@ -3,6 +3,8 @@
 #include "ASTNode.h"
 #include "Block.h"
 
+#include <memory>
+
 class Layer : public ASTNode
 {
 public:

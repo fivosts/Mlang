@@ -3,6 +3,7 @@
 #include "Params.h"
 
 #include <unordered_set>
+#include <memory>
 
 template<typename T>
 using setParams = std::unordered_set<std::unique_ptr<T>>;

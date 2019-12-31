@@ -145,9 +145,8 @@ private:
 	template<typename T>
 	std::unique_ptr<HyperparamBlock> parseHyperparamBlock();
 
-	template<typename T>
 	//TODO
-	void parseBlockParams(setPtr<T> &&bl);
+	void parseBlockParams(setPtr<LayerParams> &&bl);
 
 	void parseNewLines();
 

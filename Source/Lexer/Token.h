@@ -1,8 +1,6 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
-#include "Except.h"
-
 #include <string>
 #ifdef TOKDBG
 	#include <iostream>

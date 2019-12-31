@@ -113,17 +113,14 @@ function build_and_compile()
         for arg in "${COMPILE_ARGS[@]}"; do
             case "$arg" in
                 -gcc)
-                    echo "HI GCC"
                     export CC=gcc
                     export CXX=g++
                     ;;
                 -clang)
-                    echo "HI GCC"
                     export CC=clang
                     export CXX=clang++
                     ;;
                 -llvm)
-                    echo "HI GCC"
                     export CC=clang
                     export CXX=clang++
                     # more TODO

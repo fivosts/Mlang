@@ -56,7 +56,16 @@ function parse_arguments()
             CMAKE_ARGS+="-DCODEDBG=ON "
             ;;
         -clean)
-            BUILD_ARGS+="-clean"
+            BUILD_ARGS+="-clean "
+            ;;
+        -gcc)
+            COMPILE_ARGS+="-gcc "
+            ;;
+        -clang)
+            COMPILE_ARGS+="-clang "
+            ;;
+        -llvm)
+            COMPILE_ARGS+="-llvm "
             ;;
         *)
             echo "configure: Unrecognized option " $arg
@@ -94,6 +103,10 @@ function build_and_compile()
     esac
     done
 
+    if [ "${#COMPILE_ARGS[@]}" -gt 1 ]; then
+        echo "Multiple compilers detected. Compilation failed."; return 1
+    fi
+
     echo "-- Configuring MLog"
     if [ ! -d "build" ]; then 
         mkdir build
@@ -107,6 +120,7 @@ function build_and_compile()
 declare -a ARGS=("$@")
 declare -a CMAKE_ARGS=()
 declare -a BUILD_ARGS=()
+declare -a COMPILE_ARGS=()
 
 parse_arguments
 setup_deps

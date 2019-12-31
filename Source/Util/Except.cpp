@@ -1,6 +1,6 @@
 #include "Except.h"
 
-std::string tokenToStr(Token::TokenType tt)
+std::string tokenToStr(Token::TokenType tt, std::string dt = "")
 {
 	switch(tt)
 	{
@@ -14,7 +14,7 @@ std::string tokenToStr(Token::TokenType tt)
 		}
 		case Token::TokenType::IDENTIFIER:
 		{
-			return "IDENTIFIER";
+			return "IDENTIFIER" + (dt != "" ? " " + dt : dt);
 		}
 		case Token::TokenType::NEWLINE:
 		{
@@ -38,15 +38,15 @@ std::string tokenToStr(Token::TokenType tt)
 		}
 		case Token::TokenType::STR_LITERAL:
 		{
-			return "STR_LITERAL";
+			return "STR_LITERAL" + (dt != "" ? " " + dt : dt);
 		}
 		case Token::TokenType::INT_LITERAL:
 		{
-			return "INT_LITERAL";
+			return "INT_LITERAL" + (dt != "" ? " " + dt : dt);
 		}
 		case Token::TokenType::BOOL_LITERAL:
 		{
-			return "BOOL_LITERAL";
+			return "BOOL_LITERAL" + (dt != "" ? " " + dt : dt);
 		}
 		case Token::TokenType::LBRA:
 		{
@@ -78,7 +78,7 @@ std::string tokenToStr(Token::TokenType tt)
 		}
 		case Token::TokenType::INVALID:
 		{
-			return "INVALID";
+			return "INVALID" + (dt != "" ? " " + dt : dt);
 		}
 	}
 	throw CompExcept("TokenType not found!");

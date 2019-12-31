@@ -11,7 +11,7 @@ public:
     CompExcept(std::string what) : runtime_error(what) {}
 };
 
-std::string tokenToStr(Token::TokenType tt);
+std::string tokenToStr(Token::TokenType tt, std::string dt = "");
 
 template<typename T = const char*>
 static std::string joinWhSpace(const char* &&cstr)

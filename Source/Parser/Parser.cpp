@@ -217,7 +217,6 @@ std::unique_ptr<MLParams> Parser::parseIdentifier(Token expectedID, specializer<
 //     return nullptr;
 // }
 
-// TODO
 std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Layer>)
 {
     std::string IDName = expectedID.getData();
@@ -357,7 +356,6 @@ bool Parser::parseBoolLiteral()
     return expect(TType::BOOL_LITERAL).getData() == "True";
 }
 
-//! TODO Dummy!!
 std::unique_ptr<BinExpr> Parser::parseBinExpr()
 {
 #ifdef PARDBG

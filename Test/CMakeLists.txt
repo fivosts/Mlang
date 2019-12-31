@@ -9,12 +9,14 @@ add_executable(MLogTest
 				${PROJECT_SOURCE_DIR}/Source/Parser/Parser.cpp
 				)
 
+## CXX_FLAGS
 target_compile_options (MLogTest PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)
 
 if (LLVM)
 	target_compile_options (MLogTest PRIVATE -emit-llvm)
 ENDIF (LLVM)
 
+## Pre-processor definitions
 target_compile_definitions(MLogTest PRIVATE MODEL_PATH="${PROJECT_SOURCE_DIR}/Models/")
 
 if (SCDBG)
@@ -41,6 +43,7 @@ if (CODEDBG)
 	target_compile_definitions(MLogTest PRIVATE CODEDBG)
 ENDIF(CODEDBG)
 
+## Library linking
 target_link_libraries(MLogTest gtest pthread)
 
 include_directories(${PROJECT_SOURCE_DIR}/Source/ASTNode)

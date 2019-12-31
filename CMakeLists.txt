@@ -15,6 +15,11 @@ else()
     message(FATAL_ERROR "Unknown compiler " ${CMAKE_CXX_COMPILER_ID} ". Aborting.")
 endif()
 
+# TODO compiler flags
+# TODO if/else branch on compiler type -> LLVM bytecode and flags
+# If else rel/dbg -> O3 vs O0 etc.
+OPTION(LLVM "Select ON to compile into LLVM-IR" OFF)
+
 ## DEBUG Tracing options
 OPTION(SCDBG "Select ON to enable scanner traces" OFF)
 OPTION(TOKDBG "Select ON to enable token traces" OFF)
@@ -29,10 +34,6 @@ set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 ## Include source folders
 add_subdirectory(Source)
 add_subdirectory(Test)
-
-# TODO compiler flags
-# TODO if/else branch on compiler type -> LLVM bytecode and flags
-# If else rel/dbg -> O3 vs O0 etc.
 
 ########################################
 ############# GoogleTest ###############

@@ -227,11 +227,11 @@ std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Lay
 
     if (IDName == "LSTM")
     {
-
+        // TODO Call parseHyperparam block here
     }
     else if (IDName == "MLP")
     {
-
+        // TODO Call parseHyperparam block here
     }
     else if (IDName == "SIGMOID")
     {

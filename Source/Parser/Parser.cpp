@@ -221,7 +221,7 @@ std::unique_ptr<MLParams> Parser::parseIdentifier(Token expectedID, specializer<
 std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Layer>)
 {
     std::string IDName = expectedID.getData();
-    expect(TType::ASSIGN);
+    // expect(TType::ASSIGN);
     expect(TType::LBRA);
     // parseParams here TODO
 

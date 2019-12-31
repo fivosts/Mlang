@@ -118,7 +118,6 @@ function build_and_compile()
         export CC=gcc
         export CXX=g++
     else
-        echo "$COMPILE_ARGS"
         for arg in "${COMPILE_ARGS[@]}"; do
             case "$arg" in
                 -gcc)

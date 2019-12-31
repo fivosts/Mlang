@@ -3,6 +3,7 @@
 #include "Lexer.h"
 #include "Model.h"
 #include "Expression.h"
+#include "Token.h"
 
 #include <memory>
 
@@ -91,7 +92,7 @@ private:
 		printf("PARSER:\t\texpect()\n");
 	#endif
 		if (!accept(std::move(ctt)))
-			throw CompExcept("Parsing error bla bla");
+			throw CompExcept(joinWhSpace("Parsing error: Expected: ", tokenToStr(ctt), " Found: ", tokenToStr(tokPend->getToken())));
 
 		Token expected = *tokPend;
 		tokPend = NULL;

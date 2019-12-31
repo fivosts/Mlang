@@ -1,5 +1,4 @@
-#ifndef TOKEN_H
-#define TOKEN_H
+#pragma once
 
 #include <string>
 #ifdef TOKDBG
@@ -118,5 +117,3 @@ public:
 #endif
 
 };
-
-#endif

@@ -11,5 +11,5 @@ add_executable(MLog
 target_compile_options (MLog PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)
 
 if (LLVM)
-	target_compile_options (MLogTest PRIVATE -emit-llvm)
+	target_compile_options (MLog PRIVATE -emit-llvm)
 ENDIF (LLVM)

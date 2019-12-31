@@ -1,6 +1,6 @@
 #include "Except.h"
 
-std::string tokenToStr(Token::TokenType tt, std::string dt = "")
+std::string tokenToStr(Token::TokenType tt, std::string dt)
 {
 	switch(tt)
 	{

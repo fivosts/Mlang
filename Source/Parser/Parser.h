@@ -92,7 +92,7 @@ private:
 		printf("PARSER:\t\texpect()\n");
 	#endif
 		if (!accept(std::move(ctt)))
-			throw CompExcept(joinWhSpace("Parsing error: Expected: ", tokenToStr(ctt), " Found: ", tokenToStr(tokPend->getToken())));
+			throw CompExcept(joinWhSpace("Parsing error: Expected:", tokenToStr(ctt), "Found:", tokenToStr(tokPend->getToken())));
 
 		Token expected = *tokPend;
 		tokPend = NULL;
@@ -105,7 +105,7 @@ private:
 		printf("PARSER:\t\texpect(...)\n");
 	#endif
 		if (!accept(std::move(ctt), std::move(expStr)))
-			throw CompExcept(joinWhSpace("Parsing error: Expected: ", tokenToStr(ctt, expStr), " Found: ", tokenToStr(tokPend->getToken(), tokPend->getData())));
+			throw CompExcept(joinWhSpace("Parsing error: Expected:", tokenToStr(ctt, expStr), "Found:", tokenToStr(tokPend->getToken(), tokPend->getData())));
 
 		Token expected = *tokPend;
 		tokPend = NULL;

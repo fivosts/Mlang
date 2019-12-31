@@ -221,14 +221,18 @@ std::unique_ptr<MLParams> Parser::parseIdentifier(Token expectedID, specializer<
 std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Layer>)
 {
     std::string IDName = expectedID.getData();
-    // expect(TType::ASSIGN);
     expect(TType::LBRA);
-    // parseParams here TODO
+
+    setPtr<LayerParams> lParams;
+    parseBlockParams<LayerParams>(std::move(lParams));
+    std::unique_ptr<ParamBlock> pBlock(new ParamBlock(std::move(lParams)));
 
     if (IDName == "LSTM")
     {
-        // TODO Call parseHyperparam block here
+        std::unique_ptr<HyperparamBlock> hBlock = parseHyperparamBlock<LSTMParams>();
         expect(TType::RBRA);
+        parseNewLines();
+        return std::unique_ptr<LSTM>(new LSTM(pBlock, hBlock));
     }
     else if (IDName == "MLP")
     {
@@ -256,24 +260,26 @@ std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
 #endif
     expect(TType::IDENTIFIER, "hyperparam_block");
     expect(TType::LBRA);
-    setPtr<T> params;
-    parseBlockParams<T>(std::move(params));
+    setPtr<HyperParams> params;
+    parseBlockParams<T, HyperParams>(std::move(params));
     expect(TType::RBRA);
     parseNewLines();
-    return std::unique_ptr<HyperparamBlock>(new HyperparamBlock(params));
+    return std::unique_ptr<HyperparamBlock>(new HyperparamBlock(std::move(params)));
 }
 
-void Parser::parseBlockParams(setPtr<LayerParams> &&bp)
+// T is the specific type specifier, U is the parent class
+// in case polymorphism is needed.
+template <typename T, typename U = T>
+void Parser::parseBlockParams(setPtr<U> &&bp)
 {
 #ifdef PARDBG
     printf("PARSER:\t\tparseBlockParams()\n");
 #endif
     if (accept(TType::IDENTIFIER))
     {
-        bp.insert(parseIdentifier<LayerParams>(expect(TType::IDENTIFIER)));
-        parseBlockParams(std::move(bp));
+        bp.insert(parseIdentifier<T>(expect(TType::IDENTIFIER)));
+        parseBlockParams<T, U>(std::move(bp));
     }
-
     return;
 }
 

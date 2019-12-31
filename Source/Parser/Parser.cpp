@@ -228,14 +228,17 @@ std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Lay
     if (IDName == "LSTM")
     {
         // TODO Call parseHyperparam block here
+        expect(TType::RBRA);
     }
     else if (IDName == "MLP")
     {
         // TODO Call parseHyperparam block here
+        expect(TType::RBRA);
     }
     else if (IDName == "SIGMOID")
     {
 
+        expect(TType::RBRA);
     }
     else
     {
@@ -260,15 +263,14 @@ std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
     return std::unique_ptr<HyperparamBlock>(new HyperparamBlock(params));
 }
 
-template<typename T>
-void Parser::parseBlockParams(setPtr<T> &&bp)
+void Parser::parseBlockParams(setPtr<LayerParams> &&bp)
 {
 #ifdef PARDBG
     printf("PARSER:\t\tparseBlockParams()\n");
 #endif
     if (accept(TType::IDENTIFIER))
     {
-        bp.insert(parseIdentifier<T>(expect(TType::IDENTIFIER)));
+        bp.insert(parseIdentifier<LayerParams>(expect(TType::IDENTIFIER)));
         parseBlockParams(std::move(bp));
     }
 

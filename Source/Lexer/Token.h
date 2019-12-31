@@ -5,6 +5,7 @@
 
 #include <string>
 #ifdef TOKDBG
+	#include <iostream>
 	#include <unordered_map>
 #endif
 
@@ -21,6 +22,9 @@ TOKENIZE(RSBR)		TOKENIZE(END)		TOKENIZE(INVALID)
 #define PRINT_TOKEN(TOKEN, CHAR) ( \
 			std::cout << "TOKEN:\t\t" << TOKEN << " " << CHAR << std::endl \
 		)
+
+template <typename T, typename... U>
+extern std::string joinWhSpace(T&& str, U&& ...nstr);
 
 class Token
 {

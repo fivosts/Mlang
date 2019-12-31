@@ -9,7 +9,12 @@ add_executable(MLogTest
 				${PROJECT_SOURCE_DIR}/Source/Parser/Parser.cpp
 				)
 
-target_compile_options (MLog PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)
+target_compile_options (MLogTest PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)
+
+if (LLVM)
+	target_compile_options (MLogTest PRIVATE -emit-llvm)
+ENDIF (LLVM)
+
 target_compile_definitions(MLogTest PRIVATE MODEL_PATH="${PROJECT_SOURCE_DIR}/Models/")
 
 if (SCDBG)

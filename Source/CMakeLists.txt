@@ -9,3 +9,7 @@ add_executable(MLog
 				ASTNode/ASTNode.cpp)
 
 target_compile_options (MLog PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)
+
+if (LLVM)
+	target_compile_options (MLogTest PRIVATE -emit-llvm)
+ENDIF (LLVM)

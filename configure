@@ -132,6 +132,7 @@ function build_and_compile()
                     export CC=clang
                     export CXX=clang++
                     # more TODO
+                    # Add cmake variable to enable CXX flags
                     ;;
             esac
         done

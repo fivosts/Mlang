@@ -280,6 +280,7 @@ void Parser::parseBlockParams(setPtr<U> &&bp)
     if (accept(TType::IDENTIFIER))
     {
         bp.insert(parseIdentifier<T>(expect(TType::IDENTIFIER)));
+        parseNewLines();
         parseBlockParams<T, U>(std::move(bp));
     }
     return;

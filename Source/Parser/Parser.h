@@ -105,7 +105,7 @@ private:
 		printf("PARSER:\t\texpect(...)\n");
 	#endif
 		if (!accept(std::move(ctt), std::move(expStr)))
-			throw CompExcept("Parsing error bla bla");
+			throw CompExcept(joinWhSpace("Parsing error: Expected: ", tokenToStr(ctt, expStr), " Found: ", tokenToStr(tokPend->getToken(), tokPend->getData())));
 
 		Token expected = *tokPend;
 		tokPend = NULL;

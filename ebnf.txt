@@ -2,7 +2,7 @@ MLog grammar:
 
 model ::= (import)* (attribute)* (layer)*
 
-import ::= '#import' STR '\n'
+import ::= '#import' STR ('\n')*
 
 attribute ::= '#define' ( network_name      # Optional - defaulted
                         | cuda_available    # Optional - defaulted 
@@ -17,17 +17,17 @@ layer ::= (LSTM
         | SIGMOID # Extend this field for new layers
 	) '\n'
 
-LSTM ::= 'LSTM' '{' param_block hyperparam_block '}'
-MLP ::= 'MLP' '{' param_block hyperparam_block '}'
-SIGMOID ::= 'SIGMOID' '{' param_block '}'
+LSTM ::= 'LSTM' ('\n')* '{' ('\n')* param_block hyperparam_block '}'
+MLP ::= 'MLP' ('\n')* '{' ('\n')* param_block hyperparam_block '}'
+SIGMOID ::= 'SIGMOID' ('\n')* '{' ('\n')* param_block '}'
 
-param_block ::= (params)* # Extend layer_n
+param_block ::= (params)* ('\n')* # Extend layer_n
 
 params ::= input        # Mandatory
          | output       # Mandatory
          | layer_name   # Optional
 
-hyperparam_block ::= 'hyperparam_block' '{' ( (lstm_hparams)* | (mlp_hparams)* ) '}' '\n'
+hyperparam_block ::= 'hyperparam_block' ('\n')* '{' ('\n')* ( (lstm_hparams)* | (mlp_hparams)* ) '}' ('\n')*
 
 lstm_hparams ::= input_size         	# Mandatory
               | output_timestep 	# Mandatory
@@ -40,30 +40,30 @@ mlp_hparams ::= in_features         	# Mandatory
 BinExpr ::= STR  
             | BinExpr '+' STR
 
-lengthof = 'len' '(' STR ')' '\n'
+lengthof = 'len' '(' STR ')' ('\n')*
 
 ## Model Attributes
-network_name ::= 'network_name' STR '\n'
-backend ::= 'backend' STR '\n'
-target ::= 'target' STR '\n'
-cuda_available ::= 'cuda_available' BOOL '\n'
+network_name ::= 'network_name' STR ('\n')*
+backend ::= 'backend' STR ('\n')*
+target ::= 'target' STR ('\n')*
+cuda_available ::= 'cuda_available' BOOL ('\n')*
 
 ## Model Inputs and Outputs
-input_tensors ::= 'input_tensors' (STR | '[' (STR ',')* STR ']') '\n'
-output_tensors ::= 'output_tensors' (STR | '[' (STR ',')* STR ']') '\n'
+input_tensors ::= 'input_tensors' (STR | '[' (STR ',')* STR ']') ('\n')*
+output_tensors ::= 'output_tensors' (STR | '[' (STR ',')* STR ']') ('\n')*
 
 ## Layer Attributes
-layer_name ::= 'name' '=' STR '\n'
-input_size ::= 'input_size' '=' INT '\n'
-output_timestep ::= 'output_timestep' '=' INT '\n'
-hidden_size ::= 'hidden_size' '=' INT '\n'
-num_layers ::= 'num_layers' '=' INT '\n'
-in_features ::= 'in_features' '=' (INT | lengthof) '\n'
-out_features ::= 'out_features' '=' '[' (INT  ',')* INT ']' '\n'
+layer_name ::= 'name' '=' STR ('\n')*
+input_size ::= 'input_size' '=' INT ('\n')*
+output_timestep ::= 'output_timestep' '=' INT ('\n')*
+hidden_size ::= 'hidden_size' '=' INT ('\n')*
+num_layers ::= 'num_layers' '=' INT ('\n')*
+in_features ::= 'in_features' '=' (INT | lengthof) ('\n')*
+out_features ::= 'out_features' '=' '[' (INT  ',')* INT ']' ('\n')*
 
 ## Layer Inputs and Outputs
-input ::= 'input' '=' BinExpr '\n'
-output ::= 'output' '=' STR '\n'
+input ::= 'input' '=' BinExpr ('\n')*
+output ::= 'output' '=' STR ('\n')*
 
 ## Generic Types
 IDENTIFIER ::= 'network_name' | 'backend' | 'target' | 'cuda_available'         # Attribute

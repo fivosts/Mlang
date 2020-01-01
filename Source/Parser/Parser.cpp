@@ -222,7 +222,7 @@ std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Lay
     std::string IDName = expectedID.getData();
     parseNewLines(); // TODO conditional
     expect(TType::LBRA);
-    parseNewLines(); // TODO conditional (??)
+    parseNewLines();
     setPtr<LayerParams> lParams;
     parseBlockParams<LayerParams>(std::move(lParams));
     std::unique_ptr<ParamBlock> pBlock(new ParamBlock(std::move(lParams)));
@@ -259,9 +259,9 @@ std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
     printf("PARSER:\t\tparseHyperparamBlock()\n");
 #endif
     expect(TType::IDENTIFIER, "hyperparam_block");
-    parseNewLines(); // Conditional
+    parseNewLines(); // TODO Conditional
     expect(TType::LBRA);
-    parseNewLines(); // Condtional ??
+    parseNewLines(); 
     setPtr<HyperParams> params;
     parseBlockParams<T, HyperParams>(std::move(params));
     expect(TType::RBRA);

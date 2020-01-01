@@ -231,20 +231,17 @@ std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Lay
     {
         std::unique_ptr<HyperparamBlock> hBlock = parseHyperparamBlock<LSTMParams>();
         expect(TType::RBRA);
-        parseNewLines();
         return std::unique_ptr<LSTM>(new LSTM(std::move(pBlock), std::move(hBlock)));
     }
     else if (IDName == "MLP")
     {
         std::unique_ptr<HyperparamBlock> hBlock = parseHyperparamBlock<MLParams>();
         expect(TType::RBRA);
-        parseNewLines();
         return std::unique_ptr<MLP>(new MLP(std::move(pBlock), std::move(hBlock)));
     }
     else if (IDName == "SIGMOID")
     {
         expect(TType::RBRA);
-        parseNewLines();
         return std::unique_ptr<Sigmoid>(new Sigmoid(std::move(pBlock)));
     }
     else

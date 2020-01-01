@@ -17,9 +17,9 @@ layer ::= (LSTM
         | SIGMOID # Extend this field for new layers
 	) ('\n')+
 
-LSTM ::= 'LSTM' ('\n')* '{' ('\n')* param_block hyperparam_block '}'
-MLP ::= 'MLP' ('\n')* '{' ('\n')* param_block hyperparam_block '}'
-SIGMOID ::= 'SIGMOID' ('\n')* '{' ('\n')* param_block '}'
+LSTM ::= 'LSTM' ('\n')* '{' ('\n')+ param_block hyperparam_block '}'
+MLP ::= 'MLP' ('\n')* '{' ('\n')+ param_block hyperparam_block '}'
+SIGMOID ::= 'SIGMOID' ('\n')+ '{' ('\n')* param_block '}'
 
 param_block ::= (params)* # Extend layer_n
 
@@ -27,7 +27,7 @@ params ::= input        # Mandatory
          | output       # Mandatory
          | layer_name   # Optional
 
-hyperparam_block ::= 'hyperparam_block' ('\n')* '{' ('\n')* ( (lstm_hparams)* | (mlp_hparams)* ) '}' ('\n')+
+hyperparam_block ::= 'hyperparam_block' ('\n')* '{' ('\n')+ ( (lstm_hparams)* | (mlp_hparams)* ) '}' ('\n')+
 
 lstm_hparams ::= input_size         	# Mandatory
               | output_timestep 	# Mandatory

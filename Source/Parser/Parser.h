@@ -67,7 +67,7 @@ private:
 	inline bool accept(Token::TokenType&& ctt)
 	{
 	#ifdef PARDBG
-		printf("PARSER:\t\taccept()\n");
+		printf("PARSER:\t\taccept(%s)\n", tokenToCChar(ctt));
 	#endif
 		return (tokPend ? *tokPend == ctt 
 						: [this](){
@@ -78,7 +78,7 @@ private:
 	inline bool accept(Token::TokenType&& ctt, std::string &&expStr)
 	{
 	#ifdef PARDBG
-		printf("PARSER:\t\taccept(...)\n");
+		printf("PARSER:\t\taccept(%s %s)\n", tokenToCChar(ctt), expStr.c_str());
 	#endif
 		return (tokPend ? *tokPend == ctt && tokPend->getData() == expStr
 						: [this](){
@@ -89,7 +89,7 @@ private:
 	inline Token expect(Token::TokenType &&ctt)
 	{
 	#ifdef PARDBG
-		printf("PARSER:\t\texpect()\n");
+		printf("PARSER:\t\texpect(%s)\n", tokenToCChar(ctt));
 	#endif
 		if (!accept(std::move(ctt)))
 			throw CompExcept(joinWhSpace("Parsing error: Expected:", tokenToStr(ctt), "Found:", tokenToStr(tokPend->getToken())));
@@ -102,7 +102,7 @@ private:
 	inline Token expect(Token::TokenType &&ctt, std::string &&expStr)
 	{
 	#ifdef PARDBG
-		printf("PARSER:\t\texpect(...)\n");
+		printf("PARSER:\t\texpect%s %s)\n", tokenToCChar(ctt), expStr.c_str());
 	#endif
 		if (!accept(std::move(ctt), std::move(expStr)))
 			throw CompExcept(joinWhSpace("Parsing error: Expected:", tokenToStr(ctt, expStr), "Found:", tokenToStr(tokPend->getToken(), tokPend->getData())));

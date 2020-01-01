@@ -12,6 +12,7 @@ public:
 };
 
 std::string tokenToStr(Token::TokenType tt, std::string dt = "");
+const char* tokenToCChar(Token::TokenType tt, std::string dt = "");
 
 template<typename T = const char*>
 static std::string joinWhSpace(const char* &&cstr)

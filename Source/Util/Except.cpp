@@ -84,3 +84,8 @@ std::string tokenToStr(Token::TokenType tt, std::string dt)
 	throw CompExcept("TokenType not found!");
 	return "";
 }
+
+const char* tokenToCChar(Token::TokenType tt, std::string dt)
+{
+	return tokenToStr(tt, dt).c_str();
+}

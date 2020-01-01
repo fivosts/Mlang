@@ -16,9 +16,9 @@ layer ::= LSTM
         | MLP
         | SIGMOID   # Extend this property for new layers
 
-LSTM ::= 'LSTM' '{' param_block hyperparam_block '}'
-MLP ::= 'MLP' '{' param_block hyperparam_block '}'
-SIGMOID ::= 'SIGMOID' '{' param_block '}'
+LSTM ::= 'LSTM' '{' param_block hyperparam_block '}' '\n'
+MLP ::= 'MLP' '{' param_block hyperparam_block '}' '\n'
+SIGMOID ::= 'SIGMOID' '{' param_block '}' '\n'
 
 param_block ::= (params)* # Extend layer_n
 

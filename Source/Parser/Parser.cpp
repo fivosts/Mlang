@@ -148,7 +148,20 @@ std::unique_ptr<LSTMParams> Parser::parseIdentifier(Token expectedID, specialize
 
     if (IDName == "input_size")
     {
-        return std::unique_ptr<LSTMParams>(new InputSize(id));
+    	//////// This should be better written here
+    	if (accept(TType::INT_LITERAL))
+    	{
+    		int id = parseIntLiteral();
+    		parseNewLines();
+	        return std::unique_ptr<LSTMParams>(new InputSize(id));
+    	}
+    	else
+    	{
+    		expect(TType::IDENTIFIER, "len");
+    		std::unique_ptr<LengthOf> lexpr(new LengthOf(parseStrLiteral()));
+	        return std::unique_ptr<LSTMParams>(new InputSize(std::move(lexpr)));
+    	}
+    	///////
     }
     else if (IDName == "output_timestep")
     {

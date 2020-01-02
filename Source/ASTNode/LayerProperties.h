@@ -2,6 +2,7 @@
 
 #include "Params.h"
 #include "Expression.h"
+#include "LengthOf.h"
 
 #include <string>
 
@@ -43,10 +44,12 @@ class InputSize : public LSTMParams
 public:
 	InputSize() = delete;
 	InputSize(int is) : inSize(is) {}
+	InputSize(std::unique_ptr<LengthOf> lo) : llength(std::move(lo)) {}
 	~InputSize() override = default;
 
 private:
 	int inSize;
+	std::unique_ptr<LengthOf> llength;
 };
 
 class OutputTimestep : public LSTMParams

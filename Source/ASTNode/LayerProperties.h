@@ -89,7 +89,7 @@ class InFeatures : public MLParams
 {
 public:
 	InFeatures() = delete;
-	InFeatures(int i) : inF(is) {}
+	InFeatures(int i) : inF(i) {}
 	InFeatures(std::unique_ptr<LengthOf> lo) : llength(std::move(lo)) {}
 	~InFeatures() override = default;
 
@@ -102,9 +102,9 @@ class OutFeatures : public MLParams
 {
 public:
 	OutFeatures() = delete;
-	OutFeatures(int of) : outFeat(of) {}
+	OutFeatures(std::vector<int> of) : outFeat(of) {}
 	~OutFeatures() override = default;
 
 private:
-	int outFeat;
+	std::vector<int> outFeat;
 };

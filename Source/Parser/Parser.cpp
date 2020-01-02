@@ -345,7 +345,8 @@ int Parser::parseIntLiteral()
 #endif
     try
     {
-        return std::stoi(expect(TType::INT_LITERAL).getData());
+        return (accept(TType::MINUS) ? [this](){expect(TType::MINUS); return -1;}() : 1) * 
+        		std::stoi(expect(TType::INT_LITERAL).getData());
     }
     catch(const std::exception& e)
     {

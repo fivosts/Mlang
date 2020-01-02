@@ -148,7 +148,7 @@ std::unique_ptr<LSTMParams> Parser::parseIdentifier(Token expectedID, specialize
 
     if (IDName == "input_size")
     {
-    	//////// This should be better written here
+    	//////// This should be better written here TODO
     	if (accept(TType::INT_LITERAL))
     	{
     		int id = parseIntLiteral();

@@ -145,8 +145,6 @@ std::unique_ptr<LSTMParams> Parser::parseIdentifier(Token expectedID, specialize
 {
     std::string IDName = expectedID.getData();
     expect(TType::ASSIGN);
-    int id = parseIntLiteral();
-    parseNewLines();
 
     if (IDName == "input_size")
     {
@@ -154,14 +152,20 @@ std::unique_ptr<LSTMParams> Parser::parseIdentifier(Token expectedID, specialize
     }
     else if (IDName == "output_timestep")
     {
+    	int id = parseIntLiteral();
+    	parseNewLines();
         return std::unique_ptr<LSTMParams>(new OutputTimestep(id));
     }
     else if (IDName == "hidden_size")
     {
+    	int id = parseIntLiteral();
+    	parseNewLines();
         return std::unique_ptr<LSTMParams>(new HiddenSize(id));
     }
     else if (IDName == "num_layers")
     {
+    	int id = parseIntLiteral();
+	    parseNewLines();
         return std::unique_ptr<LSTMParams>(new NumLayers(id));
     }
     else
@@ -193,7 +197,6 @@ std::unique_ptr<MLParams> Parser::parseIdentifier(Token expectedID, specializer<
     }
     return nullptr;
 }
-
 
 std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Layer>)
 {

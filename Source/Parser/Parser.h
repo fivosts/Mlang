@@ -154,6 +154,7 @@ private:
 	std::string parseStrLiteral();
 	std::unordered_set<std::string> parseStrArrLiteral();
 	int parseIntLiteral();	
+	std::vector<int> parseIntArrLiteral();
 	bool parseBoolLiteral();
 
 	std::unique_ptr<BinExpr> parseBinExpr();

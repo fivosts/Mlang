@@ -36,7 +36,7 @@ LSTM {
 	output = "line_encoder"
 	input = "trace_func" + "ret_encoder" + "arg_encoder"
 	hyperparam_block{
-		input_size = len(input)
+		input_size = len("input")
 		output_timestep = -1
 		hidden_size = 128
 		num_layers = 1
@@ -46,7 +46,7 @@ MLP {
 	output = "MLP"
 	input = "line_encoder"
 	hyperparam_block{
-		in_features = len(input)
+		in_features = len("input")
 		out_features = [128, 64, 32, 1]
 	}
 }

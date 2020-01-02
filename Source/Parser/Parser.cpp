@@ -283,7 +283,7 @@ void Parser::parseBlockParams(setPtr<U> &&bp)
 #ifdef PARDBG
     printf("PARSER:\t\tparseBlockParams()\n");
 #endif
-    if (accept(TType::IDENTIFIER)) // TODO make sure here that you only accept T
+    if (accept(TType::IDENTIFIER) && !accept(TType::IDENTIFIER, "hyperparam_block")) // TODO make sure here that you only accept T
     {
         bp.insert(parseIdentifier<T>(expect(TType::IDENTIFIER)));
         parseBlockParams<T, U>(std::move(bp));

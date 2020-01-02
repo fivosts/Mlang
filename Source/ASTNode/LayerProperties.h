@@ -85,16 +85,17 @@ private:
 	int nLayers;
 };
 
-template <class T>
 class InFeatures : public MLParams
 {
 public:
 	InFeatures() = delete;
-	InFeatures(T inf) : inFeat(inf) {}
+	InFeatures(int i) : inF(is) {}
+	InFeatures(std::unique_ptr<LengthOf> lo) : llength(std::move(lo)) {}
 	~InFeatures() override = default;
 
 private:
-	T inFeat;
+	int inF;
+	std::unique_ptr<LengthOf> llength;
 };
 
 class OutFeatures : public MLParams

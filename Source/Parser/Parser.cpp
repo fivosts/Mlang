@@ -17,6 +17,7 @@ std::unique_ptr<Model> Parser::parseModel()
     parseImport(std::move(imp));
     parseAttribute(std::move(attr));
     parseLayer(std::move(lay));
+    expect(TType::END);
 
     return std::make_unique<Model>(std::move(imp), std::move(attr), std::move(lay));
 }

@@ -194,28 +194,6 @@ std::unique_ptr<MLParams> Parser::parseIdentifier(Token expectedID, specializer<
     return nullptr;
 }
 
-// It is unclear whether this specialization is actually needed.
-// See, the entity that will search for a hyperparam block will be pretty sure
-// that the only thing it is seeking is a hyperparam block.
-// std::unique_ptr<ASTNode> Parser::parseIdentifier(Token expectedID, specializer<ASTNode>)
-// {
-//     std::string IDName = expectedID.getData();
-    
-//     if (IDName == "hyperparam_block")
-//     {
-//         // return parseHyperparamBlock();
-//         return parseHyperparamBlock();
-//     }
-//     else if (IDName == "len")
-//     {
-
-//     }
-//     else
-//     {
-//         throw CompExcept("Parsing Error: ASTNode not recognized");
-//     }
-//     return nullptr;
-// }
 
 std::unique_ptr<Layer> Parser::parseIdentifier(Token expectedID, specializer<Layer>)
 {

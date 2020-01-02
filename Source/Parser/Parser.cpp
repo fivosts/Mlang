@@ -343,7 +343,6 @@ int Parser::parseIntLiteral()
 #ifdef PARDBG
     printf("PARSER:\t\tparseIntLiteral()\n");
 #endif
-    Token intID = expect(TType::INT_LITERAL);
     try
     {
         return std::stoi(expect(TType::INT_LITERAL).getData());

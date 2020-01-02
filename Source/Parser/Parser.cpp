@@ -158,7 +158,10 @@ std::unique_ptr<LSTMParams> Parser::parseIdentifier(Token expectedID, specialize
     	else
     	{
     		expect(TType::IDENTIFIER, "len");
+    		expect(TType::LPAR);
     		std::unique_ptr<LengthOf> lexpr(new LengthOf(parseStrLiteral()));
+	        expect(TType::RPAR);
+	        parseNewLines();
 	        return std::unique_ptr<LSTMParams>(new InputSize(std::move(lexpr)));
     	}
     	///////

@@ -5,7 +5,8 @@
 class LengthOf : public ASTNode
 {
 public:
-	LengthOf() = default;
+	LengthOf() = delete;
+	LengthOf(std::string l) : layer(l) {}
 	~LengthOf() = default;
 
 private:

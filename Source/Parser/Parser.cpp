@@ -198,14 +198,29 @@ std::unique_ptr<MLParams> Parser::parseIdentifier(Token expectedID, specializer<
     
     if (IDName == "in_features")
     {
-        //! TODO this looks troublesome
-        // return new InFeatures<T>();
+    	//////// This should be better written here TODO
+    	if (accept(TType::INT_LITERAL))
+    	{
+    		int id = parseIntLiteral();
+    		parseNewLines();
+	        return std::unique_ptr<MLParams>(new InFeatures(id));
+    	}
+    	else
+    	{
+    		expect(TType::IDENTIFIER, "len");
+    		expect(TType::LPAR);
+    		std::unique_ptr<LengthOf> lexpr(new LengthOf(parseStrLiteral()));
+	        expect(TType::RPAR);
+	        parseNewLines();
+	        return std::unique_ptr<MLParams>(new InFeatures(std::move(lexpr)));
+    	}
+    	///////
     }
     else if (IDName == "out_features")
     {
-        int id = parseIntLiteral();
+        std::vector<int> ids = parseIntArrLiteral();
         parseNewLines();
-        return std::unique_ptr<MLParams>(new OutFeatures(id));
+        return std::unique_ptr<MLParams>(new OutFeatures(ids));
     }
     else
     {
@@ -349,6 +364,32 @@ int Parser::parseIntLiteral()
     {
         throw CompExcept("Parsing Error: Invalid int literal");
     }
+}
+
+std::vector<int> Parser::parseIntArrLiteral()
+{
+#ifdef PARDBG
+    printf("PARSER:\t\tparseIntArrLiteral()\n");
+#endif
+    std::vector<int> intArr;
+    if (accept(TType::INT_LITERAL))
+        return 
+        {
+            parseIntLiteral()
+        };
+
+    expect(TType::LSBR);
+    if (!accept(TType::RSBR))
+    {
+        intArr.push_back(parseIntLiteral());
+        while(accept(TType::COMMA))
+        {
+            expect(TType::COMMA);
+            intArr.push_back(parseIntLiteral());
+        }
+    }
+    expect(TType::RSBR);
+    return intArr;
 }
 
 bool Parser::parseBoolLiteral()

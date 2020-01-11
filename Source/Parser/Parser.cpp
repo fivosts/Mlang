@@ -289,7 +289,7 @@ std::unique_ptr<HyperparamBlock> Parser::parseHyperparamBlock()
 
 // T is the specific type specifier, U is the parent class
 // in case polymorphism is needed.
-template <typename T, typename U = T>
+template <typename T, typename U>
 void Parser::parseBlockParams(setPtr<U> &&bp)
 {
 #ifdef PARDBG

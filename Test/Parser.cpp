@@ -15,8 +15,6 @@ namespace
                     };
 }
 
-// TODO test constructors as well
-
 namespace MLogTest
 {
 	TEST(ParserTest, StrConstructor1)

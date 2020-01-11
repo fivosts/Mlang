@@ -1,6 +1,7 @@
 include_directories(ASTNode)
 include_directories(Lexer)
 include_directories(Parser)
+include_directories(SemAnalysis)
 include_directories(Util)
 add_executable(MLog
 				main.cpp

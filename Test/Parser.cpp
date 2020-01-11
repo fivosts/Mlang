@@ -16,7 +16,6 @@ namespace
 }
 
 // TODO test constructors as well
-// TODO all tests for parser. WARNING, they are copy-paste atm
 
 namespace MLogTest
 {
@@ -39,7 +38,7 @@ namespace MLogTest
     TEST(ParserTest, Normal)
     {
         Parser par(FULL_PATH("ase_model.mlog"));
-        par.safeParseModel();
+        ASSERT_NO_THROW(par.safeParseModel());
 
     }
 

@@ -19,6 +19,28 @@ namespace
 
 namespace MLogTest
 {
+	TEST(ParserTest, StrConstructor1)
+	{
+		ASSERT_THROW(Parser par(FULL_PATH("invalid")), CompExcept );
+	}
+
+	TEST(ParserTest, StrConstructor2)
+	{
+		ASSERT_NO_THROW(Parser par(FULL_PATH("empty.mlog")));
+	}
+
+	TEST(ParserTest, LexConstructor)
+	{
+		std::unique_ptr<Lexer> lex(new Lexer(FULL_PATH("empty.mlog")));
+		ASSERT_NO_THROW(Parser par(std::move(lex)));
+	}
+
+	TEST(ParserTest, ScConstructor)
+	{
+		std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("empty.mlog")));
+		ASSERT_NO_THROW(Parser par(std::move(sc)));
+	}
+
     TEST(ParserTest, Empty)
     {
         Parser par(FULL_PATH("empty.mlog"));

@@ -140,7 +140,6 @@ private:
 	std::unique_ptr<LayerParams> parseIdentifier(Token expectedID, specializer<LayerParams>);
 	std::unique_ptr<LSTMParams> parseIdentifier(Token expectedID, specializer<LSTMParams>);
 	std::unique_ptr<MLParams> parseIdentifier(Token expectedID, specializer<MLParams>);
-	// std::unique_ptr<ASTNode> parseIdentifier(Token expectedID, specializer<ASTNode>);
 	std::unique_ptr<Layer> parseIdentifier(Token expectedID, specializer<Layer>);
 
 	template<typename T>

@@ -13,6 +13,7 @@
 #include "Token.h"
 #include "Lexer.h"
 #include "Parser.h"
+#include "SemAnalyzer.h"
 #include <iostream>
 
 #define TEST_PATH "./Models/ase_model.mlog"
@@ -23,7 +24,7 @@ int main(){
 
 	try{
 		std::unique_ptr<Parser> p(new Parser(TEST_PATH));
-		p->safeParseModel();
+		SemAnalyzer s(p->safeParseModel());
 	}
 	catch(CompExcept &e){
 		std::cout << "Oops: " << e.what() << std::endl;

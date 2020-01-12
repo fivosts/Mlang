@@ -17,6 +17,13 @@ public:
 
 private:
 	void AnalyzeModel();
+
+	// Name Analysis in 3 aspects 
+	// Includes: Does the module exist ?
+	// Attributes: add to symbol table
+	// Layers: add declared variables to symbol table
+	// Then check if used symbols are legit.
+	// Is scope in this context meaningful ?
 	void AnalyzeNames();
 	void AnalyzeTypes();
 

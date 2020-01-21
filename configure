@@ -39,7 +39,7 @@ function help()
     echo "all preprocessor flags set to off by default."
     echo ""
     echo "@author: Foivos Tsimpourlas"
-    echo "@webpage: <https://github.com/fivosts/MLog>"
+    echo "@webpage: <https://github.com/fivosts/Mlang>"
     exit $1
 }
 
@@ -141,7 +141,7 @@ function build_and_compile()
         done
     fi
 
-    echo "-- Configuring MLog"
+    echo "-- Configuring Mlang"
     if [ ! -d "build" ]; then 
         mkdir build
     fi

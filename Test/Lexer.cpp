@@ -15,7 +15,7 @@ namespace
                     };
 }
 
-namespace MLogTest
+namespace MlangTest
 {
     TEST(LexerTest, Empty)
     {

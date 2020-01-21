@@ -56,4 +56,4 @@ matrix:
 script:
   - $CXX --version
   - ./configure
-  - ./build/bin/MLogTest
+  - ./build/bin/MlangTest

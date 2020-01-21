@@ -7,7 +7,7 @@
 
 static Scanner *sc;
 
-namespace MLogTest
+namespace MlangTest
 {
     TEST(ScannerTest, Empty)
     {

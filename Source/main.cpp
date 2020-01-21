@@ -30,7 +30,7 @@ int main(){
 		std::cout << "Oops: " << e.what() << std::endl;
 	}
 	// std::ifstream a;
-	// a->open("/home/foitsi01/MLog/Models/ase_model.mlog");
+	// a->open("/home/foitsi01/Mlang/Models/ase_model.mlog");
 
 	// auto b = a->getChar();
 

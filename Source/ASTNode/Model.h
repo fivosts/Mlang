@@ -28,6 +28,15 @@ public:
 		// lr = NULL;
 	}
 
+	void accept(ASTVisitor &v)
+	{
+		for (auto &i : imp)
+			v.visit(i);
+		for (auto &a : attr)
+			v.visit(a);
+		for (auto &l : lr)
+			v.visit(l);
+	}
 
 private:
 	setPtr<Import> imp;

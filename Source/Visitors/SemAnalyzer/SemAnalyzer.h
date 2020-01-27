@@ -41,7 +41,7 @@ class NameAnalyzer : public ASTVisitor
 
     std::shared_ptr<Model> safeVisit()
     {
-        try                         {   model->visit(this);
+        try                         {   model->accept(this);
                                         return model;               }
         catch (CompExcept& ex)      {   throw;                      }
     }

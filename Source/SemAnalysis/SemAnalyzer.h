@@ -18,7 +18,12 @@ public:
 private:
 
     // Analyze model will call analyze name and types
-    void AnalyzeModel();
+    void AnalyzeModel()
+    {
+        AnalyzeNames();
+        AnalyzeTypes();
+        return;
+    }
 
     // Name Analysis in 3 aspects 
     // Includes: Does the module exist ?

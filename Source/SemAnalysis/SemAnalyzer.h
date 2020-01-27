@@ -11,8 +11,8 @@ public:
     std::shared_ptr<Model> safeAnalyzeModel()
     {
         try                         {    AnalyzeModel();
-                                        return model;            }
-        catch (CompExcept& ex)        {    throw;                    }
+                                        return model;              }
+        catch (CompExcept& ex)      {    throw;                    }
     }
 
 private:

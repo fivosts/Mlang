@@ -38,6 +38,27 @@ private:
     void AnalyzeNames();
     void AnalyzeTypes();
 
-private:
+protected:
     std::shared_ptr<Model> model = NULL;
 };
+
+class NameAnalyzer : public SemAnalyzer
+{
+    NameAnalyzer() = default;
+    ~NameAnalyzer()
+    {
+        model = NULL;
+    }
+
+};
+
+
+class TypeCheckAnalyzer : public SemAnalyzer
+{
+    TypeCheckAnalyzer() = default;
+    ~TypeCheckAnalyzer()
+    {
+        model = NULL;
+    }
+
+};  

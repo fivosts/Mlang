@@ -2,37 +2,6 @@
 
 #include "ASTVisitor.h"
 
-class NameAnalyzer;
-class TypeCheckAnalyzer;
-
-class SemAnalyzer
-{
-public:
-    SemAnalyzer() = default;
-    ~SemAnalyzer()
-    {
-        model = NULL;
-    }
-
-    std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
-    {
-        std::shared_ptr<NameAnalyzer> name(std::move(m));
-        std::shared_ptr<TypeCheckAnalyzer> type(std::move(m));
-
-        try                         {   name->safeVisit();
-                                        type->safeVisit();
-                                        return m;                }
-        catch (CompExcept& ex)      {   throw;                       }
-    }
-
-    // Name Analysis in 3 aspects 
-    // Includes: Does the module exist ?
-    // Attributes: add to symbol table
-    // Layers: add declared variables to symbol table
-    // Then check if used symbols are legit.
-    // Is scope in this context meaningful ?
-};
-
 class NameAnalyzer : public ASTVisitor
 {
     NameAnalyzer(std::shared_ptr<Model> &&m) : model(std::move(m)) {}
@@ -68,3 +37,32 @@ class TypeCheckAnalyzer : public ASTVisitor
     }
 
 };  
+
+class SemAnalyzer
+{
+public:
+    SemAnalyzer() = default;
+    ~SemAnalyzer()
+    {
+        model = NULL;
+    }
+
+    std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
+    {
+        std::shared_ptr<NameAnalyzer> name(std::move(m));
+        std::shared_ptr<TypeCheckAnalyzer> type(std::move(m));
+
+        try                         {   name->safeVisit();
+                                        type->safeVisit();
+                                        return m;                }
+        catch (CompExcept& ex)      {   throw;                       }
+    }
+
+    // Name Analysis in 3 aspects 
+    // Includes: Does the module exist ?
+    // Attributes: add to symbol table
+    // Layers: add declared variables to symbol table
+    // Then check if used symbols are legit.
+    // Is scope in this context meaningful ?
+};
+

@@ -2,6 +2,9 @@
 
 #include "ASTVisitor.h"
 
+class NameAnalyzer;
+class TypeCheckAnalyzer;
+
 class SemAnalyzer
 {
 public:
@@ -13,13 +16,12 @@ public:
 
     std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
     {
-        std::shared_ptr<Model> model(std::move(m));
-        std::shared_ptr<NameAnalyzer> name(std::move(model));
-        std::shared_ptr<TypeCheckAnalyzer> type(std::move(model));
+        std::shared_ptr<NameAnalyzer> name(std::move(m));
+        std::shared_ptr<TypeCheckAnalyzer> type(std::move(m));
 
         try                         {   name->safeVisit();
                                         type->safeVisit();
-                                        return model;                }
+                                        return m;                }
         catch (CompExcept& ex)      {   throw;                       }
     }
 

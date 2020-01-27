@@ -16,6 +16,8 @@ public:
 	}
 
 private:
+
+	// Analyze model will call analyze name and types
 	void AnalyzeModel();
 
 	// Name Analysis in 3 aspects 

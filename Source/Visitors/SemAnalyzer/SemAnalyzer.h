@@ -41,8 +41,7 @@ class NameAnalyzer : public ASTVisitor
 
     std::shared_ptr<Model> safeVisit()
     {
-        model = std::move(m);
-        try                         {   visit(std::move(m));
+        try                         {   model->visit(this);
                                         return model;               }
         catch (CompExcept& ex)      {   throw;                      }
     }
@@ -61,8 +60,7 @@ class TypeCheckAnalyzer : public ASTVisitor
 
     std::shared_ptr<Model> safeVisit()
     {
-        model = std::move(m);
-        try                         {   visit(std::move(m));
+        try                         {   model->visit(this);
                                         return model;               }
         catch (CompExcept& ex)      {   throw;                      }
     }

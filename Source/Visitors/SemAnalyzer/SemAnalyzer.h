@@ -1,8 +1,8 @@
 #pragma once
 
-// #include <memory>
+#include "ASTVisitor.h"
 
-class SemAnalyzer : public ASTVisitor
+class SemAnalyzer
 {
 public:
     SemAnalyzer() = default;
@@ -11,22 +11,16 @@ public:
         model = NULL;
     }
 
-    std::shared_ptr<Model> safeAnalyzeModel(std::shared_ptr<Model> &&m)
+    std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
     {
-        model = std::move(m);
-        try                         {    AnalyzeModel();
-                                        return model;              }
-        catch (CompExcept& ex)      {    throw;                    }
-    }
+        std::shared_ptr<Model> model(std::move(m));
+        std::shared_ptr<NameAnalyzer> name();
+        std::shared_ptr<TypeCheckAnalyzer> type();
 
-private:
-
-    // Analyze model will call analyze name and types
-    void AnalyzeModel()
-    {
-        AnalyzeNames();
-        AnalyzeTypes();
-        return;
+        try                         {   name->safeVisit(std::move(model));
+                                        type->safeVisit(std::move(model));
+                                        return model;                           }
+        catch (CompExcept& ex)      {   throw;                                  }
     }
 
     // Name Analysis in 3 aspects 
@@ -35,14 +29,9 @@ private:
     // Layers: add declared variables to symbol table
     // Then check if used symbols are legit.
     // Is scope in this context meaningful ?
-    void AnalyzeNames();
-    void AnalyzeTypes();
-
-protected:
-    std::shared_ptr<Model> model = NULL;
 };
 
-class NameAnalyzer : public SemAnalyzer
+class NameAnalyzer : public ASTVisitor
 {
     NameAnalyzer() = default;
     ~NameAnalyzer()
@@ -50,15 +39,32 @@ class NameAnalyzer : public SemAnalyzer
         model = NULL;
     }
 
+    std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
+    {
+        model = std::move(m);
+        try                         {   visit(std::move(m));
+                                        return model;               }
+        catch (CompExcept& ex)      {   throw;                      }
+    }
+
+
 };
 
 
-class TypeCheckAnalyzer : public SemAnalyzer
+class TypeCheckAnalyzer : public ASTVisitor
 {
     TypeCheckAnalyzer() = default;
     ~TypeCheckAnalyzer()
     {
         model = NULL;
+    }
+
+    std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
+    {
+        model = std::move(m);
+        try                         {    isit(std::move(m));
+                                        return model;               }
+        catch (CompExcept& ex)      {   throw;                      }
     }
 
 };  

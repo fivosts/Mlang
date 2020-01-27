@@ -13,9 +13,9 @@ public:
 	Import(importPath ip) : path(ip) {}
 	virtual ~Import() override = default;
 
-	void accept(ASTVisitor &v) override
+	void accept(ASTVisitor *v) override
 	{
-		v.visit(path);
+		v->visit(path);
 	}
 
 private:

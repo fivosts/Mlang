@@ -7,6 +7,8 @@ class LayerParams : public ASTNode
 public:
 	LayerParams() = default;
 	virtual ~LayerParams() = 0;
+
+	virtual void accept(ASTVisitor &v) = 0;
 };
 
 class HyperParams : public ASTNode

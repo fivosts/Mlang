@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ASTVisitor.h"
+#include "ASTNode.h"
 
 class NameAnalyzer : public ASTVisitor
 {
@@ -51,8 +52,8 @@ public:
 
     std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
     {
-        std::shared_ptr<NameAnalyzer> name(std::move(m));
-        std::shared_ptr<TypeCheckAnalyzer> type(std::move(m));
+        std::shared_ptr<NameAnalyzer> name(m);
+        std::shared_ptr<TypeCheckAnalyzer> type(m);
 
         try                         {   name->safeVisit();
                                         type->safeVisit();

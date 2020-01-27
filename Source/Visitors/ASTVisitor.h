@@ -1,15 +1,7 @@
 #pragma once
 
-/* Forward declaration of ast types */
-// #include "Import.h"
 #include "ASTNode.h"
-// class Model;
-// class LayerParams;
-// class BinExpr;
-// class Layer;
-// class ParamBlock;
-// class HyperparamBlock;
-// class Attribute;
+
 
 class ASTVisitor
 {

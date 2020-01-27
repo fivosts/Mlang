@@ -30,11 +30,11 @@ public:
 
 	void accept(ASTVisitor &v) override
 	{
-		for (auto &i : imp)
+		for (auto &&i : imp)
 			v.visit(std::move(i));
-		for (auto &a : attr)
+		for (auto &&a : attr)
 			v.visit(std::move(a));
-		for (auto &l : lr)
+		for (auto &&l : lr)
 			v.visit(std::move(l));
 	}
 

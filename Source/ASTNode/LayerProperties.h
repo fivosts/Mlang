@@ -13,6 +13,11 @@ public:
 	Input(std::unique_ptr<BinExpr> bi) : inp(std::move(bi)) {}
 	~Input() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(inp);
+	}
+
 private:
 	std::unique_ptr<BinExpr> inp;
 };
@@ -24,6 +29,11 @@ public:
 	Output(std::string o) : outp(o) {} 
 	~Output() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(outp);
+	}
+
 private:
 	std::string outp;
 };
@@ -34,6 +44,11 @@ public:
 	LayerName() = delete;
 	LayerName(std::string n) : name(n) {}
 	~LayerName() override = default;
+
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(name);
+	}
 
 private:
 	std::string name;
@@ -47,6 +62,12 @@ public:
 	InputSize(std::unique_ptr<LengthOf> lo) : llength(std::move(lo)) {}
 	~InputSize() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(inSize);
+		v.visit(std::move(llength));
+	}
+
 private:
 	int inSize;
 	std::unique_ptr<LengthOf> llength;
@@ -59,6 +80,11 @@ public:
 	OutputTimestep(int os) : outStep(os) {}
 	~OutputTimestep() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(outStep);
+	}
+
 private:
 	int outStep;
 };
@@ -70,6 +96,11 @@ public:
 	HiddenSize(int hs) : hSize(hs) {}
 	~HiddenSize() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(hSize);
+	}
+
 private:
 	int hSize;
 };
@@ -80,6 +111,11 @@ public:
 	NumLayers() = delete;
 	NumLayers(int nl) : nLayers(nl) {}
 	~NumLayers() override = default;
+
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(nLayers);
+	}
 
 private:
 	int nLayers;
@@ -93,6 +129,12 @@ public:
 	InFeatures(std::unique_ptr<LengthOf> lo) : llength(std::move(lo)) {}
 	~InFeatures() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(inF);
+		v.visit(std::move(llength));
+	}
+	
 private:
 	int inF;
 	std::unique_ptr<LengthOf> llength;
@@ -104,6 +146,12 @@ public:
 	OutFeatures() = delete;
 	OutFeatures(std::vector<int> of) : outFeat(of) {}
 	~OutFeatures() override = default;
+
+	void accept(ASTVisitor &v) override
+	{
+		for(auto &o : outFeat)
+			v.visit(o);
+	}
 
 private:
 	std::vector<int> outFeat;

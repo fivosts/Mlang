@@ -21,6 +21,12 @@ public:
 											   hblock(std::move(hb)) {}
 	~LSTM() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(std::move(pblock));
+		v.visit(std::move(hblock));
+	}
+
 private:
 	std::unique_ptr<ParamBlock> pblock;
 	std::unique_ptr<HyperparamBlock> hblock;
@@ -35,6 +41,12 @@ public:
 											hblock(std::move(hb)) {}
 	~MLP() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(std::move(pblock));
+		v.visit(std::move(hblock));
+	}
+
 private:
 	std::unique_ptr<ParamBlock> pblock;
 	std::unique_ptr<HyperparamBlock> hblock;
@@ -46,6 +58,11 @@ public:
 	Sigmoid() = delete;
 	Sigmoid(std::unique_ptr<ParamBlock> pb) : pblock(std::move(pb)) {}
 	~Sigmoid() override = default;
+
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(std::move(pblock));
+	}
 
 private:
 	std::unique_ptr<ParamBlock> pblock;

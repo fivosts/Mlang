@@ -28,14 +28,14 @@ public:
 		// lr = NULL;
 	}
 
-	void accept(ASTVisitor &v)
+	void accept(ASTVisitor &v) override
 	{
 		for (auto &i : imp)
-			v.visit(i);
+			v.visit(std::move(i));
 		for (auto &a : attr)
-			v.visit(a);
+			v.visit(std::move(a));
 		for (auto &l : lr)
-			v.visit(l);
+			v.visit(std::move(l));
 	}
 
 private:

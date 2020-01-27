@@ -12,6 +12,11 @@ public:
 	NetworkName(std::string n) : name(n) {}
 	~NetworkName() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(name);
+	}
+
 	// TODO
 	virtual void printData() override{
 		std::cout << "I am definitely in the right place! My network name is: " << name << std::endl;
@@ -27,6 +32,11 @@ public:
 	Backend(std::string b) : bend(b) {} 
 	~Backend() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(bend);
+	}
+
 private:
 	std::string bend;
 };
@@ -37,6 +47,11 @@ public:
 	Target() = delete;
 	Target(std::string t) : target(t) {}
 	~Target() override = default;
+
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(target);
+	}
 
 private:
 	std::string target;
@@ -49,6 +64,11 @@ public:
 	CUDA(bool c) : cuda(c) {}
 	~CUDA() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		v.visit(cuda);
+	}
+
 private:
 	bool cuda;
 };
@@ -60,6 +80,12 @@ public:
 	InpTensors(std::unordered_set<std::string> iT) : inTens(iT) {}
 	~InpTensors() override = default;
 
+	void accept(ASTVisitor &v) override
+	{
+		for (auto &i : inTens)
+			v.visit(i);
+	}
+
 private:
 	std::unordered_set<std::string> inTens;
 };
@@ -70,6 +96,12 @@ public:
 	OutTensors() = delete;
 	OutTensors(std::unordered_set<std::string> oT) : outTens(oT) {}
 	~OutTensors() override = default;
+
+	void accept(ASTVisitor &v) override
+	{
+		for (auto &i : outTens)
+			v.visit(i);
+	}
 
 private:
 	std::unordered_set<std::string> outTens;

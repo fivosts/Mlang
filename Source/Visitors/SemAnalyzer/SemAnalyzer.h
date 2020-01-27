@@ -4,6 +4,7 @@
 
 class NameAnalyzer : public ASTVisitor
 {
+public:
     NameAnalyzer(std::shared_ptr<Model> &&m) : model(std::move(m)) {}
     ~NameAnalyzer()
     {
@@ -23,6 +24,7 @@ class NameAnalyzer : public ASTVisitor
 
 class TypeCheckAnalyzer : public ASTVisitor
 {
+public:
     TypeCheckAnalyzer(std::shared_ptr<Model> &&m) : model(std::move(m)) {}
     ~TypeCheckAnalyzer()
     {

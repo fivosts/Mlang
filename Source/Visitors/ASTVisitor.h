@@ -1,9 +1,15 @@
 #pragma once
 
 /* Forward declaration of ast types */
-
-class Model;
-class LayerParams;
+// #include "Import.h"
+#include "ASTNode.h"
+// class Model;
+// class LayerParams;
+// class BinExpr;
+// class Layer;
+// class ParamBlock;
+// class HyperparamBlock;
+// class Attribute;
 
 class ASTVisitor
 {
@@ -12,7 +18,34 @@ public:
 	virtual ~ASTVisitor() = 0;
 
 	virtual void visit(std::string /*s*/){}
-	virtual void visit(std::unique_ptr<LayerParams> lp){
+	virtual void visit(std::unique_ptr<LayerParams> &&lp){
+		(void)lp;
+	}
+	virtual void visit(std::shared_ptr<BinExpr> &&lp){
+		(void)lp;
+	}
+
+	virtual void visit(std::shared_ptr<Layer> &&lp){
+		(void)lp;
+	}
+
+	virtual void visit(std::unique_ptr<Model> &&lp){
+		(void)lp;
+	}
+
+	virtual void visit(std::unique_ptr<ParamBlock> &&lp){
+		(void)lp;
+	}
+
+	virtual void visit(std::unique_ptr<HyperparamBlock> &&lp){
+		(void)lp;
+	}
+
+	virtual void visit(std::shared_ptr<Import> &&lp){
+		lp->accept(this);
+	}
+
+	virtual void visit(std::unique_ptr<Attribute> &&lp){
 		(void)lp;
 	}
 

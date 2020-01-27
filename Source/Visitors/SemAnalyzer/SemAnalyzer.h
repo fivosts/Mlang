@@ -14,13 +14,13 @@ public:
     std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
     {
         std::shared_ptr<Model> model(std::move(m));
-        std::shared_ptr<NameAnalyzer> name();
-        std::shared_ptr<TypeCheckAnalyzer> type();
+        std::shared_ptr<NameAnalyzer> name(std::move(model));
+        std::shared_ptr<TypeCheckAnalyzer> type(std::move(model));
 
-        try                         {   name->safeVisit(std::move(model));
-                                        type->safeVisit(std::move(model));
-                                        return model;                           }
-        catch (CompExcept& ex)      {   throw;                                  }
+        try                         {   name->safeVisit();
+                                        type->safeVisit();
+                                        return model;                }
+        catch (CompExcept& ex)      {   throw;                       }
     }
 
     // Name Analysis in 3 aspects 
@@ -33,13 +33,13 @@ public:
 
 class NameAnalyzer : public ASTVisitor
 {
-    NameAnalyzer() = default;
+    NameAnalyzer(std::shared_ptr<Model> &&m) : model(std::move(m)) {}
     ~NameAnalyzer()
     {
         model = NULL;
     }
 
-    std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
+    std::shared_ptr<Model> safeVisit()
     {
         model = std::move(m);
         try                         {   visit(std::move(m));
@@ -53,13 +53,13 @@ class NameAnalyzer : public ASTVisitor
 
 class TypeCheckAnalyzer : public ASTVisitor
 {
-    TypeCheckAnalyzer() = default;
+    TypeCheckAnalyzer(std::shared_ptr<Model> &&m) : model(std::move(m)) {}
     ~TypeCheckAnalyzer()
     {
         model = NULL;
     }
 
-    std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
+    std::shared_ptr<Model> safeVisit()
     {
         model = std::move(m);
         try                         {    isit(std::move(m));

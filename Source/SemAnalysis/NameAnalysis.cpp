@@ -1,7 +1,7 @@
 #include "SemAnalyzer.h"
 
-void SemAnalyzer::AnalyzeModel()
+
+void SemAnalyzer::AnalyzeNames()
 {
 
-	return;
 }

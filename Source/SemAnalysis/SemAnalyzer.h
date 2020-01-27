@@ -2,14 +2,18 @@
 
 // #include <memory>
 
-class SemAnalyzer
+class SemAnalyzer : public ASTVisitor
 {
 public:
-    SemAnalyzer() = delete;
-    SemAnalyzer(std::shared_ptr<Model> &&m) : model(std::move(m)) {}
-
-    std::shared_ptr<Model> safeAnalyzeModel()
+    SemAnalyzer() = default;
+    ~SemAnalyzer()
     {
+        model = NULL;
+    }
+
+    std::shared_ptr<Model> safeAnalyzeModel(std::shared_ptr<Model> &&m)
+    {
+        model = std::move(m);
         try                         {    AnalyzeModel();
                                         return model;              }
         catch (CompExcept& ex)      {    throw;                    }

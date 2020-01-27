@@ -1,8 +1,3 @@
-include_directories(ASTNode)
-include_directories(Lexer)
-include_directories(Parser)
-include_directories(SemAnalysis)
-include_directories(Util)
 add_executable(Mlang
 				main.cpp
 				Lexer/Lexer.cpp
@@ -15,3 +10,10 @@ target_compile_options (Mlang PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)
 if (LLVM)
 	target_compile_options (Mlang PRIVATE -emit-llvm)
 ENDIF (LLVM)
+
+add_subdirectory(Visitors)
+
+include_directories(ASTNode)
+include_directories(Lexer)
+include_directories(Parser)
+include_directories(Util)

@@ -24,7 +24,7 @@ int main(){
 
 	try{
 		std::unique_ptr<Parser> p(new Parser(TEST_PATH));
-		SemAnalyzer s(p->safeParseModel());
+		SemAnalyzer s();
 	}
 	catch(CompExcept &e){
 		std::cout << "Oops: " << e.what() << std::endl;

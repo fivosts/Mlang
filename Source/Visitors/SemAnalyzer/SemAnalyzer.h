@@ -62,7 +62,7 @@ class TypeCheckAnalyzer : public ASTVisitor
     std::shared_ptr<Model> safeVisit()
     {
         model = std::move(m);
-        try                         {    isit(std::move(m));
+        try                         {   visit(std::move(m));
                                         return model;               }
         catch (CompExcept& ex)      {   throw;                      }
     }

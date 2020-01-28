@@ -4,10 +4,6 @@ add_executable(MlangTest
 				Scanner.cpp
 				Lexer.cpp
 				Parser.cpp
-				${PROJECT_SOURCE_DIR}/Source/ASTNode/ASTNode.cpp
-				${PROJECT_SOURCE_DIR}/Source/Lexer/Lexer.cpp
-				${PROJECT_SOURCE_DIR}/Source/Parser/Parser.cpp
-				${PROJECT_SOURCE_DIR}/Source/Util/Except.cpp
 				)
 
 ## CXX_FLAGS
@@ -45,12 +41,6 @@ if (CODEDBG)
 ENDIF(CODEDBG)
 
 ## Library linking
-target_link_libraries(MlangTest gtest pthread)
-
-include_directories(${PROJECT_SOURCE_DIR}/Source/ASTNode)
-include_directories(${PROJECT_SOURCE_DIR}/Source/Scanner)
-include_directories(${PROJECT_SOURCE_DIR}/Source/Lexer)
-include_directories(${PROJECT_SOURCE_DIR}/Source/Parser)
-include_directories(${PROJECT_SOURCE_DIR}/Source/Util)
-include_directories(${PROJECT_SOURCE_DIR}/Source/Visitors)
-include_directories(${PROJECT_SOURCE_DIR}/Source/Visitors/SemAnalyzer)
+target_link_libraries(MlangTest MlangSource 
+								gtest 
+								pthread)

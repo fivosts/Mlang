@@ -13,10 +13,7 @@ public:
 	Import(importPath ip) : path(ip) {}
 	virtual ~Import() override = default;
 
-	void accept(ASTVisitor *v) override
-	{
-		v->visit(path);
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	importPath path;

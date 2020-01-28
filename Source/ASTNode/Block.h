@@ -15,11 +15,7 @@ public:
 	ParamBlock(setParams<LayerParams> lp) : lparams(std::move(lp)) {}
 	~ParamBlock() = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		for (auto &lp : lparams)
-			v.visit(std::move(lp));
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	setParams<LayerParams> lparams;
@@ -32,11 +28,7 @@ public:
 	HyperparamBlock(setParams<HyperParams> hp) : hparams(std::move(hp)) {}
 	~HyperparamBlock() = default;
 	
-	void accept(ASTVisitor &v) override
-	{
-		for (auto &hp : hparams)
-			v.visit(std::move(hp));
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	setParams<HyperParams> hparams;

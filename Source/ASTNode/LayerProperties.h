@@ -5,6 +5,7 @@
 #include "LengthOf.h"
 
 #include <string>
+#include <vector>
 
 class Input : public LayerParams
 {
@@ -13,10 +14,7 @@ public:
 	Input(std::unique_ptr<BinExpr> bi) : inp(std::move(bi)) {}
 	~Input() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		v.visit(inp);
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	std::unique_ptr<BinExpr> inp;
@@ -29,10 +27,7 @@ public:
 	Output(std::string o) : outp(o) {} 
 	~Output() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		v.visit(outp);
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	std::string outp;
@@ -45,10 +40,7 @@ public:
 	LayerName(std::string n) : name(n) {}
 	~LayerName() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		v.visit(name);
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	std::string name;
@@ -62,11 +54,7 @@ public:
 	InputSize(std::unique_ptr<LengthOf> lo) : llength(std::move(lo)) {}
 	~InputSize() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		v.visit(inSize);
-		v.visit(std::move(llength));
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	int inSize;
@@ -80,10 +68,7 @@ public:
 	OutputTimestep(int os) : outStep(os) {}
 	~OutputTimestep() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		v.visit(outStep);
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	int outStep;
@@ -96,10 +81,7 @@ public:
 	HiddenSize(int hs) : hSize(hs) {}
 	~HiddenSize() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		v.visit(hSize);
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	int hSize;
@@ -112,10 +94,7 @@ public:
 	NumLayers(int nl) : nLayers(nl) {}
 	~NumLayers() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		v.visit(nLayers);
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	int nLayers;
@@ -129,11 +108,7 @@ public:
 	InFeatures(std::unique_ptr<LengthOf> lo) : llength(std::move(lo)) {}
 	~InFeatures() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		v.visit(inF);
-		v.visit(std::move(llength));
-	}
+	void accept(ASTVisitor* v) override;
 	
 private:
 	int inF;
@@ -147,12 +122,7 @@ public:
 	OutFeatures(std::vector<int> of) : outFeat(of) {}
 	~OutFeatures() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		for(auto &o : outFeat)
-			v.visit(o);
-	}
-
+	void accept(ASTVisitor* v) override;
 private:
 	std::vector<int> outFeat;
 };

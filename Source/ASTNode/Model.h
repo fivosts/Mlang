@@ -28,15 +28,7 @@ public:
 		// lr = NULL;
 	}
 
-	void accept(ASTVisitor &v) override
-	{
-		for (auto &&i : imp)
-			v.visit(std::move(i));
-		for (auto &&a : attr)
-			v.visit(std::move(a));
-		for (auto &&l : lr)
-			v.visit(std::move(l));
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	setPtr<Import> imp;

@@ -10,6 +10,8 @@ class Layer : public ASTNode
 public:
 	Layer() = default;
 	virtual ~Layer() = 0;
+
+	virtual void accept(ASTVisitor* /*v*/) override = 0;
 };
 
 class LSTM : public Layer
@@ -21,11 +23,7 @@ public:
 											   hblock(std::move(hb)) {}
 	~LSTM() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		v.visit(std::move(pblock));
-		v.visit(std::move(hblock));
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	std::unique_ptr<ParamBlock> pblock;
@@ -41,11 +39,7 @@ public:
 											hblock(std::move(hb)) {}
 	~MLP() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		v.visit(std::move(pblock));
-		v.visit(std::move(hblock));
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	std::unique_ptr<ParamBlock> pblock;
@@ -59,10 +53,7 @@ public:
 	Sigmoid(std::unique_ptr<ParamBlock> pb) : pblock(std::move(pb)) {}
 	~Sigmoid() override = default;
 
-	void accept(ASTVisitor &v) override
-	{
-		v.visit(std::move(pblock));
-	}
+	void accept(ASTVisitor* v) override;
 
 private:
 	std::unique_ptr<ParamBlock> pblock;

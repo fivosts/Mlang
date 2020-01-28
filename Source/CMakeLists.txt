@@ -1,9 +1,15 @@
+add_library(MlangSource STATIC)
+
 add_executable(Mlang
 				main.cpp
-				Lexer/Lexer.cpp
-				Parser/Parser.cpp
-				ASTNode/ASTNode.cpp
-				Util/Except.cpp)
+				# Lexer/Lexer.cpp
+				# Parser/Parser.cpp
+				# ASTNode/ASTNode.cpp
+				# Util/Except.cpp
+			)
+
+target_link_libraries(Mlang MlangSource)
+
 
 target_compile_options (Mlang PRIVATE -std=c++17 -O3 -Wall -Wextra -Werror)
 

@@ -1,2 +1,2 @@
-target_include_directories(Mlang PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
-target_sources(Mlang PRIVATE Except.cpp)
+target_include_directories(MlangSource PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
+target_sources(MlangSource PUBLIC Except.cpp)

@@ -11,9 +11,8 @@ if (LLVM)
 	target_compile_options (Mlang PRIVATE -emit-llvm)
 ENDIF (LLVM)
 
+add_subdirectory(ASTNode)
+add_subdirectory(Lexer)
+add_subdirectory(Parser)
+add_subdirectory(Util)
 add_subdirectory(Visitors)
-
-include_directories(ASTNode)
-include_directories(Lexer)
-include_directories(Parser)
-include_directories(Util)

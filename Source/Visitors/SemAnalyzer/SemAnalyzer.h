@@ -19,7 +19,8 @@ public:
         catch (CompExcept& ex)      {   throw;                      }
     }
 
-
+protected:
+    std::shared_ptr<Model> model = NULL;
 };
 
 
@@ -34,29 +35,27 @@ public:
 
     std::shared_ptr<Model> safeVisit()
     {
-        try                         {   model->visit(this);
+        try                         {   model->accept(this);
                                         return model;               }
         catch (CompExcept& ex)      {   throw;                      }
     }
-
+protected:
+    std::shared_ptr<Model> model = NULL;
 };  
 
 class SemAnalyzer
 {
 public:
     SemAnalyzer() = default;
-    ~SemAnalyzer()
-    {
-        model = NULL;
-    }
+    ~SemAnalyzer() = default;
 
     std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
     {
-        std::shared_ptr<NameAnalyzer> name(m);
-        std::shared_ptr<TypeCheckAnalyzer> type(m);
+        NameAnalyzer name(std::move(m));
+        TypeCheckAnalyzer type(std::move(m));
 
-        try                         {   name->safeVisit();
-                                        type->safeVisit();
+        try                         {   name.safeVisit();
+                                        type.safeVisit();
                                         return m;                }
         catch (CompExcept& ex)      {   throw;                       }
     }

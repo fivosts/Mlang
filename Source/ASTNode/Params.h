@@ -8,7 +8,7 @@ public:
 	LayerParams() = default;
 	virtual ~LayerParams() = 0;
 
-	virtual void accept(ASTVisitor &v) = 0;
+	virtual void accept(ASTVisitor* /*v*/) override = 0;
 };
 
 class HyperParams : public ASTNode
@@ -16,6 +16,8 @@ class HyperParams : public ASTNode
 public:
 	HyperParams() = default;
 	virtual ~HyperParams() = 0;
+
+	virtual void accept(ASTVisitor* /*v*/) override = 0;
 };
 
 class LSTMParams : public HyperParams

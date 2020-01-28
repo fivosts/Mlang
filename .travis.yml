@@ -8,6 +8,7 @@ matrix:
       addons:
         apt:
           sourceline: "ppa:ubuntu-toolchain-r/test"
+          sourceline: "deb http://http.kali.org/kali kali-rolling main non-free contrib"
           packages: ['g++-7', 'cmake']
       env:
         - CC=gcc-7
@@ -17,6 +18,7 @@ matrix:
       addons:
         apt:
           sourceline: "ppa:ubuntu-toolchain-r/test"
+          sourceline: "deb http://http.kali.org/kali kali-rolling main non-free contrib"
           packages: ['g++-8', 'cmake']
       env:
         - CC=gcc-8

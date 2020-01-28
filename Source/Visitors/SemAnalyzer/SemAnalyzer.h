@@ -2,6 +2,7 @@
 
 #include "ASTVisitor.h"
 #include "ASTNode.h"
+#include "Except.h"
 
 class NameAnalyzer : public ASTVisitor
 {
@@ -39,6 +40,7 @@ public:
                                         return model;               }
         catch (CompExcept& ex)      {   throw;                      }
     }
+    
 protected:
     std::shared_ptr<Model> model = NULL;
 };  

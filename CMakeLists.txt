@@ -5,6 +5,8 @@ project(MLOG,
         DESCRIPTION "Source to source compiler for machine learning models"
         LANGUAGES C CXX)
 
+cmake_policy(SET CMP0076 NEW)
+
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     # TODO on clang
     message("-- Using Clang")

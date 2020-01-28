@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 
-project(MLOG, 
+project(MLANG, 
         VERSION 1.0.0
         DESCRIPTION "Source to source compiler for machine learning models"
         LANGUAGES C CXX)

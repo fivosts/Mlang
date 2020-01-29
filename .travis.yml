@@ -54,11 +54,11 @@ matrix:
     #     - CXX=clang++-8
 
 before_script:
-  - CMAKE_URL="https://cmake.org/files/v3.13/cmake-3.13.0-rc3-Linux-x86_64.tar.gz"
-  - mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
-  - export PATH=${DEPS_DIR}/cmake/bin:${PATH}
+  - wget https://github.com/Kitware/CMake/releases/download/v3.13.4/cmake-3.13.4-Linux-x86_64.sh
+  - sh cmake-3.13.4-Linux-x86_64.sh
+  - export PATH=./cmake-3.13.4-Linux-x86_64/bin/:${PATH}
   - echo ${PATH}
-  - cmake --version
+  - ./cmake-3.13.4-Linux-x86_64/bin/cmake --version
 
 script:
   - $CXX --version

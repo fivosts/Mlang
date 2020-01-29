@@ -7,7 +7,7 @@
 class NameAnalyzer : public ASTVisitor
 {
 public:
-    NameAnalyzer(std::shared_ptr<Model> &&m) : model(std::move(m)) {}
+    NameAnalyzer(std::shared_ptr<Model> m) : model(m) {}
     ~NameAnalyzer()
     {
         model = NULL;
@@ -28,7 +28,7 @@ protected:
 class TypeCheckAnalyzer : public ASTVisitor
 {
 public:
-    TypeCheckAnalyzer(std::shared_ptr<Model> &&m) : model(std::move(m)) {}
+    TypeCheckAnalyzer(std::shared_ptr<Model> m) : model(m) {}
     ~TypeCheckAnalyzer()
     {
         model = NULL;
@@ -51,7 +51,7 @@ public:
     SemAnalyzer() = default;
     ~SemAnalyzer() = default;
 
-    void safeVisit(std::unique_ptr<Model> &m)
+    void safeVisit(std::shared_ptr<Model> &&m)
     {
         NameAnalyzer name(m);
         TypeCheckAnalyzer type(m);

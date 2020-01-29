@@ -1,12 +1,6 @@
 add_library(MlangSource STATIC)
 
-add_executable(Mlang
-				main.cpp
-				# Lexer/Lexer.cpp
-				# Parser/Parser.cpp
-				# ASTNode/ASTNode.cpp
-				# Util/Except.cpp
-			)
+add_executable(Mlang main.cpp)
 
 target_link_libraries(Mlang MlangSource)
 

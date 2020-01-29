@@ -14,6 +14,7 @@ public:
 	ASTVisitor() = default;
 	virtual ~ASTVisitor() = 0;
 
+	// TODO  Convert them to pure virtuals once name analyzer and type checker have their prototypes
 	virtual void visit(const std::unique_ptr<Model> & /*m*/) {}
 	virtual void visit(const std::unique_ptr<Import> & /*i*/) {}
 	virtual void visit(const std::unique_ptr<Attribute> & /*s*/) {}

@@ -11,7 +11,7 @@ namespace
 {
     auto getSc = [](const char *file){
                     std::unique_ptr<Scanner> sc(new Scanner(file));
-                    return std::move(sc);
+                    return sc;
                     };
 }
 

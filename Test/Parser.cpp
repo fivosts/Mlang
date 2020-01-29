@@ -11,7 +11,7 @@ namespace
 {
     auto getSc = [](const char *file){
                     std::unique_ptr<Scanner> sc(new Scanner(file));
-                    return std::move(sc);
+                    return sc;
                     };
 }
 
@@ -35,8 +35,7 @@ namespace MlangTest
 
 	TEST(ParserTest, ScConstructor)
 	{
-		std::unique_ptr<Scanner> sc(new Scanner(FULL_PATH("empty.mlog")));
-		ASSERT_NO_THROW(Parser par(std::move(sc)));
+		ASSERT_NO_THROW(Parser par(getSc(FULL_PATH("empty.mlog"))));
 	}
 
 	TEST(ParserTest, Empty)

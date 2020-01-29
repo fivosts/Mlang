@@ -147,6 +147,8 @@ function build_and_compile()
         mkdir build
     fi
 
+    cmake --version
+
     cd build && cmake .. "${CMAKE_ARGS[@]}" || (echo "Cmake config failed: Error $$"; return $$)
     make || (echo "Compilation failed: Error $$"; return $$)
     return 0

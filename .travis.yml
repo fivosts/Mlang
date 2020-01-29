@@ -58,7 +58,6 @@ before_script:
   - yes | sh cmake-3.13.4-Linux-x86_64.sh --skip-license
   - export PATH=$(pwd)/bin/:${PATH}
 
-versions:
   - $CXX --version
   - cmake --version
 

@@ -51,14 +51,14 @@ public:
     SemAnalyzer() = default;
     ~SemAnalyzer() = default;
 
-    std::shared_ptr<Model> safeVisit(std::shared_ptr<Model> &&m)
+    void safeVisit(std::unique_ptr<Model> &m)
     {
-        NameAnalyzer name(std::move(m));
-        TypeCheckAnalyzer type(std::move(m));
+        NameAnalyzer name(m);
+        TypeCheckAnalyzer type(m);
 
         try                         {   name.safeVisit();
                                         type.safeVisit();
-                                        return m;                }
+                                        return;                      }
         catch (CompExcept& ex)      {   throw;                       }
     }
 

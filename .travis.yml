@@ -57,13 +57,11 @@ before_script:
   - wget https://github.com/Kitware/CMake/releases/download/v3.13.4/cmake-3.13.4-Linux-x86_64.sh
   - yes | sh cmake-3.13.4-Linux-x86_64.sh --skip-license
   - export PATH=$(pwd)/bin/:${PATH}
-  - ls
-  - ls ./*/
-  - echo ${PATH}
-  - ./bin/cmake --version
 
-script:
+versions:
   - $CXX --version
   - cmake --version
+
+script:
   - ./configure
   - ./build/bin/MlangTest

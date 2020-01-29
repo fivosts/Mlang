@@ -55,7 +55,6 @@ public:
     {
         NameAnalyzer name(m);
         TypeCheckAnalyzer type(m);
-
         try                         {   name.safeVisit();
                                         type.safeVisit();
                                         return;                      }
